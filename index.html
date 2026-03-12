@@ -4,1160 +4,439 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cedric Mathias | Product Designer & Growth Marketer</title>
-    <meta name="description" content="Product Designer with 3+ years in B2B SaaS, specializing in UX research, growth marketing, and data-driven design.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --primary: #818cf8;
-            --primary-dark: #6366f1;
-            --secondary: #a78bfa;
-            --accent: #f472b6;
-            --text-primary: #ffffff;
-            --text-secondary: #cbd5e1;
-            --text-tertiary: #94a3b8;
-            --bg-primary: #000000;
-            --bg-secondary: #0a0a0a;
-            --bg-tertiary: #1a1a1a;
-            --border: #2a2a2a;
-            --glow: rgba(129, 140, 248, 0.3);
+            --p: #818cf8;
+            --a: #f472b6;
+            --t1: #ffffff;
+            --t2: #cbd5e1;
+            --t3: #64748b;
+            --bg: #030303;
+            --bg2: #0d0d0d;
+            --bg3: #141414;
+            --bd: rgba(255,255,255,0.07);
+            --bd2: rgba(255,255,255,0.12);
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
-            line-height: 1.6;
-            color: var(--text-primary);
-            background: var(--bg-primary);
-            overflow-x: hidden;
-        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--t1); overflow-x: hidden; }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.15;
-        }
-
-        .bg-animation::before {
-            content: '';
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
-            border-radius: 50%;
-            top: -250px;
-            right: -250px;
-            animation: float 20s ease-in-out infinite;
-        }
-
-        .bg-animation::after {
-            content: '';
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
-            border-radius: 50%;
-            bottom: -200px;
-            left: -200px;
-            animation: float 15s ease-in-out infinite reverse;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(100px, 100px) scale(1.1); }
-        }
-
+        /* NAV */
         nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            z-index: 1000;
-            transition: all 0.3s ease;
+            position: fixed; top: 0; width: 100%; z-index: 100;
+            background: rgba(3,3,3,0.85); backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--bd);
         }
+        .nav-inner { max-width: 1100px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.2rem; font-weight: 900; background: linear-gradient(135deg, var(--p), var(--a)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--t3); font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--t1); }
 
-        nav.scrolled {
-            background: rgba(0, 0, 0, 0.95);
-            box-shadow: 0 4px 30px rgba(129, 140, 248, 0.1);
-        }
+        .wrap { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
 
-        nav .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 1.5rem 3rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        nav .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -0.5px;
-        }
-
-        nav .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 3rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 3rem;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-weight: 500;
-            font-size: 1.05rem;
-            transition: all 0.3s;
-            position: relative;
-        }
-
-        nav a:hover {
-            color: var(--primary);
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            transition: width 0.3s ease;
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
+        /* HERO */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 10rem 3rem 6rem;
-            position: relative;
-            overflow: hidden;
+            min-height: 100vh; display: flex; align-items: center; padding-top: 4rem;
+            position: relative; overflow: hidden;
         }
-
         .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(129, 140, 248, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(244, 114, 182, 0.15) 0%, transparent 50%);
-        }
-
-        .hero .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-content {
-            max-width: 1000px;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.7rem 1.5rem;
-            background: rgba(129, 140, 248, 0.1);
-            border: 1px solid rgba(129, 140, 248, 0.3);
-            border-radius: 50px;
-            font-size: 0.95rem;
-            margin-bottom: 2.5rem;
-            animation: fadeInUp 0.8s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .hero-badge::before {
-            content: '✨';
-            font-size: 1.2rem;
-        }
-
-        .hero h1 {
-            font-size: 5.5rem;
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 2rem;
-            animation: fadeInUp 0.8s ease 0.2s backwards;
-            letter-spacing: -2px;
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            position: relative;
-            display: inline-block;
-        }
-
-        .hero .subtitle {
-            font-size: 1.6rem;
-            line-height: 1.6;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            animation: fadeInUp 0.8s ease 0.4s backwards;
-            max-width: 800px;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--text-tertiary);
-            margin-bottom: 3rem;
-            line-height: 1.8;
-            animation: fadeInUp 0.8s ease 0.6s backwards;
-            max-width: 700px;
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: 4rem;
-            margin-bottom: 3rem;
-            animation: fadeInUp 0.8s ease 0.8s backwards;
-        }
-
-        .hero-stat {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .hero-stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            line-height: 1;
-            margin-bottom: 0.5rem;
-        }
-
-        .hero-stat-label {
-            font-size: 0.9rem;
-            color: var(--text-tertiary);
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            animation: fadeInUp 0.8s ease 1s backwards;
-        }
-
-        .btn {
-            padding: 1.2rem 3rem;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.4s ease;
-            display: inline-block;
-            font-size: 1.1rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: white;
-            box-shadow: 0 10px 40px rgba(129, 140, 248, 0.3);
-        }
-
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn-primary:hover::before {
-            left: 100%;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 50px rgba(129, 140, 248, 0.4);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-
-        .btn-secondary:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-3px);
-        }
-
-        section {
-            padding: 5rem 3rem;
-            position: relative;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-badge {
-            display: inline-block;
-            padding: 0.6rem 1.8rem;
-            background: rgba(129, 140, 248, 0.1);
-            border: 1px solid rgba(129, 140, 248, 0.3);
-            color: var(--primary);
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        h2 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 900;
-            letter-spacing: -1px;
-        }
-
-        .section-subtitle {
-            font-size: 1.3rem;
-            color: var(--text-secondary);
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-
-        .featured-project { background: var(--bg-primary); }
-        .projects-section { background: var(--bg-secondary); }
-
-        /* ── Divider line between sections ── */
-        .section-divider {
-            width: 60px; height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            border-radius: 2px;
-            margin: 0 auto 1.2rem;
-        }
-
-        /* ── USCH hero card ── */
-        .usch-card {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            border-radius: 28px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            background: var(--bg-secondary);
-            transition: border-color 0.4s, box-shadow 0.4s;
-        }
-        .usch-card:hover {
-            border-color: rgba(129,140,248,0.5);
-            box-shadow: 0 32px 80px rgba(129,140,248,0.12);
-        }
-        .usch-card-content {
-            padding: 3.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .project-eyebrow {
-            font-size: 0.75rem; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 2px;
-            color: var(--primary); margin-bottom: 1rem;
-        }
-        .usch-card-content h3 {
-            font-size: 2.2rem; font-weight: 900;
-            color: var(--text-primary); line-height: 1.15;
-            letter-spacing: -0.8px; margin-bottom: 0.8rem;
-        }
-        .usch-card-content .impact {
-            font-size: 0.95rem; color: var(--primary);
-            font-weight: 600; margin-bottom: 1.2rem;
-        }
-        .usch-card-content > p {
-            font-size: 0.98rem; color: var(--text-secondary);
-            line-height: 1.75; margin-bottom: 1.5rem;
-        }
-        .project-tags {
-            display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.8rem;
-        }
-        .tag {
-            padding: 0.35rem 0.9rem;
-            background: rgba(129,140,248,0.08);
-            border: 1px solid rgba(129,140,248,0.2);
-            border-radius: 50px; font-size: 0.78rem;
-            color: var(--primary); font-weight: 500;
-            transition: all 0.3s;
-        }
-        .tag:hover { background: var(--primary); color: white; }
-        .usch-stats {
-            display: flex; gap: 2rem;
-            padding: 1.2rem 0; border-top: 1px solid var(--border);
-            margin-bottom: 1.8rem;
-        }
-        .usch-stat .num {
-            font-size: 1.8rem; font-weight: 900; display: block; line-height: 1;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            background-clip: text; margin-bottom: 0.3rem;
-        }
-        .usch-stat .lbl { font-size: 0.78rem; color: var(--text-tertiary); }
-        .project-link {
-            display: inline-flex; align-items: center; gap: 0.6rem;
-            color: white; text-decoration: none; font-weight: 600;
-            font-size: 0.95rem; padding: 0.85rem 1.8rem;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            border-radius: 50px; width: fit-content;
-            box-shadow: 0 8px 24px rgba(129,140,248,0.3);
-            transition: all 0.3s;
-        }
-        .project-link:hover { gap: 1rem; transform: translateY(-2px); box-shadow: 0 12px 36px rgba(129,140,248,0.45); }
-        .usch-card-image { position: relative; overflow: hidden; background: #f0f2f8; min-height: 460px; }
-        .usch-card-image img { width: 100%; height: 100%; object-fit: cover; object-position: top left; transition: transform 0.6s; }
-        .usch-card:hover .usch-card-image img { transform: scale(1.04); }
-        .usch-card-image::before {
-            content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
-            background: linear-gradient(270deg, transparent 55%, var(--bg-secondary) 100%);
-        }
-
-        /* ── Projects grid (4 cards) ── */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.2rem;
-        }
-        .pcard {
-            border-radius: 20px; overflow: hidden;
-            border: 1px solid var(--border); background: var(--bg-primary);
-            transition: transform 0.4s, border-color 0.4s, box-shadow 0.4s;
-            position: relative;
-        }
-        .pcard:hover { transform: translateY(-8px); border-color: rgba(129,140,248,0.4); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-        .pcard-img-wrap { overflow: hidden; position: relative; height: 180px; }
-        .pcard-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s, filter 0.4s; filter: saturate(0.8) brightness(0.9); }
-        .pcard:hover .pcard-img-wrap img { transform: scale(1.08); filter: saturate(1.1) brightness(1); }
-        .pcard-img-wrap::after {
-            content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 50%;
-            background: linear-gradient(transparent, var(--bg-primary));
-        }
-        .pcard-body { padding: 1.4rem 1.6rem 1.8rem; }
-        .pcard-co { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--primary); margin-bottom: 0.4rem; }
-        .pcard-body h3 { font-size: 1.1rem; font-weight: 800; color: var(--text-primary); margin-bottom: 0.5rem; line-height: 1.3; }
-        .pcard-metric {
-            display: inline-block; font-size: 0.8rem; font-weight: 700;
-            padding: 0.3rem 0.8rem; border-radius: 50px; margin-bottom: 0.8rem;
-            background: linear-gradient(135deg, rgba(129,140,248,0.15), rgba(244,114,182,0.15));
-            border: 1px solid rgba(129,140,248,0.2); color: var(--text-primary);
-        }
-        .pcard-body p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 1rem; }
-
-        /* USCH mini card accent */
-        .pcard.usch-mini { border-color: rgba(129,140,248,0.3); }
-        .pcard.usch-mini .pcard-co { color: var(--accent); }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-        }
-
-        .about {
-            background: var(--bg-primary);
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 5rem;
-            align-items: start;
-        }
-
-        .about-text h3 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            color: var(--text-primary);
-            font-weight: 800;
-        }
-
-        .about-text p {
-            font-size: 1.15rem;
-            color: var(--text-secondary);
-            line-height: 1.9;
-            margin-bottom: 1.8rem;
-        }
-
-        .about-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-card {
-            background: var(--bg-secondary);
-            padding: 2.5rem;
-            border-radius: 20px;
-            text-align: center;
-            border: 1px solid var(--border);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(129, 140, 248, 0.1), rgba(244, 114, 182, 0.1));
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .stat-card:hover::before {
-            opacity: 1;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary);
-            box-shadow: 0 20px 40px rgba(129, 140, 248, 0.15);
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: block;
-            margin-bottom: 0.8rem;
-            position: relative;
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            position: relative;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-
-        .skill-item {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            padding: 1.8rem;
-            background: var(--bg-secondary);
-            border-radius: 15px;
-            transition: all 0.4s ease;
-            border: 1px solid var(--border);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .skill-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 0;
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            transition: width 0.4s ease;
-        }
-
-        .skill-item:hover::before {
-            width: 4px;
-        }
-
-        .skill-item:hover {
-            transform: translateX(15px);
-            border-color: var(--primary);
-        }
-
-        .skill-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.8rem;
-            flex-shrink: 0;
-        }
-
-        .skill-info h4 {
-            font-size: 1.1rem;
-            color: var(--text-primary);
-            margin-bottom: 0.3rem;
-            font-weight: 700;
-        }
-
-        .skill-info p {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            margin: 0;
-        }
-
-        .contact {
-            background: var(--bg-primary);
-            position: relative;
-        }
-
-        .contact::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 50% 50%, rgba(129, 140, 248, 0.1) 0%, transparent 50%);
-        }
-
-        .contact .container {
-            position: relative;
-        }
-
-        .contact-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .contact h2 {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-text {
-            font-size: 1.4rem;
-            color: var(--text-secondary);
-            margin-bottom: 4rem;
-            line-height: 1.8;
-        }
-
-        .contact-links {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .contact-card {
-            background: var(--bg-secondary);
-            backdrop-filter: blur(20px);
-            padding: 3rem 2rem;
-            border-radius: 20px;
-            text-decoration: none;
-            color: var(--text-primary);
-            transition: all 0.4s ease;
-            border: 1px solid var(--border);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(129, 140, 248, 0.1), rgba(244, 114, 182, 0.1));
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .contact-card:hover::before {
-            opacity: 1;
-        }
-
-        .contact-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary);
-            box-shadow: 0 20px 40px rgba(129, 140, 248, 0.2);
-        }
-
-        .contact-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            position: relative;
-        }
-
-        .contact-card h4 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-            position: relative;
-        }
-
-        .contact-card p {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            position: relative;
-        }
-
-        footer {
-            background: var(--bg-primary);
-            color: var(--text-secondary);
-            text-align: center;
-            padding: 4rem 3rem;
-            border-top: 1px solid var(--border);
-        }
-
-        footer p {
-            font-size: 1rem;
-            line-height: 1.8;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 1s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        @media (max-width: 1024px) {
-            .hero h1 { font-size: 4rem; }
-            .about-content { grid-template-columns: 1fr; }
-            .contact-links { grid-template-columns: 1fr; }
-            .usch-card { grid-template-columns: 1fr; }
-            .usch-card-image { min-height: 280px; }
-            .usch-card-image::before { background: linear-gradient(180deg, transparent 40%, var(--bg-secondary) 100%); }
-            .projects-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        @media (max-width: 768px) {
-            nav .container { padding: 1rem 1.5rem; }
-            nav ul { gap: 1.5rem; font-size: 0.9rem; }
-            nav .nav-links { gap: 1.5rem; }
-            .hero { padding: 8rem 1.5rem 4rem; }
+            content: ''; position: absolute; inset: 0; pointer-events: none;
+            background:
+                radial-gradient(ellipse 800px 600px at 110% 5%, rgba(129,140,248,0.09) 0%, transparent 60%),
+                radial-gradient(ellipse 600px 500px at -10% 95%, rgba(244,114,182,0.06) 0%, transparent 60%);
+        }
+        .hero::after {
+            content: ''; position: absolute; inset: 0; pointer-events: none;
+            background-image: linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+            background-size: 80px 80px;
+            mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+        }
+        .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; position: relative; z-index: 1; width: 100%; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 1rem; border-radius: 50px; margin-bottom: 1.5rem; background: rgba(129,140,248,0.08); border: 1px solid rgba(129,140,248,0.2); font-size: 0.75rem; font-weight: 600; color: var(--p); }
+        .hero h1 { font-size: 3.6rem; font-weight: 900; line-height: 1.08; letter-spacing: -2px; margin-bottom: 1.2rem; }
+        .grad { background: linear-gradient(135deg, var(--p), var(--a)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero-sub { font-size: 1rem; color: var(--t2); line-height: 1.8; margin-bottom: 0.6rem; max-width: 460px; }
+        .hero-note { font-size: 0.82rem; color: var(--t3); margin-bottom: 2rem; }
+        .hero-stats { display: flex; gap: 2.5rem; margin-bottom: 2.2rem; }
+        .hs-n { display: block; font-size: 1.6rem; font-weight: 900; line-height: 1; background: linear-gradient(135deg,var(--p),var(--a)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.15rem; }
+        .hs-l { font-size: 0.72rem; color: var(--t3); }
+        .hero-btns { display: flex; gap: 0.8rem; }
+        .btn-p { padding: 0.8rem 1.8rem; background: linear-gradient(135deg,var(--p),var(--a)); color: white; border-radius: 50px; font-weight: 700; font-size: 0.88rem; text-decoration: none; transition: all 0.3s; box-shadow: 0 6px 20px rgba(129,140,248,0.28); }
+        .btn-p:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(129,140,248,0.42); }
+        .btn-o { padding: 0.8rem 1.8rem; border: 1px solid var(--bd2); color: var(--t2); border-radius: 50px; font-weight: 600; font-size: 0.88rem; text-decoration: none; transition: all 0.3s; }
+        .btn-o:hover { border-color: var(--p); color: var(--p); }
+
+        /* Hero mockup */
+        .hero-visual { position: relative; }
+        .mockup { border-radius: 14px; overflow: hidden; border: 1px solid var(--bd2); box-shadow: 0 40px 80px rgba(0,0,0,0.7); }
+        .mockup-bar { background: var(--bg3); padding: 0.55rem 1rem; display: flex; align-items: center; gap: 0.4rem; border-bottom: 1px solid var(--bd); }
+        .dot { width: 9px; height: 9px; border-radius: 50%; }
+        .dr { background: #ff5f56; } .dy { background: #ffbd2e; } .dg { background: #27c93f; }
+        .mockup img { width: 100%; display: block; }
+        .float-badge { position: absolute; background: var(--bg3); border: 1px solid var(--bd2); border-radius: 10px; padding: 0.6rem 1rem; font-size: 0.75rem; box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
+        .fb1 { bottom: -12px; left: -16px; }
+        .fb2 { top: -12px; right: -16px; }
+        .fb-lbl { font-size: 0.62rem; color: var(--t3); margin-bottom: 0.15rem; }
+        .fb-val { font-weight: 800; font-size: 0.9rem; }
+
+        /* SECTION COMMON */
+        section { padding: 4.5rem 0; }
+        .sh { text-align: center; margin-bottom: 2.5rem; }
+        .pill { display: inline-block; padding: 0.3rem 0.9rem; border-radius: 50px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--p); background: rgba(129,140,248,0.07); border: 1px solid rgba(129,140,248,0.18); margin-bottom: 0.7rem; }
+        .sh h2 { font-size: 2.2rem; font-weight: 900; letter-spacing: -0.8px; color: var(--t1); margin-bottom: 0.5rem; }
+        .sh p { font-size: 0.9rem; color: var(--t3); max-width: 440px; margin: 0 auto; line-height: 1.7; }
+
+        /* ── GROWTH MARKETING (FIRST) ── */
+        .mkt-sec { background: var(--bg2); }
+        .mkt-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+        .mcard { border-radius: 18px; overflow: hidden; border: 1px solid var(--bd); background: var(--bg3); transition: transform 0.35s, border-color 0.35s, box-shadow 0.35s; }
+        .mcard:hover { transform: translateY(-7px); border-color: rgba(129,140,248,0.3); box-shadow: 0 22px 55px rgba(0,0,0,0.55); }
+
+        /* CSS visual panels */
+        .mcard-vis { height: 200px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .mcard-vis::before { content: ''; position: absolute; inset: 0; }
+        .vis-conv::before { background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%); }
+        .vis-email::before { background: linear-gradient(135deg, #1a0533 0%, #6b21a8 50%, #c026d3 100%); }
+        .vis-launch::before { background: linear-gradient(135deg, #064e3b 0%, #065f46 40%, #0d9488 100%); }
+
+        .mcard-vis-inner { position: relative; z-index: 1; text-align: center; }
+        .vis-metric { display: inline-block; padding: 0.35rem 1rem; border-radius: 50px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); font-size: 0.8rem; font-weight: 700; color: white; backdrop-filter: blur(8px); }
+        .vis-bars { display: flex; align-items: flex-end; gap: 6px; height: 70px; margin-bottom: 0.6rem; }
+        .vis-bar { border-radius: 4px 4px 0 0; background: rgba(255,255,255,0.2); }
+        .vis-bar.hi { background: linear-gradient(180deg, #818cf8, #6366f1); }
+        .vis-dots { display: grid; grid-template-columns: repeat(5,1fr); gap: 8px; margin-bottom: 0.6rem; }
+        .vis-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.2); }
+        .vis-dot.on { background: rgba(244,114,182,0.9); box-shadow: 0 0 6px rgba(244,114,182,0.6); }
+        .vis-rocket { font-size: 3rem; display: block; margin-bottom: 0.4rem; animation: float 2s ease-in-out infinite; }
+        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+        .mcard-body { padding: 1.4rem 1.6rem 2rem; }
+        .mcard-co { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.8px; color: var(--p); margin-bottom: 0.35rem; }
+        .mcard-body h3 { font-size: 1.1rem; font-weight: 800; color: var(--t1); margin-bottom: 0.5rem; line-height: 1.3; }
+        .mcard-metric { display: inline-block; font-size: 0.75rem; font-weight: 700; padding: 0.28rem 0.75rem; border-radius: 50px; margin-bottom: 0.8rem; background: rgba(129,140,248,0.1); border: 1px solid rgba(129,140,248,0.2); color: var(--t1); }
+        .mcard-body p { font-size: 0.84rem; color: var(--t2); line-height: 1.68; margin-bottom: 1rem; }
+        .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+        .tag { padding: 0.28rem 0.7rem; border-radius: 50px; font-size: 0.7rem; color: var(--p); background: rgba(129,140,248,0.07); border: 1px solid rgba(129,140,248,0.18); }
+
+        /* ── USCH CASE STUDY (SECOND) ── */
+        .feat-sec { background: var(--bg); }
+        .usch { display: grid; grid-template-columns: 1fr 1fr; border-radius: 22px; overflow: hidden; border: 1px solid var(--bd2); background: var(--bg3); transition: border-color 0.4s, box-shadow 0.4s; }
+        .usch:hover { border-color: rgba(129,140,248,0.35); box-shadow: 0 30px 70px rgba(0,0,0,0.5); }
+        .usch-l { padding: 3rem; display: flex; flex-direction: column; justify-content: center; }
+        .usch-eye { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--p); margin-bottom: 0.7rem; }
+        .usch-l h3 { font-size: 1.9rem; font-weight: 900; letter-spacing: -0.6px; line-height: 1.2; margin-bottom: 0.5rem; }
+        .usch-impact { font-size: 0.85rem; color: var(--p); font-weight: 600; margin-bottom: 1rem; }
+        .usch-l > p { font-size: 0.9rem; color: var(--t2); line-height: 1.75; margin-bottom: 1.2rem; }
+        .usch-nums { display: flex; gap: 2rem; padding: 1.1rem 0; border-top: 1px solid var(--bd); margin-bottom: 1.4rem; margin-top: 0.4rem; }
+        .un-n { display: block; font-size: 1.5rem; font-weight: 900; background: linear-gradient(135deg,var(--p),var(--a)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; margin-bottom: 0.18rem; }
+        .un-l { font-size: 0.68rem; color: var(--t3); }
+        .usch-btn { display: inline-flex; align-items: center; gap: 0.5rem; color: white; text-decoration: none; font-weight: 700; font-size: 0.85rem; padding: 0.72rem 1.5rem; background: linear-gradient(135deg,var(--p),var(--a)); border-radius: 50px; width: fit-content; box-shadow: 0 6px 18px rgba(129,140,248,0.28); transition: all 0.3s; }
+        .usch-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(129,140,248,0.42); }
+        .usch-r { position: relative; overflow: hidden; min-height: 400px; background: #eef0f8; }
+        .usch-r img { width: 100%; height: 100%; object-fit: cover; object-position: top left; transition: transform 0.5s; display: block; }
+        .usch:hover .usch-r img { transform: scale(1.03); }
+        .usch-r::before { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(270deg, transparent 50%, var(--bg3) 100%); }
+
+        /* ABOUT */
+        .about-sec { background: var(--bg2); }
+        .about-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 4rem; align-items: start; }
+        .about-l h3 { font-size: 1.7rem; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 1rem; }
+        .about-l p { font-size: 0.92rem; color: var(--t2); line-height: 1.85; margin-bottom: 1rem; }
+        .astats { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-top: 1.8rem; }
+        .asc { background: var(--bg3); border: 1px solid var(--bd); border-radius: 14px; padding: 1.3rem; text-align: center; transition: border-color 0.3s; }
+        .asc:hover { border-color: rgba(129,140,248,0.25); }
+        .asc-n { display: block; font-size: 1.8rem; font-weight: 900; background: linear-gradient(135deg,var(--p),var(--a)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.25rem; }
+        .asc-l { font-size: 0.72rem; color: var(--t3); }
+        .skills { display: flex; flex-direction: column; gap: 0.7rem; }
+        .sk { display: flex; align-items: center; gap: 1rem; background: var(--bg3); border: 1px solid var(--bd); border-radius: 12px; padding: 0.9rem 1.1rem; transition: border-color 0.3s; }
+        .sk:hover { border-color: rgba(129,140,248,0.22); }
+        .sk-icon { font-size: 1.3rem; flex-shrink: 0; }
+        .sk-name { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.1rem; }
+        .sk-desc { font-size: 0.72rem; color: var(--t3); }
+
+        /* CONTACT */
+        .contact-sec { background: var(--bg); }
+        .contact-c { text-align: center; }
+        .contact-c h2 { font-size: 2.2rem; font-weight: 900; letter-spacing: -0.8px; margin-bottom: 0.6rem; }
+        .contact-c > p { font-size: 0.9rem; color: var(--t3); max-width: 440px; margin: 0 auto 2.2rem; line-height: 1.7; }
+        .ccards { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; max-width: 640px; margin: 0 auto; }
+        .ccard { background: var(--bg2); border: 1px solid var(--bd); border-radius: 16px; padding: 1.8rem 1.4rem; text-align: center; text-decoration: none; color: var(--t1); transition: all 0.3s; }
+        .ccard:hover { border-color: rgba(129,140,248,0.3); transform: translateY(-4px); box-shadow: 0 14px 36px rgba(0,0,0,0.4); }
+        .ccard-ic { font-size: 1.8rem; margin-bottom: 0.7rem; }
+        .ccard h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.3rem; }
+        .ccard p { font-size: 0.75rem; color: var(--t3); margin: 0; }
+
+        footer { background: var(--bg2); border-top: 1px solid var(--bd); padding: 1.8rem 2rem; text-align: center; }
+        footer p { font-size: 0.78rem; color: var(--t3); }
+
+        .fi { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+        .fi.vis { opacity: 1; transform: translateY(0); }
+        .mkt-grid .fi:nth-child(2) { transition-delay: 0.1s; }
+        .mkt-grid .fi:nth-child(3) { transition-delay: 0.2s; }
+
+        @media (max-width: 900px) {
+            .hero-inner { grid-template-columns: 1fr; }
+            .hero-visual { display: none; }
             .hero h1 { font-size: 2.8rem; }
-            .hero .subtitle { font-size: 1.3rem; }
-            .hero-stats { flex-direction: column; gap: 2rem; }
-            section { padding: 4rem 1.5rem; }
-            h2 { font-size: 2.2rem; }
-            .usch-card-content { padding: 2rem; }
-            .usch-card-content h3 { font-size: 1.7rem; }
-            .cta-buttons { flex-direction: column; }
-            .about-stats { grid-template-columns: 1fr; }
-            .projects-grid { grid-template-columns: 1fr; }
+            .usch { grid-template-columns: 1fr; }
+            .usch-r { min-height: 240px; }
+            .usch-r::before { background: linear-gradient(180deg, transparent 30%, var(--bg3) 100%); }
+            .mkt-grid { grid-template-columns: 1fr; }
+            .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+        }
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2.2rem; letter-spacing: -1px; }
+            .ccards { grid-template-columns: 1fr; }
+            .hero-stats { gap: 1.5rem; }
+            section { padding: 3.5rem 0; }
         }
     </style>
 </head>
 <body>
-    <div class="bg-animation"></div>
 
-    <nav id="nav">
-        <div class="container">
-            <div class="logo">CM</div>
-            <div class="nav-links">
-                <ul>
-                    <li><a href="#work">Work</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<nav>
+    <div class="nav-inner">
+        <div class="logo">CM</div>
+        <ul class="nav-links">
+            <li><a href="#marketing">Marketing</a></li>
+            <li><a href="#design">Design</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
 
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-badge">Product Designer × Growth Marketer</div>
-                <h1>
-                    Designing <span class="gradient-text">experiences</span> that drive measurable growth
-                </h1>
-                <p class="subtitle">Bridging the gap between beautiful design and business impact through data-driven strategy and user-centered thinking.</p>
-                <p>Currently pursuing MSc in Design & Development of Digital Business at UCC. Previously drove growth at Pepsales AI and Kommunicate.</p>
-                
+<!-- HERO -->
+<section class="hero">
+    <div class="wrap">
+        <div class="hero-inner">
+            <div>
+                <div class="hero-badge">✦ Product Designer × Growth Marketer</div>
+                <h1>Designing <span class="grad">experiences</span> that drive growth</h1>
+                <p class="hero-sub">Bridging beautiful design with business impact through data-driven strategy and human-centered thinking.</p>
+                <p class="hero-note">MSc Digital Business @ UCC &nbsp;·&nbsp; ex-Pepsales AI &nbsp;·&nbsp; ex-Kommunicate</p>
                 <div class="hero-stats">
-                    <div class="hero-stat">
-                        <div class="hero-stat-number">3+</div>
-                        <div class="hero-stat-label">Years B2B SaaS</div>
-                    </div>
-                    <div class="hero-stat">
-                        <div class="hero-stat-number">25x</div>
-                        <div class="hero-stat-label">Conversion Increase</div>
-                    </div>
-                    <div class="hero-stat">
-                        <div class="hero-stat-number">Top 5</div>
-                        <div class="hero-stat-label">Product Hunt Launches</div>
-                    </div>
+                    <div><span class="hs-n">3+</span><span class="hs-l">Years B2B SaaS</span></div>
+                    <div><span class="hs-n">25x</span><span class="hs-l">Conversion Increase</span></div>
+                    <div><span class="hs-n">Top 5</span><span class="hs-l">Product Hunt</span></div>
                 </div>
-
-                <div class="cta-buttons">
-                    <a href="#work" class="btn btn-primary">View My Work</a>
-                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                <div class="hero-btns">
+                    <a href="#marketing" class="btn-p">View My Work</a>
+                    <a href="#contact" class="btn-o">Get In Touch</a>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- USCH Featured Case Study -->
-    <section id="work" class="featured-project">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-divider"></div>
-                <div class="section-badge">Featured Case Study</div>
-                <h2>Product Design</h2>
-                <p class="section-subtitle">End-to-end UX research — from problem discovery to high-fidelity prototype</p>
-            </div>
-
-            <div class="usch-card fade-in">
-                <div class="usch-card-content">
-                    <div class="project-eyebrow">UX Research · Product Design · Figma</div>
-                    <h3>Unified Student Communication Hub</h3>
-                    <p class="impact">📊 Reducing communication overload by 80% through human-centered design</p>
-                    <p>Led end-to-end UX research and design for a centralised academic platform, consolidating fragmented notifications from Canvas, Gmail, and Teams into one intuitive dashboard.</p>
-                    <div class="project-tags">
-                        <span class="tag">UX Research</span>
-                        <span class="tag">Usability Testing</span>
-                        <span class="tag">0→1 Design</span>
-                        <span class="tag">Figma</span>
+            <div class="hero-visual">
+                <div class="mockup">
+                    <div class="mockup-bar">
+                        <span class="dot dr"></span><span class="dot dy"></span><span class="dot dg"></span>
                     </div>
-                    <div class="usch-stats">
-                        <div class="usch-stat"><span class="num">80%</span><span class="lbl">User Satisfaction</span></div>
-                        <div class="usch-stat"><span class="num">90%</span><span class="lbl">Ease of Use</span></div>
-                        <div class="usch-stat"><span class="num">8</span><span class="lbl">User Interviews</span></div>
-                    </div>
-                    <a href="usch.html" class="project-link">View Full Case Study →</a>
-                </div>
-                <div class="usch-card-image">
                     <img src="images/Dashboard.png" alt="USCH Dashboard">
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- All Projects Grid -->
-    <section class="projects-section">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-divider"></div>
-                <div class="section-badge">All Projects</div>
-                <h2>Growth Marketing</h2>
-                <p class="section-subtitle">Data-driven campaigns that moved the needle at B2B SaaS companies</p>
-            </div>
-
-            <div class="projects-grid">
-                <!-- USCH mini card -->
-                <div class="pcard usch-mini fade-in">
-                    <div class="pcard-img-wrap">
-                        <img src="images/Dashboard.png" alt="USCH Dashboard">
-                    </div>
-                    <div class="pcard-body">
-                        <div class="pcard-co">UX Design · UCC</div>
-                        <h3>Student Communication Hub</h3>
-                        <div class="pcard-metric">📊 80% User Satisfaction</div>
-                        <p>Unified academic notifications from Canvas, Gmail & Teams into one dashboard.</p>
-                        <div class="project-tags">
-                            <span class="tag">UX Research</span>
-                            <span class="tag">Figma</span>
-                        </div>
-                        <a href="usch.html" style="font-size:0.85rem; color:var(--primary); font-weight:600; text-decoration:none;">View Case Study →</a>
-                    </div>
+                <div class="float-badge fb1">
+                    <div class="fb-lbl">User Satisfaction</div>
+                    <div class="fb-val" style="color:#4ade80;">▲ 80%</div>
                 </div>
-
-                <!-- Lead Conversion -->
-                <div class="pcard fade-in">
-                    <div class="pcard-img-wrap">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80" alt="Analytics">
-                    </div>
-                    <div class="pcard-body">
-                        <div class="pcard-co">Pepsales AI</div>
-                        <h3>Lead Conversion Optimization</h3>
-                        <div class="pcard-metric">📈 0.2% → 5% Conversion</div>
-                        <p>25x increase in lead capture and 25% MQL growth via landing page redesign and targeted campaigns.</p>
-                        <div class="project-tags">
-                            <span class="tag">CRO</span>
-                            <span class="tag">B2B SaaS</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Email Marketing -->
-                <div class="pcard fade-in">
-                    <div class="pcard-img-wrap">
-                        <img src="https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=600&q=80" alt="Email">
-                    </div>
-                    <div class="pcard-body">
-                        <div class="pcard-co">Kommunicate</div>
-                        <h3>Email Marketing Overhaul</h3>
-                        <div class="pcard-metric">📧 9% → 30% Open Rate</div>
-                        <p>Rebuilt lifecycle email strategy with segmentation and personalisation, tripling open rates.</p>
-                        <div class="project-tags">
-                            <span class="tag">Email Design</span>
-                            <span class="tag">Lifecycle</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product Launch -->
-                <div class="pcard fade-in">
-                    <div class="pcard-img-wrap">
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80" alt="Growth">
-                    </div>
-                    <div class="pcard-body">
-                        <div class="pcard-co">Kommunicate</div>
-                        <h3>Product Launch Strategy</h3>
-                        <div class="pcard-metric">🚀 #3 Product Hunt · +20% Users</div>
-                        <p>GTM strategy for two Product Hunt launches, hitting top rankings and driving strong user growth.</p>
-                        <div class="project-tags">
-                            <span class="tag">GTM</span>
-                            <span class="tag">Growth</span>
-                        </div>
-                    </div>
+                <div class="float-badge fb2">
+                    <div class="fb-lbl">Lead Conversion</div>
+                    <div class="fb-val" style="color:var(--p);">▲ 25x</div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section id="about" class="about">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-badge">About Me</div>
-                <h2>Designer. Marketer. Problem Solver.</h2>
-                <p class="section-subtitle">Bridging the gap between what users need and what businesses require</p>
-            </div>
+<!-- ① GROWTH MARKETING — FIRST -->
+<section id="marketing" class="mkt-sec">
+    <div class="wrap">
+        <div class="sh">
+            <div class="pill">Growth Marketing</div>
+            <h2>Marketing Impact</h2>
+            <p>Data-driven campaigns that moved the needle at B2B SaaS companies</p>
+        </div>
+        <div class="mkt-grid">
 
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>From Engineering to Design</h3>
-                    <p>My journey started with a Bachelor's in Mechanical Engineering and an MBA in Marketing, giving me a unique perspective that combines analytical thinking with creative problem-solving.</p>
-                    <p>After 3+ years driving growth at B2B SaaS companies like Pepsales AI and Kommunicate, I discovered my true passion: designing the products and experiences that make growth possible. Now at UCC, I'm deepening my expertise in UI/UX design, front-end development, and digital business strategy.</p>
-                    <p>What makes me different? I don't just design beautiful interfaces—I design experiences backed by data, informed by user research, and measured by business impact. I speak the language of designers, marketers, and developers.</p>
-
-                    <div class="about-stats">
-                        <div class="stat-card">
-                            <span class="stat-number">3+</span>
-                            <span class="stat-label">Years in B2B SaaS</span>
+            <div class="mcard fi">
+                <div class="mcard-vis vis-conv">
+                    <div class="mcard-vis-inner">
+                        <div class="vis-bars">
+                            <div class="vis-bar" style="height:20px;width:18px;"></div>
+                            <div class="vis-bar" style="height:35px;width:18px;"></div>
+                            <div class="vis-bar" style="height:28px;width:18px;"></div>
+                            <div class="vis-bar" style="height:50px;width:18px;"></div>
+                            <div class="vis-bar hi" style="height:70px;width:18px;"></div>
                         </div>
-                        <div class="stat-card">
-                            <span class="stat-number">25%</span>
-                            <span class="stat-label">MQL Growth</span>
-                        </div>
-                        <div class="stat-card">
-                            <span class="stat-number">25x</span>
-                            <span class="stat-label">Conversion Increase</span>
-                        </div>
-                        <div class="stat-card">
-                            <span class="stat-number">2</span>
-                            <span class="stat-label">Top 5 PH Launches</span>
-                        </div>
+                        <div class="vis-metric">📈 0.2% → 5% Conversion</div>
                     </div>
                 </div>
-
-                <div class="skills-grid">
-                    <div class="skill-item">
-                        <div class="skill-icon">🎨</div>
-                        <div class="skill-info">
-                            <h4>Product Design</h4>
-                            <p>UI/UX, User Research, Prototyping</p>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon">📊</div>
-                        <div class="skill-info">
-                            <h4>Growth Strategy</h4>
-                            <p>GTM, CRO, Lifecycle Marketing</p>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon">💻</div>
-                        <div class="skill-info">
-                            <h4>Development</h4>
-                            <p>HTML, CSS, JavaScript, SQL</p>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon">🔍</div>
-                        <div class="skill-info">
-                            <h4>Analytics</h4>
-                            <p>A/B Testing, Funnel Analysis, SQL</p>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon">🛠️</div>
-                        <div class="skill-info">
-                            <h4>Tools</h4>
-                            <p>Figma, Adobe XD, Python, PHP</p>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon">🧠</div>
-                        <div class="skill-info">
-                            <h4>Strategy</h4>
-                            <p>Product Strategy, User Research</p>
-                        </div>
+                <div class="mcard-body">
+                    <div class="mcard-co">Pepsales AI</div>
+                    <h3>Lead Conversion Optimization</h3>
+                    <div class="mcard-metric">25x increase in lead capture</div>
+                    <p>Redesigned landing pages and ran targeted B2B campaigns, driving a 25x increase in lead capture and 25% MQL growth.</p>
+                    <div class="tags">
+                        <span class="tag">CRO</span>
+                        <span class="tag">Product Marketing</span>
+                        <span class="tag">B2B SaaS</span>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="contact-content">
-                <div class="section-badge">Let's Connect</div>
-                <h2>Let's Build Something Great</h2>
-                <p class="contact-text">I'm currently open to Product Designer, UX Designer, and Growth Marketing roles. Let's chat about how I can help drive impact at your company.</p>
-
-                <div class="contact-links">
-                    <a href="/cdn-cgi/l/email-protection#0a676b7e62636b79696f6e786369394a6d676b636624696567" class="contact-card">
-                        <div class="contact-icon">📧</div>
-                        <h4>Email</h4>
-                        <p><span class="__cf_email__" data-cfemail="305d5144585951435355544259530370575d51595c1e535f5d">[email&#160;protected]</span></p>
-                    </a>
-
-                    <a href="https://linkedin.com/in/cedric-mathias" target="_blank" class="contact-card">
-                        <div class="contact-icon">💼</div>
-                        <h4>LinkedIn</h4>
-                        <p>Connect with me</p>
-                    </a>
-
-                    <a href="tel:+353899439379" class="contact-card">
-                        <div class="contact-icon">📱</div>
-                        <h4>Phone</h4>
-                        <p>+353 89 943 9379</p>
-                    </a>
+            <div class="mcard fi">
+                <div class="mcard-vis vis-email">
+                    <div class="mcard-vis-inner">
+                        <div class="vis-dots">
+                            <div class="vis-dot on"></div><div class="vis-dot on"></div><div class="vis-dot"></div><div class="vis-dot on"></div><div class="vis-dot on"></div>
+                            <div class="vis-dot"></div><div class="vis-dot on"></div><div class="vis-dot on"></div><div class="vis-dot"></div><div class="vis-dot on"></div>
+                            <div class="vis-dot on"></div><div class="vis-dot"></div><div class="vis-dot on"></div><div class="vis-dot on"></div><div class="vis-dot on"></div>
+                        </div>
+                        <div class="vis-metric">📧 9% → 30% Open Rate</div>
+                    </div>
+                </div>
+                <div class="mcard-body">
+                    <div class="mcard-co">Kommunicate</div>
+                    <h3>Email Marketing Overhaul</h3>
+                    <div class="mcard-metric">3× open rate improvement</div>
+                    <p>Rebuilt lifecycle email strategy with advanced segmentation and personalisation, tripling open rates across all campaigns.</p>
+                    <div class="tags">
+                        <span class="tag">Email Design</span>
+                        <span class="tag">Lifecycle</span>
+                        <span class="tag">Automation</span>
+                    </div>
                 </div>
             </div>
+
+            <div class="mcard fi">
+                <div class="mcard-vis vis-launch">
+                    <div class="mcard-vis-inner">
+                        <span class="vis-rocket">🚀</span>
+                        <div class="vis-metric">🏆 #3 Product Hunt</div>
+                    </div>
+                </div>
+                <div class="mcard-body">
+                    <div class="mcard-co">Kommunicate</div>
+                    <h3>Product Launch Strategy</h3>
+                    <div class="mcard-metric">+20% User Growth</div>
+                    <p>Executed data-backed GTM strategies for two Product Hunt launches, hitting top 5 rankings and driving strong user acquisition.</p>
+                    <div class="tags">
+                        <span class="tag">GTM Strategy</span>
+                        <span class="tag">Product Launch</span>
+                        <span class="tag">Growth</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </section>
+    </div>
+</section>
 
-    <footer>
-        <div class="container">
-            <p>© 2026 Cedric Mathias. Designed & Developed with passion for great UX.</p>
-            <p style="margin-top: 0.5rem; opacity: 0.6;">Dublin, Ireland 🇮🇪</p>
+<!-- ② USCH CASE STUDY — SECOND -->
+<section id="design" class="feat-sec">
+    <div class="wrap">
+        <div class="sh">
+            <div class="pill">Featured Case Study</div>
+            <h2>Product Design</h2>
+            <p>End-to-end UX research — from discovery to high-fidelity prototype</p>
         </div>
-    </footer>
+        <div class="usch fi">
+            <div class="usch-l">
+                <div class="usch-eye">UX Research · Product Design · Figma</div>
+                <h3>Unified Student Communication Hub</h3>
+                <p class="usch-impact">📊 Reducing communication overload by 80% through human-centered design</p>
+                <p>Led end-to-end UX research and design for a centralised academic platform, consolidating fragmented notifications from Canvas, Gmail, and Teams into one intuitive dashboard.</p>
+                <div class="tags" style="margin-bottom:1.4rem;">
+                    <span class="tag">UX Research</span>
+                    <span class="tag">Usability Testing</span>
+                    <span class="tag">Wireframing</span>
+                    <span class="tag">0→1 Design</span>
+                    <span class="tag">Figma</span>
+                </div>
+                <div class="usch-nums">
+                    <div><span class="un-n">80%</span><span class="un-l">User Satisfaction</span></div>
+                    <div><span class="un-n">90%</span><span class="un-l">Ease of Use</span></div>
+                    <div><span class="un-n">8</span><span class="un-l">User Interviews</span></div>
+                </div>
+                <a href="usch.html" class="usch-btn">View Full Case Study →</a>
+            </div>
+            <div class="usch-r">
+                <img src="images/Dashboard.png" alt="USCH Dashboard">
+            </div>
+        </div>
+    </div>
+</section>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
+<!-- ABOUT -->
+<section id="about" class="about-sec">
+    <div class="wrap">
+        <div class="sh">
+            <div class="pill">About Me</div>
+            <h2>Designer. Marketer. Problem Solver.</h2>
+            <p>Bridging the gap between what users need and what businesses require</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-l">
+                <h3>From Engineering to Design</h3>
+                <p>My journey started with a Bachelor's in Mechanical Engineering and an MBA in Marketing — a unique mix that combines analytical thinking with creative problem-solving.</p>
+                <p>After 3+ years driving growth at B2B SaaS companies like Pepsales AI and Kommunicate, I discovered my true passion: designing the products and experiences that make growth possible.</p>
+                <p>I don't just design beautiful interfaces — I design experiences backed by data, informed by user research, and measured by business impact.</p>
+                <div class="astats">
+                    <div class="asc"><span class="asc-n">3+</span><span class="asc-l">Years in B2B SaaS</span></div>
+                    <div class="asc"><span class="asc-n">25%</span><span class="asc-l">MQL Growth</span></div>
+                    <div class="asc"><span class="asc-n">25x</span><span class="asc-l">Conversion Increase</span></div>
+                    <div class="asc"><span class="asc-n">2</span><span class="asc-l">Top 5 PH Launches</span></div>
+                </div>
+            </div>
+            <div class="skills">
+                <div class="sk"><div class="sk-icon">🎨</div><div><div class="sk-name">Product Design</div><div class="sk-desc">UI/UX, User Research, Prototyping, Figma</div></div></div>
+                <div class="sk"><div class="sk-icon">📊</div><div><div class="sk-name">Growth Strategy</div><div class="sk-desc">GTM, CRO, Lifecycle Marketing</div></div></div>
+                <div class="sk"><div class="sk-icon">💻</div><div><div class="sk-name">Development</div><div class="sk-desc">HTML, CSS, JavaScript, SQL</div></div></div>
+                <div class="sk"><div class="sk-icon">🔍</div><div><div class="sk-name">Analytics</div><div class="sk-desc">A/B Testing, Funnel Analysis, Data Viz</div></div></div>
+                <div class="sk"><div class="sk-icon">🚀</div><div><div class="sk-name">Product Strategy</div><div class="sk-desc">Roadmapping, User Research, Positioning</div></div></div>
+            </div>
+        </div>
+    </div>
+</section>
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
+<!-- CONTACT -->
+<section id="contact" class="contact-sec">
+    <div class="wrap">
+        <div class="contact-c">
+            <div class="pill" style="margin-bottom:1rem;">Let's Connect</div>
+            <h2 class="grad">Let's Build Something Great</h2>
+            <p>Open to Product Designer, UX Designer, and Growth Marketing roles. Let's chat about how I can drive impact at your company.</p>
+            <div class="ccards">
+                <a href="mailto:mathiascedric3@gmail.com" class="ccard">
+                    <div class="ccard-ic">📧</div><h4>Email</h4><p>mathiascedric3@gmail.com</p>
+                </a>
+                <a href="https://linkedin.com/in/cedric-mathias" target="_blank" class="ccard">
+                    <div class="ccard-ic">💼</div><h4>LinkedIn</h4><p>Connect with me</p>
+                </a>
+                <a href="tel:+353899439379" class="ccard">
+                    <div class="ccard-ic">📱</div><h4>Phone</h4><p>+353 89 943 9379</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
 
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+<footer>
+    <p>© 2026 Cedric Mathias &nbsp;·&nbsp; Designed & Developed with passion &nbsp;·&nbsp; Dublin, Ireland 🇮🇪</p>
+</footer>
 
-        const nav = document.getElementById('nav');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
+<script>
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fi').forEach(el => obs.observe(el));
 
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        const animateValue = (element, start, end, duration) => {
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                const value = Math.floor(progress * (end - start) + start);
-                element.innerHTML = value + (element.dataset.suffix || '');
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
-                }
-            };
-            window.requestAnimationFrame(step);
-        };
-
-        const numberObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !entry.target.dataset.animated) {
-                    entry.target.dataset.animated = 'true';
-                    const text = entry.target.textContent;
-                    const number = parseInt(text.replace(/\D/g, ''));
-                    if (number) {
-                        animateValue(entry.target, 0
+    window.addEventListener('scroll', () => {
+        document.querySelector('nav').style.background =
+            window.scrollY > 60 ? 'rgba(3,3,3,0.97)' : 'rgba(3,3,3,0.85)';
+    });
+</script>
+</body>
+</html>
