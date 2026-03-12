@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cedric Mathias | Product Designer & Growth Marketer</title>
+    <title>Cedric Mathias | Growth Marketer & Product Designer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -56,33 +56,20 @@
             background-size: 80px 80px;
             mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
         }
-        .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; position: relative; z-index: 1; width: 100%; }
-        .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 1rem; border-radius: 50px; margin-bottom: 1.5rem; background: rgba(129,140,248,0.08); border: 1px solid rgba(129,140,248,0.2); font-size: 0.75rem; font-weight: 600; color: var(--p); }
-        .hero h1 { font-size: 3.6rem; font-weight: 900; line-height: 1.08; letter-spacing: -2px; margin-bottom: 1.2rem; }
+        .hero-inner { display: flex; flex-direction: column; align-items: flex-start; position: relative; z-index: 1; width: 100%; max-width: 820px; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 1rem; border-radius: 50px; margin-bottom: 1.8rem; background: rgba(129,140,248,0.08); border: 1px solid rgba(129,140,248,0.2); font-size: 0.75rem; font-weight: 600; color: var(--p); }
+        .hero h1 { font-size: 5rem; font-weight: 900; line-height: 1.05; letter-spacing: -3px; margin-bottom: 1.4rem; }
         .grad { background: linear-gradient(135deg, var(--p), var(--a)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .hero-sub { font-size: 1rem; color: var(--t2); line-height: 1.8; margin-bottom: 0.6rem; max-width: 460px; }
-        .hero-note { font-size: 0.82rem; color: var(--t3); margin-bottom: 2rem; }
-        .hero-stats { display: flex; gap: 2.5rem; margin-bottom: 2.2rem; }
-        .hs-n { display: block; font-size: 1.6rem; font-weight: 900; line-height: 1; background: linear-gradient(135deg,var(--p),var(--a)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.15rem; }
+        .hero-sub { font-size: 1.1rem; color: var(--t2); line-height: 1.8; margin-bottom: 0.6rem; max-width: 600px; }
+        .hero-note { font-size: 0.82rem; color: var(--t3); margin-bottom: 2.2rem; }
+        .hero-stats { display: flex; gap: 3.5rem; margin-bottom: 2.5rem; padding: 1.5rem 2rem; background: rgba(255,255,255,0.03); border: 1px solid var(--bd); border-radius: 16px; }
+        .hs-n { display: block; font-size: 1.8rem; font-weight: 900; line-height: 1; background: linear-gradient(135deg,var(--p),var(--a)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.2rem; }
         .hs-l { font-size: 0.72rem; color: var(--t3); }
         .hero-btns { display: flex; gap: 0.8rem; }
-        .btn-p { padding: 0.8rem 1.8rem; background: linear-gradient(135deg,var(--p),var(--a)); color: white; border-radius: 50px; font-weight: 700; font-size: 0.88rem; text-decoration: none; transition: all 0.3s; box-shadow: 0 6px 20px rgba(129,140,248,0.28); }
+        .btn-p { padding: 0.85rem 2rem; background: linear-gradient(135deg,var(--p),var(--a)); color: white; border-radius: 50px; font-weight: 700; font-size: 0.9rem; text-decoration: none; transition: all 0.3s; box-shadow: 0 6px 20px rgba(129,140,248,0.28); }
         .btn-p:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(129,140,248,0.42); }
-        .btn-o { padding: 0.8rem 1.8rem; border: 1px solid var(--bd2); color: var(--t2); border-radius: 50px; font-weight: 600; font-size: 0.88rem; text-decoration: none; transition: all 0.3s; }
+        .btn-o { padding: 0.85rem 2rem; border: 1px solid var(--bd2); color: var(--t2); border-radius: 50px; font-weight: 600; font-size: 0.9rem; text-decoration: none; transition: all 0.3s; }
         .btn-o:hover { border-color: var(--p); color: var(--p); }
-
-        /* Hero mockup */
-        .hero-visual { position: relative; }
-        .mockup { border-radius: 14px; overflow: hidden; border: 1px solid var(--bd2); box-shadow: 0 40px 80px rgba(0,0,0,0.7); }
-        .mockup-bar { background: var(--bg3); padding: 0.55rem 1rem; display: flex; align-items: center; gap: 0.4rem; border-bottom: 1px solid var(--bd); }
-        .dot { width: 9px; height: 9px; border-radius: 50%; }
-        .dr { background: #ff5f56; } .dy { background: #ffbd2e; } .dg { background: #27c93f; }
-        .mockup img { width: 100%; display: block; }
-        .float-badge { position: absolute; background: var(--bg3); border: 1px solid var(--bd2); border-radius: 10px; padding: 0.6rem 1rem; font-size: 0.75rem; box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
-        .fb1 { bottom: -12px; left: -16px; }
-        .fb2 { top: -12px; right: -16px; }
-        .fb-lbl { font-size: 0.62rem; color: var(--t3); margin-bottom: 0.15rem; }
-        .fb-val { font-weight: 800; font-size: 0.9rem; }
 
         /* SECTION COMMON */
         section { padding: 4.5rem 0; }
@@ -180,9 +167,8 @@
         .mkt-grid .fi:nth-child(3) { transition-delay: 0.2s; }
 
         @media (max-width: 900px) {
-            .hero-inner { grid-template-columns: 1fr; }
-            .hero-visual { display: none; }
-            .hero h1 { font-size: 2.8rem; }
+            .hero h1 { font-size: 3.2rem; }
+            .hero-stats { gap: 2rem; }
             .usch { grid-template-columns: 1fr; }
             .usch-r { min-height: 240px; }
             .usch-r::before { background: linear-gradient(180deg, transparent 30%, var(--bg3) 100%); }
@@ -190,7 +176,8 @@
             .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
         }
         @media (max-width: 600px) {
-            .hero h1 { font-size: 2.2rem; letter-spacing: -1px; }
+            .hero h1 { font-size: 2.6rem; letter-spacing: -1.5px; }
+            .hero-stats { flex-wrap: wrap; gap: 1.2rem; padding: 1.2rem; }
             .ccards { grid-template-columns: 1fr; }
             .hero-stats { gap: 1.5rem; }
             section { padding: 3.5rem 0; }
@@ -215,36 +202,19 @@
 <section class="hero">
     <div class="wrap">
         <div class="hero-inner">
-            <div>
-                <div class="hero-badge">✦ Product Designer × Growth Marketer</div>
-                <h1>Designing <span class="grad">experiences</span> that drive growth</h1>
-                <p class="hero-sub">Bridging beautiful design with business impact through data-driven strategy and human-centered thinking.</p>
-                <p class="hero-note">MSc Digital Business @ UCC &nbsp;·&nbsp; ex-Pepsales AI &nbsp;·&nbsp; ex-Kommunicate</p>
-                <div class="hero-stats">
-                    <div><span class="hs-n">3+</span><span class="hs-l">Years B2B SaaS</span></div>
-                    <div><span class="hs-n">25x</span><span class="hs-l">Conversion Increase</span></div>
-                    <div><span class="hs-n">Top 5</span><span class="hs-l">Product Hunt</span></div>
-                </div>
-                <div class="hero-btns">
-                    <a href="#marketing" class="btn-p">View My Work</a>
-                    <a href="#contact" class="btn-o">Get In Touch</a>
-                </div>
+            <div class="hero-badge">✦ Product Designer × Growth Marketer</div>
+            <h1>I don't just design.<br>I make products <span class="grad">grow.</span></h1>
+            <p class="hero-sub">Most designers stop at beautiful. Most marketers stop at clicks. I sit at the intersection — using UX research, data, and creative strategy to build products people love <em>and</em> businesses that scale.</p>
+            <p class="hero-note">MSc Digital Business @ UCC &nbsp;·&nbsp; ex-Pepsales AI &nbsp;·&nbsp; ex-Kommunicate &nbsp;·&nbsp; Background in Engineering + Marketing</p>
+            <div class="hero-stats">
+                <div><span class="hs-n">3+</span><span class="hs-l">Years B2B SaaS</span></div>
+                <div><span class="hs-n">25x</span><span class="hs-l">Conversion Increase</span></div>
+                <div><span class="hs-n">Top 5</span><span class="hs-l">Product Hunt Launches</span></div>
+                <div><span class="hs-n">80%</span><span class="hs-l">UX Satisfaction Score</span></div>
             </div>
-            <div class="hero-visual">
-                <div class="mockup">
-                    <div class="mockup-bar">
-                        <span class="dot dr"></span><span class="dot dy"></span><span class="dot dg"></span>
-                    </div>
-                    <img src="images/Dashboard.png" alt="USCH Dashboard">
-                </div>
-                <div class="float-badge fb1">
-                    <div class="fb-lbl">User Satisfaction</div>
-                    <div class="fb-val" style="color:#4ade80;">▲ 80%</div>
-                </div>
-                <div class="float-badge fb2">
-                    <div class="fb-lbl">Lead Conversion</div>
-                    <div class="fb-val" style="color:var(--p);">▲ 25x</div>
-                </div>
+            <div class="hero-btns">
+                <a href="#marketing" class="btn-p">View My Work</a>
+                <a href="#contact" class="btn-o">Get In Touch</a>
             </div>
         </div>
     </div>
