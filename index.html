@@ -325,7 +325,7 @@
         }
 
         section {
-            padding: 8rem 3rem;
+            padding: 5rem 3rem;
             position: relative;
         }
 
@@ -336,7 +336,7 @@
 
         .section-header {
             text-align: center;
-            margin-bottom: 5rem;
+            margin-bottom: 3rem;
         }
 
         .section-badge {
@@ -372,319 +372,135 @@
             line-height: 1.8;
         }
 
-        .featured-project {
-            background: var(--bg-primary);
+        .featured-project { background: var(--bg-primary); }
+        .projects-section { background: var(--bg-secondary); }
+
+        /* ── Divider line between sections ── */
+        .section-divider {
+            width: 60px; height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+            margin: 0 auto 1.2rem;
         }
 
-        .project-hero {
-            background: var(--bg-secondary);
-            border-radius: 30px;
-            padding: 5rem;
-            position: relative;
+        /* ── USCH hero card ── */
+        .usch-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-radius: 28px;
             overflow: hidden;
             border: 1px solid var(--border);
-            transition: all 0.5s ease;
+            background: var(--bg-secondary);
+            transition: border-color 0.4s, box-shadow 0.4s;
+        }
+        .usch-card:hover {
+            border-color: rgba(129,140,248,0.5);
+            box-shadow: 0 32px 80px rgba(129,140,248,0.12);
+        }
+        .usch-card-content {
+            padding: 3.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .project-eyebrow {
+            font-size: 0.75rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 2px;
+            color: var(--primary); margin-bottom: 1rem;
+        }
+        .usch-card-content h3 {
+            font-size: 2.2rem; font-weight: 900;
+            color: var(--text-primary); line-height: 1.15;
+            letter-spacing: -0.8px; margin-bottom: 0.8rem;
+        }
+        .usch-card-content .impact {
+            font-size: 0.95rem; color: var(--primary);
+            font-weight: 600; margin-bottom: 1.2rem;
+        }
+        .usch-card-content > p {
+            font-size: 0.98rem; color: var(--text-secondary);
+            line-height: 1.75; margin-bottom: 1.5rem;
+        }
+        .project-tags {
+            display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.8rem;
+        }
+        .tag {
+            padding: 0.35rem 0.9rem;
+            background: rgba(129,140,248,0.08);
+            border: 1px solid rgba(129,140,248,0.2);
+            border-radius: 50px; font-size: 0.78rem;
+            color: var(--primary); font-weight: 500;
+            transition: all 0.3s;
+        }
+        .tag:hover { background: var(--primary); color: white; }
+        .usch-stats {
+            display: flex; gap: 2rem;
+            padding: 1.2rem 0; border-top: 1px solid var(--border);
+            margin-bottom: 1.8rem;
+        }
+        .usch-stat .num {
+            font-size: 1.8rem; font-weight: 900; display: block; line-height: 1;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; margin-bottom: 0.3rem;
+        }
+        .usch-stat .lbl { font-size: 0.78rem; color: var(--text-tertiary); }
+        .project-link {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            color: white; text-decoration: none; font-weight: 600;
+            font-size: 0.95rem; padding: 0.85rem 1.8rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50px; width: fit-content;
+            box-shadow: 0 8px 24px rgba(129,140,248,0.3);
+            transition: all 0.3s;
+        }
+        .project-link:hover { gap: 1rem; transform: translateY(-2px); box-shadow: 0 12px 36px rgba(129,140,248,0.45); }
+        .usch-card-image { position: relative; overflow: hidden; background: #f0f2f8; min-height: 460px; }
+        .usch-card-image img { width: 100%; height: 100%; object-fit: cover; object-position: top left; transition: transform 0.6s; }
+        .usch-card:hover .usch-card-image img { transform: scale(1.04); }
+        .usch-card-image::before {
+            content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+            background: linear-gradient(270deg, transparent 55%, var(--bg-secondary) 100%);
         }
 
-        .project-hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(129, 140, 248, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: pulse 4s ease-in-out infinite;
+        /* ── Projects grid (4 cards) ── */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.2rem;
         }
+        .pcard {
+            border-radius: 20px; overflow: hidden;
+            border: 1px solid var(--border); background: var(--bg-primary);
+            transition: transform 0.4s, border-color 0.4s, box-shadow 0.4s;
+            position: relative;
+        }
+        .pcard:hover { transform: translateY(-8px); border-color: rgba(129,140,248,0.4); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .pcard-img-wrap { overflow: hidden; position: relative; height: 180px; }
+        .pcard-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s, filter 0.4s; filter: saturate(0.8) brightness(0.9); }
+        .pcard:hover .pcard-img-wrap img { transform: scale(1.08); filter: saturate(1.1) brightness(1); }
+        .pcard-img-wrap::after {
+            content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 50%;
+            background: linear-gradient(transparent, var(--bg-primary));
+        }
+        .pcard-body { padding: 1.4rem 1.6rem 1.8rem; }
+        .pcard-co { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--primary); margin-bottom: 0.4rem; }
+        .pcard-body h3 { font-size: 1.1rem; font-weight: 800; color: var(--text-primary); margin-bottom: 0.5rem; line-height: 1.3; }
+        .pcard-metric {
+            display: inline-block; font-size: 0.8rem; font-weight: 700;
+            padding: 0.3rem 0.8rem; border-radius: 50px; margin-bottom: 0.8rem;
+            background: linear-gradient(135deg, rgba(129,140,248,0.15), rgba(244,114,182,0.15));
+            border: 1px solid rgba(129,140,248,0.2); color: var(--text-primary);
+        }
+        .pcard-body p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 1rem; }
+
+        /* USCH mini card accent */
+        .pcard.usch-mini { border-color: rgba(129,140,248,0.3); }
+        .pcard.usch-mini .pcard-co { color: var(--accent); }
 
         @keyframes pulse {
             0%, 100% { transform: scale(1); opacity: 0.5; }
             50% { transform: scale(1.1); opacity: 0.8; }
-        }
-
-        .project-hero:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 30px 60px rgba(129, 140, 248, 0.15);
-            border-color: var(--primary);
-        }
-
-        .project-hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
-        }
-
-        .project-hero h3 {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            color: var(--text-primary);
-            font-weight: 800;
-            letter-spacing: -1px;
-        }
-
-        .project-hero .impact {
-            font-size: 1.4rem;
-            color: var(--primary);
-            font-weight: 700;
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .project-hero p {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            line-height: 1.9;
-            margin-bottom: 2.5rem;
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .tag {
-            padding: 0.6rem 1.5rem;
-            background: rgba(129, 140, 248, 0.1);
-            border: 1px solid rgba(129, 140, 248, 0.3);
-            border-radius: 50px;
-            font-size: 0.9rem;
-            color: var(--primary);
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .tag:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .project-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 3rem;
-            margin: 3rem 0;
-            padding: 2rem 0;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-item .number {
-            font-size: 2.8rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item .label {
-            color: var(--text-secondary);
-            font-size: 1rem;
-        }
-
-        .project-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.8rem;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            padding: 1rem 2rem;
-            background: rgba(129, 140, 248, 0.1);
-            border-radius: 50px;
-            border: 1px solid rgba(129, 140, 248, 0.3);
-        }
-
-        .project-link:hover {
-            gap: 1.5rem;
-            background: var(--primary);
-            color: white;
-            transform: translateX(5px);
-        }
-
-        .projects-section {
-            background: var(--bg-secondary);
-        }
-
-        /* USCH Hero Split Layout */
-        .project-hero-split {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .project-type-label {
-            font-size: 0.85rem;
-            color: var(--primary);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 1.2rem;
-        }
-
-        .project-hero-image {
-            position: relative;
-        }
-
-        .project-hero-image::before {
-            content: '';
-            position: absolute;
-            inset: -20px;
-            background: radial-gradient(circle, rgba(129,140,248,0.15) 0%, transparent 70%);
-            border-radius: 30px;
-        }
-
-        /* Marketing List Layout */
-        .marketing-list {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .marketing-item {
-            display: grid;
-            grid-template-columns: 80px 1fr auto;
-            gap: 2.5rem;
-            align-items: center;
-            background: var(--bg-primary);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 2.5rem 3rem;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .marketing-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: linear-gradient(180deg, var(--primary), var(--accent));
-            border-radius: 4px 0 0 4px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .marketing-item:hover::before {
-            opacity: 1;
-        }
-
-        .marketing-item:hover {
-            border-color: var(--primary);
-            transform: translateX(8px);
-            box-shadow: 0 20px 50px rgba(129,140,248,0.12);
-        }
-
-        .marketing-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            flex-shrink: 0;
-        }
-
-        .marketing-company {
-            font-size: 0.8rem;
-            color: var(--primary);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.5rem;
-        }
-
-        .marketing-body h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.8rem;
-        }
-
-        .marketing-body p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.7;
-            margin-bottom: 1.2rem;
-        }
-
-        .marketing-metric {
-            text-align: center;
-            min-width: 120px;
-            flex-shrink: 0;
-        }
-
-        .metric-before {
-            font-size: 1.3rem;
-            color: var(--text-tertiary);
-            font-weight: 600;
-        }
-
-        .metric-arrow {
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin: 0.2rem 0;
-        }
-
-        .metric-after {
-            font-size: 2.2rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            line-height: 1;
-        }
-
-        .metric-label {
-            font-size: 0.8rem;
-            color: var(--text-tertiary);
-            margin-top: 0.5rem;
-        }
-
-        .project-content {
-            padding: 2.5rem;
-            position: relative;
-        }
-
-        .project-content h3 {
-            font-size: 1.6rem;
-            margin-bottom: 0.8rem;
-            color: var(--text-primary);
-            font-weight: 700;
-        }
-
-        .project-metric {
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 1.2rem;
-            margin-bottom: 1.2rem;
-        }
-
-        .project-content p {
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            line-height: 1.8;
-            font-size: 1.05rem;
         }
 
         .about {
@@ -973,11 +789,10 @@
             .hero h1 { font-size: 4rem; }
             .about-content { grid-template-columns: 1fr; }
             .contact-links { grid-template-columns: 1fr; }
-            .project-stats { grid-template-columns: 1fr; gap: 2rem; }
-            .project-hero-split { grid-template-columns: 1fr; }
-            .project-hero-image { display: none; }
-            .marketing-item { grid-template-columns: 70px 1fr; }
-            .marketing-metric { display: none; }
+            .usch-card { grid-template-columns: 1fr; }
+            .usch-card-image { min-height: 280px; }
+            .usch-card-image::before { background: linear-gradient(180deg, transparent 40%, var(--bg-secondary) 100%); }
+            .projects-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (max-width: 768px) {
@@ -988,13 +803,13 @@
             .hero h1 { font-size: 2.8rem; }
             .hero .subtitle { font-size: 1.3rem; }
             .hero-stats { flex-direction: column; gap: 2rem; }
-            section { padding: 5rem 1.5rem; }
-            h2 { font-size: 2.5rem; }
-            .project-hero { padding: 2rem; }
-            .project-hero h3 { font-size: 2rem; }
+            section { padding: 4rem 1.5rem; }
+            h2 { font-size: 2.2rem; }
+            .usch-card-content { padding: 2rem; }
+            .usch-card-content h3 { font-size: 1.7rem; }
             .cta-buttons { flex-direction: column; }
             .about-stats { grid-template-columns: 1fr; }
-            .marketing-item { grid-template-columns: 1fr; padding: 2rem; gap: 1.5rem; }
+            .projects-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -1051,117 +866,115 @@
     <section id="work" class="featured-project">
         <div class="container">
             <div class="section-header">
+                <div class="section-divider"></div>
                 <div class="section-badge">Featured Case Study</div>
                 <h2>Product Design</h2>
-                <p class="section-subtitle">End-to-end UX research and design — from problem discovery to high-fidelity prototype</p>
+                <p class="section-subtitle">End-to-end UX research — from problem discovery to high-fidelity prototype</p>
             </div>
 
-            <div class="project-hero fade-in">
-                <div class="project-hero-split">
-                    <div class="project-hero-content">
-                        <div class="project-type-label">UX Research · Product Design · Figma</div>
-                        <h3>Unified Student Communication Hub</h3>
-                        <p class="impact">📊 Reducing Communication Overload by 80% Through Human-Centered Design</p>
-                        <p>Led end-to-end UX research and design for a centralised academic communication platform. Through user interviews, personas, and iterative prototyping, created a solution that consolidated fragmented notifications across Canvas, Gmail, and Teams into one intuitive dashboard.</p>
-                        
-                        <div class="project-tags">
-                            <span class="tag">UX Research</span>
-                            <span class="tag">Product Design</span>
-                            <span class="tag">Usability Testing</span>
-                            <span class="tag">0→1 Design</span>
-                        </div>
-
-                        <div class="project-stats">
-                            <div class="stat-item">
-                                <div class="number">80%</div>
-                                <div class="label">User Satisfaction</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="number">90%</div>
-                                <div class="label">Ease of Use</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="number">8</div>
-                                <div class="label">User Interviews</div>
-                            </div>
-                        </div>
-
-                        <a href="usch.html" class="project-link">View Full Case Study →</a>
+            <div class="usch-card fade-in">
+                <div class="usch-card-content">
+                    <div class="project-eyebrow">UX Research · Product Design · Figma</div>
+                    <h3>Unified Student Communication Hub</h3>
+                    <p class="impact">📊 Reducing communication overload by 80% through human-centered design</p>
+                    <p>Led end-to-end UX research and design for a centralised academic platform, consolidating fragmented notifications from Canvas, Gmail, and Teams into one intuitive dashboard.</p>
+                    <div class="project-tags">
+                        <span class="tag">UX Research</span>
+                        <span class="tag">Usability Testing</span>
+                        <span class="tag">0→1 Design</span>
+                        <span class="tag">Figma</span>
                     </div>
-                    <div class="project-hero-image">
-                        <img src="images/Dashboard.png" alt="USCH Dashboard" style="width:100%; border-radius: 16px; box-shadow: 0 30px 80px rgba(0,0,0,0.6); border: 1px solid rgba(129,140,248,0.2);">
+                    <div class="usch-stats">
+                        <div class="usch-stat"><span class="num">80%</span><span class="lbl">User Satisfaction</span></div>
+                        <div class="usch-stat"><span class="num">90%</span><span class="lbl">Ease of Use</span></div>
+                        <div class="usch-stat"><span class="num">8</span><span class="lbl">User Interviews</span></div>
                     </div>
+                    <a href="usch.html" class="project-link">View Full Case Study →</a>
+                </div>
+                <div class="usch-card-image">
+                    <img src="images/Dashboard.png" alt="USCH Dashboard">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Growth Marketing Work -->
+    <!-- All Projects Grid -->
     <section class="projects-section">
         <div class="container">
             <div class="section-header">
-                <div class="section-badge">Growth Marketing</div>
-                <h2>Marketing Impact</h2>
-                <p class="section-subtitle">Data-driven campaigns and strategies that moved the needle at B2B SaaS companies</p>
+                <div class="section-divider"></div>
+                <div class="section-badge">All Projects</div>
+                <h2>Growth Marketing</h2>
+                <p class="section-subtitle">Data-driven campaigns that moved the needle at B2B SaaS companies</p>
             </div>
 
-            <div class="marketing-list">
-                <div class="marketing-item fade-in">
-                    <div class="marketing-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">📈</div>
-                    <div class="marketing-body">
-                        <div class="marketing-company">Pepsales AI</div>
-                        <h3>Lead Conversion Optimization</h3>
-                        <p>Optimised landing pages and targeted campaigns, resulting in a 25x increase in lead capture conversion and 25% growth in MQLs.</p>
+            <div class="projects-grid">
+                <!-- USCH mini card -->
+                <div class="pcard usch-mini fade-in">
+                    <div class="pcard-img-wrap">
+                        <img src="images/Dashboard.png" alt="USCH Dashboard">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-co">UX Design · UCC</div>
+                        <h3>Student Communication Hub</h3>
+                        <div class="pcard-metric">📊 80% User Satisfaction</div>
+                        <p>Unified academic notifications from Canvas, Gmail & Teams into one dashboard.</p>
                         <div class="project-tags">
-                            <span class="tag">Product Marketing</span>
+                            <span class="tag">UX Research</span>
+                            <span class="tag">Figma</span>
+                        </div>
+                        <a href="usch.html" style="font-size:0.85rem; color:var(--primary); font-weight:600; text-decoration:none;">View Case Study →</a>
+                    </div>
+                </div>
+
+                <!-- Lead Conversion -->
+                <div class="pcard fade-in">
+                    <div class="pcard-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80" alt="Analytics">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-co">Pepsales AI</div>
+                        <h3>Lead Conversion Optimization</h3>
+                        <div class="pcard-metric">📈 0.2% → 5% Conversion</div>
+                        <p>25x increase in lead capture and 25% MQL growth via landing page redesign and targeted campaigns.</p>
+                        <div class="project-tags">
                             <span class="tag">CRO</span>
                             <span class="tag">B2B SaaS</span>
                         </div>
                     </div>
-                    <div class="marketing-metric">
-                        <div class="metric-before">0.2%</div>
-                        <div class="metric-arrow">→</div>
-                        <div class="metric-after">5%</div>
-                        <div class="metric-label">Conversion Rate</div>
-                    </div>
                 </div>
 
-                <div class="marketing-item fade-in">
-                    <div class="marketing-icon" style="background: linear-gradient(135deg, #f093fb, #f5576c);">📧</div>
-                    <div class="marketing-body">
-                        <div class="marketing-company">Kommunicate</div>
+                <!-- Email Marketing -->
+                <div class="pcard fade-in">
+                    <div class="pcard-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=600&q=80" alt="Email">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-co">Kommunicate</div>
                         <h3>Email Marketing Overhaul</h3>
-                        <p>Redesigned email strategy with segmentation and personalisation, tripling open rates and significantly improving lifecycle engagement.</p>
+                        <div class="pcard-metric">📧 9% → 30% Open Rate</div>
+                        <p>Rebuilt lifecycle email strategy with segmentation and personalisation, tripling open rates.</p>
                         <div class="project-tags">
                             <span class="tag">Email Design</span>
-                            <span class="tag">Lifecycle Marketing</span>
-                            <span class="tag">Automation</span>
+                            <span class="tag">Lifecycle</span>
                         </div>
-                    </div>
-                    <div class="marketing-metric">
-                        <div class="metric-before">9%</div>
-                        <div class="metric-arrow">→</div>
-                        <div class="metric-after">30%</div>
-                        <div class="metric-label">Open Rate</div>
                     </div>
                 </div>
 
-                <div class="marketing-item fade-in">
-                    <div class="marketing-icon" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">🚀</div>
-                    <div class="marketing-body">
-                        <div class="marketing-company">Kommunicate</div>
+                <!-- Product Launch -->
+                <div class="pcard fade-in">
+                    <div class="pcard-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80" alt="Growth">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-co">Kommunicate</div>
                         <h3>Product Launch Strategy</h3>
-                        <p>Executed data-backed GTM strategies and led two successful Product Hunt launches, driving user growth and achieving top product rankings.</p>
+                        <div class="pcard-metric">🚀 #3 Product Hunt · +20% Users</div>
+                        <p>GTM strategy for two Product Hunt launches, hitting top rankings and driving strong user growth.</p>
                         <div class="project-tags">
-                            <span class="tag">GTM Strategy</span>
-                            <span class="tag">Product Launch</span>
+                            <span class="tag">GTM</span>
                             <span class="tag">Growth</span>
                         </div>
-                    </div>
-                    <div class="marketing-metric">
-                        <div class="metric-after" style="font-size: 1.8rem;">#3</div>
-                        <div class="metric-label">Product Hunt</div>
-                        <div class="metric-label" style="margin-top: 0.3rem;">+20% Users</div>
                     </div>
                 </div>
             </div>
@@ -1259,10 +1072,10 @@
                 <p class="contact-text">I'm currently open to Product Designer, UX Designer, and Growth Marketing roles. Let's chat about how I can help drive impact at your company.</p>
 
                 <div class="contact-links">
-                    <a href="/cdn-cgi/l/email-protection#7b161a0f13121a08181e1f091218483b1c161a121755181416" class="contact-card">
+                    <a href="/cdn-cgi/l/email-protection#0a676b7e62636b79696f6e786369394a6d676b636624696567" class="contact-card">
                         <div class="contact-icon">📧</div>
                         <h4>Email</h4>
-                        <p><span class="__cf_email__" data-cfemail="6904081d0100081a0a0c0d1b000a5a290e04080005470a0604">[email&#160;protected]</span></p>
+                        <p><span class="__cf_email__" data-cfemail="305d5144585951435355544259530370575d51595c1e535f5d">[email&#160;protected]</span></p>
                     </a>
 
                     <a href="https://linkedin.com/in/cedric-mathias" target="_blank" class="contact-card">
