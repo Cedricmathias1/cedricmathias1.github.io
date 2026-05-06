@@ -3,14 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cedric Mathias | Growth Marketer & Product Designer</title>
+  <title>Cedric Mathias | Growth Marketer and Product Designer</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
-
-    /* ══════════════════════════════════════════
-       LIGHT MODE TOKENS  (default)
-       Amber: #c46200 — passes WCAG AA on white (4.6:1)
-       ══════════════════════════════════════════ */
     :root {
       --bg:           #f5f2ec;
       --bg-alt:       #ede9e0;
@@ -19,32 +14,22 @@
       --slate:        #3a3a3a;
       --muted:        #6b6560;
       --border:       #ddd8ce;
-      --amber:        #c46200;   /* 4.6:1 on white — WCAG AA ✓ */
+      --amber:        #c46200;
       --amber-hero:   #c46200;
       --amber-bg:     rgba(196,98,0,0.08);
       --amber-border: rgba(196,98,0,0.25);
-
-      /* Dark marketing stripe stays dark in both modes */
       --stripe-bg:    #0f0f0f;
       --stripe-text:  #f5f2ec;
       --stripe-muted: rgba(245,242,236,0.55);
-      --stripe-amber: #f0a040;   /* amber-light — on dark bg, passes 7:1 ✓ */
+      --stripe-amber: #f0a040;
       --stripe-border:rgba(255,255,255,0.08);
       --stripe-card:  rgba(255,255,255,0.04);
       --stripe-hover: rgba(255,255,255,0.07);
       --stripe-pill:  rgba(255,255,255,0.1);
-
       --nav-bg:       rgba(245,242,236,0.92);
       --section-gap:  120px;
-
-      /* Toggle */
       --toggle-bg:    #e0dbd2;
-      --toggle-icon:  "🌙";
     }
-
-    /* ══════════════════════════════════════════
-       DARK MODE TOKENS
-       ══════════════════════════════════════════ */
     [data-theme="dark"] {
       --bg:           #111110;
       --bg-alt:       #1a1917;
@@ -53,11 +38,10 @@
       --slate:        #c8c2b8;
       --muted:        #8a8278;
       --border:       #2e2c28;
-      --amber:        #f0a040;   /* on dark bg: 7.2:1 — WCAG AAA ✓ */
+      --amber:        #f0a040;
       --amber-hero:   #f0a040;
       --amber-bg:     rgba(240,160,64,0.1);
       --amber-border: rgba(240,160,64,0.25);
-
       --stripe-bg:    #0a0a09;
       --stripe-text:  #f0ede6;
       --stripe-muted: rgba(240,237,230,0.55);
@@ -66,191 +50,66 @@
       --stripe-card:  rgba(255,255,255,0.03);
       --stripe-hover: rgba(255,255,255,0.06);
       --stripe-pill:  rgba(255,255,255,0.08);
-
       --nav-bg:       rgba(17,17,16,0.92);
-
       --toggle-bg:    #2e2c28;
     }
 
-    /* ── BASE ── */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); overflow-x: hidden; transition: background 0.35s ease, color 0.35s ease; }
 
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
-      color: var(--ink);
-      overflow-x: hidden;
-      transition: background 0.35s ease, color 0.35s ease;
-    }
-
-    /* ── NAV ── */
+    /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 18px 60px;
-      background: var(--nav-bg);
-      backdrop-filter: blur(14px);
+      background: var(--nav-bg); backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
       transition: background 0.35s ease, border-color 0.35s ease;
     }
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem; font-weight: 700;
-      color: var(--ink); text-decoration: none;
-      letter-spacing: -0.02em;
-      transition: color 0.35s;
-    }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--ink); text-decoration: none; letter-spacing: -0.02em; transition: color 0.35s; }
     .nav-right { display: flex; gap: 32px; align-items: center; }
     .nav-links { display: flex; gap: 28px; align-items: center; }
-    .nav-links a {
-      text-decoration: none; color: var(--slate);
-      font-size: 0.82rem; font-weight: 500;
-      letter-spacing: 0.05em; text-transform: uppercase;
-      transition: color 0.2s;
-    }
+    .nav-links a { text-decoration: none; color: var(--slate); font-size: 0.82rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.2s; }
     .nav-links a:hover { color: var(--amber); }
-    .nav-cv {
-      background: var(--ink); color: var(--bg) !important;
-      padding: 8px 18px; border-radius: 4px;
-      font-size: 0.82rem !important;
-      transition: background 0.2s !important;
-    }
-    .nav-cv:hover { background: var(--amber) !important; }
-
-    /* ── THEME TOGGLE ── */
-    .theme-toggle {
-      width: 40px; height: 40px;
-      background: var(--toggle-bg);
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem;
-      transition: background 0.35s, border-color 0.35s, transform 0.15s;
-      flex-shrink: 0;
-    }
+    .theme-toggle { width: 40px; height: 40px; background: var(--toggle-bg); border: 1px solid var(--border); border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: background 0.35s, border-color 0.35s, transform 0.15s; flex-shrink: 0; }
     .theme-toggle:hover { transform: rotate(20deg) scale(1.1); }
 
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 140px 60px 80px;
-      position: relative; overflow: hidden;
-    }
-    .hero-bg-text {
-      position: absolute; right: -20px; top: 50%;
-      transform: translateY(-50%);
-      font-family: 'Playfair Display', serif;
-      font-size: 22vw; font-weight: 900;
-      color: rgba(196,98,0,0.05);
-      letter-spacing: -0.05em;
-      user-select: none; pointer-events: none;
-      white-space: nowrap;
-      transition: color 0.35s;
-    }
+    /* HERO */
+    .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 140px 60px 80px; position: relative; overflow: hidden; }
+    .hero-bg-text { position: absolute; right: -20px; top: 50%; transform: translateY(-50%); font-family: 'Playfair Display', serif; font-size: 22vw; font-weight: 900; color: rgba(196,98,0,0.05); letter-spacing: -0.05em; user-select: none; pointer-events: none; white-space: nowrap; transition: color 0.35s; }
     [data-theme="dark"] .hero-bg-text { color: rgba(240,160,64,0.05); }
 
-    .hero-label {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--amber);
-      margin-bottom: 28px;
-      animation: fadeUp 0.6s ease both;
-    }
-    .hero-label::before {
-      content: ''; display: block;
-      width: 32px; height: 1px; background: var(--amber);
-    }
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3rem, 7vw, 6.5rem);
-      font-weight: 900; line-height: 1.0;
-      letter-spacing: -0.03em; color: var(--ink);
-      max-width: 900px; margin-bottom: 12px;
-      animation: fadeUp 0.6s 0.1s ease both;
-    }
+    .hero-label { display: inline-flex; align-items: center; gap: 10px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--amber); margin-bottom: 28px; animation: fadeUp 0.6s ease both; }
+    .hero-label::before { content: ''; display: block; width: 32px; height: 1px; background: var(--amber); }
+    h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 900; line-height: 1.0; letter-spacing: -0.03em; color: var(--ink); max-width: 900px; margin-bottom: 12px; animation: fadeUp 0.6s 0.1s ease both; }
     h1 em { font-style: italic; color: var(--amber-hero); }
-
-    .hero-sub {
-      font-size: 1.1rem; color: var(--slate);
-      max-width: 560px; line-height: 1.7;
-      margin-bottom: 44px; font-weight: 300;
-      animation: fadeUp 0.6s 0.2s ease both;
-    }
+    .hero-sub { font-size: 1.1rem; color: var(--slate); max-width: 560px; line-height: 1.7; margin-bottom: 44px; font-weight: 300; animation: fadeUp 0.6s 0.2s ease both; }
     .hero-sub strong { font-weight: 600; color: var(--ink); }
 
-    .hero-ctas {
-      display: flex; gap: 14px; flex-wrap: wrap;
-      animation: fadeUp 0.6s 0.3s ease both;
-    }
-    .btn-primary {
-      background: var(--ink); color: var(--bg);
-      padding: 13px 28px; border-radius: 4px;
-      text-decoration: none; font-weight: 600; font-size: 0.88rem;
-      letter-spacing: 0.02em;
-      transition: background 0.2s, transform 0.15s, color 0.35s;
-      display: inline-flex; align-items: center; gap: 8px;
-    }
+    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; animation: fadeUp 0.6s 0.3s ease both; }
+    .btn-primary { background: var(--ink); color: var(--bg); padding: 13px 28px; border-radius: 4px; text-decoration: none; font-weight: 600; font-size: 0.88rem; letter-spacing: 0.02em; transition: background 0.2s, transform 0.15s, color 0.35s; display: inline-flex; align-items: center; gap: 8px; }
     .btn-primary:hover { background: var(--amber); transform: translateY(-1px); }
-    .btn-secondary {
-      background: transparent; color: var(--ink);
-      padding: 13px 28px; border-radius: 4px;
-      text-decoration: none; font-weight: 600; font-size: 0.88rem;
-      letter-spacing: 0.02em; border: 1.5px solid var(--border);
-      transition: all 0.2s;
-      display: inline-flex; align-items: center; gap: 8px;
-    }
+    .btn-secondary { background: transparent; color: var(--ink); padding: 13px 28px; border-radius: 4px; text-decoration: none; font-weight: 600; font-size: 0.88rem; letter-spacing: 0.02em; border: 1.5px solid var(--border); transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
     .btn-secondary:hover { border-color: var(--amber); color: var(--amber); }
 
-    /* Stats */
-    .stats-bar {
-      display: flex; gap: 0; margin-top: 72px;
-      border-top: 1px solid var(--border); padding-top: 40px;
-      animation: fadeUp 0.6s 0.4s ease both;
-    }
+    .stats-bar { display: flex; gap: 0; margin-top: 72px; border-top: 1px solid var(--border); padding-top: 40px; animation: fadeUp 0.6s 0.4s ease both; }
     .stat { flex: 1; padding-right: 40px; border-right: 1px solid var(--border); margin-right: 40px; }
     .stat:last-child { border-right: none; margin-right: 0; }
-    .stat-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.4rem; font-weight: 900;
-      color: var(--ink); line-height: 1; letter-spacing: -0.03em;
-    }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 900; color: var(--ink); line-height: 1; letter-spacing: -0.03em; }
     .stat-num span { color: var(--amber); }
     .stat-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 6px; font-weight: 500; }
 
-    /* ── MARKETING STRIPE ── */
-    .marketing-section {
-      background: var(--stripe-bg);
-      padding: var(--section-gap) 60px;
-      transition: background 0.35s;
-    }
-    .marketing-section .section-label { color: var(--stripe-amber); }
-    .marketing-section .section-label::after { background: var(--stripe-amber); }
+    /* MARKETING */
+    .marketing-section { background: var(--stripe-bg); padding: var(--section-gap) 60px; transition: background 0.35s; }
     .marketing-section h2 { color: var(--stripe-text); }
     .marketing-section .section-intro { color: var(--stripe-muted); }
 
     .cases-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
-    .case-card {
-      background: var(--stripe-card);
-      border: 1px solid var(--stripe-border);
-      padding: 44px;
-      transition: background 0.25s;
-      position: relative; overflow: hidden;
-    }
+    .case-card { background: var(--stripe-card); border: 1px solid var(--stripe-border); padding: 44px; transition: background 0.25s; position: relative; overflow: hidden; }
     .case-card:hover { background: var(--stripe-hover); }
-    .case-card.featured {
-      grid-column: span 2;
-      background: rgba(240,160,64,0.08);
-      border-color: rgba(240,160,64,0.2);
-    }
-    .case-tag {
-      display: inline-block; font-size: 0.68rem; font-weight: 700;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--stripe-amber); background: rgba(240,160,64,0.12);
-      padding: 4px 10px; border-radius: 3px; margin-bottom: 18px;
-    }
+    .case-card.featured { grid-column: span 2; background: rgba(240,160,64,0.08); border-color: rgba(240,160,64,0.2); }
+    .case-tag { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--stripe-amber); background: rgba(240,160,64,0.12); padding: 4px 10px; border-radius: 3px; margin-bottom: 18px; }
     .case-company { font-size: 0.73rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245,242,236,0.38); margin-bottom: 8px; }
     .case-card h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--stripe-text); margin-bottom: 12px; line-height: 1.25; }
     .case-metric { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 900; color: var(--stripe-amber); letter-spacing: -0.04em; line-height: 1; margin-bottom: 6px; }
@@ -261,27 +120,13 @@
     .featured-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
     .case-card.featured .case-metric { font-size: 3.5rem; }
 
-    /* ── DESIGN SECTION ── */
+    /* DESIGN */
     .design-section { background: var(--bg-alt); padding: var(--section-gap) 60px; transition: background 0.35s; }
     .design-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
-    .design-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px; overflow: hidden;
-      transition: box-shadow 0.25s, transform 0.25s, background 0.35s, border-color 0.35s;
-    }
+    .design-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; transition: box-shadow 0.25s, transform 0.25s, background 0.35s, border-color 0.35s; }
     .design-card:hover { box-shadow: 0 20px 60px rgba(0,0,0,0.12); transform: translateY(-3px); }
-    .design-card-img {
-      height: 200px; display: flex; align-items: center; justify-content: center;
-      border-bottom: 1px solid var(--border); position: relative; overflow: hidden;
-    }
-    .img-label {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      background: linear-gradient(transparent, rgba(0,0,0,0.45));
-      padding: 18px 22px 14px;
-      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em;
-      text-transform: uppercase; color: rgba(255,255,255,0.85);
-    }
+    .design-card-img { height: 200px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+    .img-label { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.45)); padding: 18px 22px 14px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.85); }
     .design-card-body { padding: 28px; }
     .design-card-body h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
     .design-card-body p { font-size: 0.88rem; line-height: 1.65; color: var(--muted); margin-bottom: 18px; }
@@ -293,8 +138,6 @@
     .dpill { font-size: 0.68rem; font-weight: 600; color: var(--slate); background: var(--bg-alt); border: 1px solid var(--border); padding: 3px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.04em; }
     .case-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.84rem; font-weight: 600; color: var(--amber); text-decoration: none; transition: gap 0.2s; }
     .case-link:hover { gap: 10px; }
-
-    /* Bridge card (dark) */
     .bridge-card { background: var(--stripe-bg) !important; border-color: rgba(255,255,255,0.07) !important; }
     .bridge-card .design-card-body h3 { color: var(--stripe-text); }
     .bridge-card .design-card-body p { color: var(--stripe-muted); }
@@ -302,26 +145,14 @@
     .bridge-card .dm-num { color: var(--stripe-amber); }
     .bridge-card .dpill { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); color: rgba(245,242,236,0.65); }
     .bridge-card .case-link { color: var(--stripe-amber); }
+    .tools-bar { margin-top: 28px; padding: 24px 32px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; display: flex; align-items: center; gap: 18px; transition: background 0.35s, border-color 0.35s; }
 
-    .tools-bar {
-      margin-top: 28px; padding: 24px 32px;
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 8px; display: flex; align-items: center; gap: 18px;
-      transition: background 0.35s, border-color 0.35s;
-    }
-    .tools-bar p:first-child { font-size: 0.82rem; font-weight: 700; color: var(--ink); white-space: nowrap; }
-    .tools-bar p:last-child { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
-
-    /* ── ABOUT ── */
+    /* ABOUT */
     .about-section { background: var(--bg); padding: var(--section-gap) 60px; transition: background 0.35s; }
     .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: start; }
     .about-text p { font-size: 0.98rem; line-height: 1.75; color: var(--slate); margin-bottom: 18px; }
     .about-text p strong { color: var(--ink); font-weight: 600; }
-    .about-quote {
-      border-left: 3px solid var(--amber); padding-left: 20px;
-      font-family: 'Playfair Display', serif; font-size: 1.1rem;
-      font-style: italic; color: var(--ink); margin: 24px 0; line-height: 1.55;
-    }
+    .about-quote { border-left: 3px solid var(--amber); padding-left: 20px; font-family: 'Playfair Display', serif; font-size: 1.1rem; font-style: italic; color: var(--ink); margin: 24px 0; line-height: 1.55; }
     .skills-grid { display: flex; flex-direction: column; }
     .skill-row { display: flex; align-items: flex-start; padding: 18px 0; border-bottom: 1px solid var(--border); transition: border-color 0.35s; }
     .skill-row:first-child { padding-top: 0; }
@@ -329,53 +160,75 @@
     .skill-info h4 { font-size: 0.83rem; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
     .skill-info p { font-size: 0.78rem; color: var(--muted); line-height: 1.5; margin: 0; }
 
-    /* ── CONTACT ── */
+    /* CONTACT */
     .contact-section { background: var(--stripe-bg); padding: var(--section-gap) 60px; text-align: center; transition: background 0.35s; }
     .contact-section h2 { color: var(--stripe-text); margin-bottom: 14px; }
-    .contact-sub { font-size: 0.98rem; color: var(--stripe-muted); max-width: 480px; margin: 0 auto 36px; line-height: 1.65; }
-    .target-roles {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(240,160,64,0.12); border: 1px solid rgba(240,160,64,0.25);
-      padding: 9px 18px; border-radius: 4px;
-      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
-      color: var(--stripe-amber); margin-bottom: 44px;
+    .contact-sub { font-size: 0.98rem; color: var(--stripe-muted); max-width: 520px; margin: 0 auto 48px; line-height: 1.65; }
+
+    /* ROLE PILLS */
+    .roles-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--stripe-amber); margin-bottom: 16px; }
+    .role-pills { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 16px; }
+    .role-pill {
+      padding: 10px 20px; border-radius: 4px;
+      border: 1.5px solid rgba(240,160,64,0.3);
+      background: rgba(240,160,64,0.06);
+      color: var(--stripe-text);
+      font-size: 0.83rem; font-weight: 600;
+      cursor: pointer; transition: all 0.2s;
+      letter-spacing: 0.02em;
     }
+    .role-pill:hover { border-color: var(--stripe-amber); background: rgba(240,160,64,0.12); }
+    .role-pill.active { border-color: var(--stripe-amber); background: var(--stripe-amber); color: #0f0f0f; }
+
+    .role-description {
+      max-width: 580px; margin: 0 auto 44px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 6px;
+      padding: 24px 28px;
+      text-align: left;
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      padding-top: 0; padding-bottom: 0;
+      transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease, margin 0.3s ease;
+    }
+    .role-description.visible {
+      max-height: 200px;
+      opacity: 1;
+      padding: 24px 28px;
+      margin-bottom: 44px;
+    }
+    .role-desc-title { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--stripe-amber); margin-bottom: 10px; }
+    .role-desc-body { font-size: 0.88rem; color: rgba(245,242,236,0.75); line-height: 1.7; }
+
+    /* CONTACT LINKS */
     .contact-links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 52px; }
     .contact-link { display: flex; align-items: center; gap: 9px; padding: 13px 22px; border-radius: 4px; text-decoration: none; font-weight: 500; font-size: 0.88rem; transition: all 0.2s; }
     .contact-link.email { background: var(--stripe-amber); color: #0f0f0f; font-weight: 700; }
     .contact-link.email:hover { opacity: 0.85; }
-    .contact-link.linkedin, .contact-link.cv { background: rgba(255,255,255,0.06); color: rgba(245,242,236,0.8); border: 1px solid rgba(255,255,255,0.1); }
-    .contact-link.linkedin:hover, .contact-link.cv:hover { background: rgba(255,255,255,0.1); }
+    .contact-link.linkedin { background: rgba(255,255,255,0.06); color: rgba(245,242,236,0.8); border: 1px solid rgba(255,255,255,0.1); }
+    .contact-link.linkedin:hover { background: rgba(255,255,255,0.1); }
+
+    /* LINKEDIN LOGO SVG */
+    .li-logo { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; }
+
     footer { border-top: 1px solid rgba(255,255,255,0.07); padding: 22px 60px; display: flex; justify-content: space-between; align-items: center; }
     footer p { font-size: 0.78rem; color: rgba(245,242,236,0.3); }
 
-    /* ── SHARED SECTION ELEMENTS ── */
-    section:not(.marketing-section):not(.contact-section) .section-label,
-    .design-section .section-label,
-    .about-section .section-label {
-      color: var(--amber);
-    }
-    section:not(.marketing-section):not(.contact-section) .section-label::after,
-    .design-section .section-label::after,
-    .about-section .section-label::after {
-      background: var(--amber);
-    }
-    .section-label {
-      font-size: 0.73rem; font-weight: 700; letter-spacing: 0.14em;
-      text-transform: uppercase; margin-bottom: 12px;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .section-label::after { content: ''; max-width: 40px; height: 1px; flex: 1; }
+    /* SHARED */
+    .section-label { font-size: 0.73rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; color: var(--amber); }
+    .section-label::after { content: ''; max-width: 40px; height: 1px; flex: 1; background: var(--amber); }
+    .marketing-section .section-label { color: var(--stripe-amber); }
+    .marketing-section .section-label::after { background: var(--stripe-amber); }
     h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.02em; color: var(--ink); line-height: 1.15; margin-bottom: 14px; }
     .section-intro { font-size: 1rem; color: var(--muted); max-width: 560px; line-height: 1.65; margin-bottom: 52px; }
 
-    /* ── ANIMATIONS ── */
     @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       nav { padding: 14px 20px; }
-      .nav-links a:not(.nav-cv) { display: none; }
+      .nav-links a:not(.nav-contact) { display: none; }
       .hero, section { padding-left: 20px; padding-right: 20px; }
       .marketing-section, .design-section, .about-section, .contact-section { padding-left: 20px; padding-right: 20px; }
       h1 { font-size: 2.6rem; }
@@ -389,7 +242,7 @@
 </head>
 <body>
 
-<!-- ── NAV ── -->
+<!-- NAV -->
 <nav>
   <a class="nav-logo" href="#">CM</a>
   <div class="nav-right">
@@ -398,37 +251,36 @@
       <a href="#design">Design</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
-      <a href="#contact" class="nav-cv">↓ CV</a>
     </div>
-    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" id="themeBtn">🌙</button>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" id="themeBtn">&#127769;</button>
   </div>
 </nav>
 
-<!-- ── HERO ── -->
+<!-- HERO -->
 <section class="hero">
   <div class="hero-bg-text">CM</div>
-  <div class="hero-label">Growth Marketer · Product Designer · Dublin, Ireland 🇮🇪</div>
+  <div class="hero-label">Growth Marketer · Product Designer · Dublin, Ireland</div>
   <h1>I drive growth.<br><em>Design</em> is<br>how I do it.</h1>
   <p class="hero-sub">
-    3+ years in B2B SaaS growth — conversion, lifecycle, product launches.
+    3 years in B2B SaaS growth: conversion, lifecycle, product launches.
     <strong>I also design the things I market,</strong> which means fewer handoffs, faster iterations, and results that actually stick.
   </p>
   <div class="hero-ctas">
-    <a href="#marketing" class="btn-primary">↓ See Marketing Work</a>
+    <a href="#marketing" class="btn-primary">See Marketing Work</a>
     <a href="#design" class="btn-secondary">Product Design</a>
   </div>
   <div class="stats-bar">
     <div class="stat">
-      <div class="stat-num">25<span>×</span></div>
+      <div class="stat-num">25<span>x</span></div>
       <div class="stat-label">Lead conversion lift — Pepsales AI</div>
     </div>
     <div class="stat">
-      <div class="stat-num">3<span>×</span></div>
+      <div class="stat-num">3<span>x</span></div>
       <div class="stat-label">Email open rate — Kommunicate</div>
     </div>
     <div class="stat">
       <div class="stat-num">#3</div>
-      <div class="stat-label">Product Hunt launch — Top 5 × 2</div>
+      <div class="stat-label">Product Hunt launch — Top 5 x 2</div>
     </div>
     <div class="stat">
       <div class="stat-num">3<span>+</span></div>
@@ -437,28 +289,28 @@
   </div>
 </section>
 
-<!-- ── MARKETING ── -->
+<!-- MARKETING -->
 <section id="marketing" class="marketing-section">
   <div class="section-label">Growth Marketing</div>
-  <h2 style="color:var(--stripe-text)">Marketing that moves numbers</h2>
-  <p class="section-intro">Real campaigns, real results — built across 3 years of B2B SaaS growth roles.</p>
+  <h2>Marketing that moves numbers</h2>
+  <p class="section-intro">Real campaigns, real results built across 3 years of B2B SaaS growth roles.</p>
 
   <div class="cases-grid">
     <div class="case-card featured">
       <div class="featured-inner">
         <div>
-          <div class="case-tag">★ Featured Case Study</div>
+          <div class="case-tag">Featured Case Study</div>
           <div class="case-company">Pepsales AI</div>
-          <h3>Landing Page Redesign & Lead Conversion Overhaul</h3>
-          <p class="case-body">The landing page was converting at 0.2%. I audited the funnel, redesigned the page from scratch — structure, copy, and CTA hierarchy — then ran targeted campaigns against the new experience. Conversion climbed to 5%. That's a 25× lift and around 25% more qualified leads month on month. The design decisions drove the result as much as the campaigns did.</p>
+          <h3>Landing Page Redesign and Lead Conversion Overhaul</h3>
+          <p class="case-body">The landing page was converting at 0.2%. I audited the funnel, redesigned the page from scratch covering structure, copy, and CTA hierarchy, then ran targeted campaigns against the new experience. Conversion climbed to 5%. That is a 25x lift and around 25% more qualified leads month on month. The design decisions drove the result as much as the campaigns did.</p>
           <div class="case-pills">
             <span class="pill">CRO</span><span class="pill">UX Design</span><span class="pill">Landing Page</span><span class="pill">B2B SaaS</span><span class="pill">A/B Testing</span>
           </div>
         </div>
         <div>
-          <div class="case-metric">0.2% → 5%</div>
-          <div class="case-metric-label">Conversion rate · 25× improvement</div>
-          <div class="case-metric" style="font-size:2rem; margin-top:24px">+25%</div>
+          <div class="case-metric">0.2% to 5%</div>
+          <div class="case-metric-label">Conversion rate · 25x improvement</div>
+          <div class="case-metric" style="font-size:2rem;margin-top:24px">+25%</div>
           <div class="case-metric-label">Qualified leads, month on month</div>
         </div>
       </div>
@@ -468,8 +320,8 @@
       <div class="case-tag">Email Marketing</div>
       <div class="case-company">Kommunicate</div>
       <h3>Email Programme Rebuild</h3>
-      <div class="case-metric">9% → 30%</div>
-      <div class="case-metric-label">Open rate · 3× improvement</div>
+      <div class="case-metric">9% to 30%</div>
+      <div class="case-metric-label">Open rate · 3x improvement</div>
       <p class="case-body">Open rates were stuck at 9%. I rebuilt the email programme end-to-end: tighter segmentation, subject lines that matched intent, and sequences mapped to where people actually were in the funnel.</p>
       <div class="case-pills">
         <span class="pill">Email Design</span><span class="pill">Segmentation</span><span class="pill">Lifecycle</span><span class="pill">Automation</span>
@@ -481,7 +333,7 @@
       <div class="case-company">Kommunicate</div>
       <h3>Product Hunt Launch Strategy</h3>
       <div class="case-metric">#3 PH</div>
-      <div class="case-metric-label">Top 5 × 2 launches · +20% user growth</div>
+      <div class="case-metric-label">Top 5 x 2 launches · +20% user growth</div>
       <p class="case-body">Planned and executed two Product Hunt launches. Both hit the top 5. The second reached #3. Combined, they brought roughly 20% new user growth in the weeks following each launch.</p>
       <div class="case-pills">
         <span class="pill">GTM Strategy</span><span class="pill">Product Launch</span><span class="pill">Community</span><span class="pill">Growth</span>
@@ -490,130 +342,185 @@
   </div>
 </section>
 
-<!-- ── DESIGN ── -->
+<!-- DESIGN -->
 <section id="design" class="design-section">
   <div class="section-label">Product Design</div>
   <h2>Design work</h2>
-  <p class="section-intro">Where my marketing instinct meets user-centred design — from 0→1 research to CRO-led UX redesigns.</p>
+  <p class="section-intro">Where my marketing instinct meets user-centred design, from 0 to 1 research to CRO-led UX redesigns.</p>
 
   <div class="design-grid">
     <div class="design-card">
       <div class="design-card-img" style="background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);">
-        <span style="font-size:2.8rem">🎓</span>
-        <div class="img-label">UX Research · 0→1 Design · Figma</div>
+        <span style="font-size:2.8rem;opacity:0.4">&#9650;</span>
+        <div class="img-label">UX Research · 0 to 1 Design · Figma</div>
       </div>
       <div class="design-card-body">
         <h3>Unified Student Communication Hub</h3>
-        <p>Students at UCC were juggling Canvas, Gmail, Teams, and more. I ran 8 in-depth interviews, mapped pain points, and designed a unified dashboard — then validated it with 45 students in moderated usability testing.</p>
+        <p>Students at UCC were juggling Canvas, Gmail, Teams, and more. I ran 8 in-depth interviews, mapped pain points, and designed a unified dashboard, then validated it with 45 students in moderated usability testing.</p>
         <div class="design-metrics">
           <div class="dm"><span class="dm-num">80%</span><span class="dm-label">Task success</span></div>
           <div class="dm"><span class="dm-num">90%</span><span class="dm-label">Ease of use</span></div>
           <div class="dm"><span class="dm-num">45</span><span class="dm-label">Students tested</span></div>
         </div>
         <div class="design-pills">
-          <span class="dpill">UX Research</span><span class="dpill">Usability Testing</span><span class="dpill">Wireframing</span><span class="dpill">Figma</span><span class="dpill">0→1</span>
+          <span class="dpill">UX Research</span><span class="dpill">Usability Testing</span><span class="dpill">Wireframing</span><span class="dpill">Figma</span>
         </div>
-        <a href="https://cedricmathias1.github.io/usch.html" class="case-link">View Case Study →</a>
+        <a href="usch.html" class="case-link">View Case Study</a>
       </div>
     </div>
 
     <div class="design-card bridge-card">
       <div class="design-card-img" style="background:linear-gradient(135deg,#1a0a00,#2d1200,#3d1a00);">
-        <span style="font-size:2.8rem">📐</span>
+        <span style="font-size:2.8rem;opacity:0.4">&#9632;</span>
         <div class="img-label">CRO · UX Design · Growth Marketing</div>
       </div>
       <div class="design-card-body">
         <h3>Pepsales AI — Landing Page UX Design</h3>
-        <p>The 25× conversion improvement wasn't just a campaign win — it was a design decision. I redesigned the page structure, visual hierarchy, and CTA logic from scratch. This is what happens when a designer runs your marketing.</p>
+        <p>The 25x conversion improvement was not just a campaign win, it was a design decision. I redesigned the page structure, visual hierarchy, and CTA logic from scratch. This is what happens when a designer runs your marketing.</p>
         <div class="design-metrics">
-          <div class="dm"><span class="dm-num">25×</span><span class="dm-label">Conversion lift</span></div>
-          <div class="dm"><span class="dm-num">0.2→5%</span><span class="dm-label">CVR</span></div>
+          <div class="dm"><span class="dm-num">25x</span><span class="dm-label">Conversion lift</span></div>
+          <div class="dm"><span class="dm-num">0.2 to 5%</span><span class="dm-label">CVR</span></div>
         </div>
         <div class="design-pills">
           <span class="dpill">UX Design</span><span class="dpill">CRO</span><span class="dpill">Visual Hierarchy</span><span class="dpill">Copywriting</span>
         </div>
-        <a href="#marketing" class="case-link">See Full Case Study →</a>
+        <a href="#marketing" class="case-link">See Full Case Study</a>
       </div>
     </div>
   </div>
 
   <div class="tools-bar">
-    <div style="font-size:1.6rem">🔧</div>
     <div>
-      <p style="font-size:0.83rem;font-weight:700;color:var(--ink);margin-bottom:3px">Tools & Methods</p>
+      <p style="font-size:0.83rem;font-weight:700;color:var(--ink);margin-bottom:3px">Tools and Methods</p>
       <p style="font-size:0.8rem;color:var(--muted);line-height:1.6">Figma · Prototyping · Usability Testing · Wireframing · Information Architecture · User Interviews · A/B Testing · HTML · CSS · JavaScript · Webflow</p>
     </div>
   </div>
 </section>
 
-<!-- ── ABOUT ── -->
+<!-- ABOUT -->
 <section id="about" class="about-section">
   <div class="about-grid">
     <div class="about-text">
       <div class="section-label">About</div>
       <h2>Designer. Marketer.<br>Both at once.</h2>
-      <div class="about-quote">"I started in engineering, went deep into marketing, and ended up obsessed with the product itself — because that's usually where the real growth lever is."</div>
-      <p>My background runs from <strong>Mechanical Engineering</strong> to an <strong>MBA with a marketing focus</strong> — which means I think in systems and communicate in numbers. That combination is genuinely useful when you're trying to get design and growth teams aligned around the same outcome.</p>
-      <p>I spent 3+ years at B2B SaaS startups doing growth work — landing pages, email programmes, product launches. At Pepsales, the biggest lever wasn't the campaign; it was the page. At Kommunicate, the biggest driver wasn't the targeting; it was the email design. Every time, the answer was in the product experience. That's what pushed me toward UX.</p>
-      <p>Right now I'm completing an <strong>MSc in Digital Business at UCC</strong>, building real projects, and looking for a role where marketing and design sit in the same seat — ideally in a product-led company in the Irish or European tech market.</p>
+      <div class="about-quote">"I started in engineering, went deep into marketing, and ended up obsessed with the product itself because that is usually where the real growth lever is."</div>
+      <p>My background runs from <strong>Mechanical Engineering</strong> to an <strong>MBA with a marketing focus</strong>, which means I think in systems and communicate in numbers. That combination is genuinely useful when you are trying to get design and growth teams aligned around the same outcome.</p>
+      <p>I spent 3 years at B2B SaaS startups doing growth work: landing pages, email programmes, product launches. At Pepsales, the biggest lever was not the campaign, it was the page. At Kommunicate, the biggest driver was not the targeting, it was the email design. Every time, the answer was in the product experience. That pushed me toward UX.</p>
+      <p>Right now I am completing an <strong>MSc in Digital Business at UCC</strong>, building real projects, and looking for a role where marketing and design sit in the same seat, ideally in a product-led company in the Irish or European tech market.</p>
     </div>
     <div class="skills-grid">
-      <div class="skill-row"><div class="skill-icon">📊</div><div class="skill-info"><h4>Growth Marketing</h4><p>GTM strategy, CRO, lifecycle email, campaign management, funnel analysis, A/B testing</p></div></div>
-      <div class="skill-row"><div class="skill-icon">🎨</div><div class="skill-info"><h4>Product & UX Design</h4><p>Figma, user research, usability testing, wireframing, information architecture, design systems</p></div></div>
-      <div class="skill-row"><div class="skill-icon">📈</div><div class="skill-info"><h4>Analytics & Data</h4><p>Funnel analysis, data visualisation, SQL, conversion tracking, performance reporting</p></div></div>
-      <div class="skill-row"><div class="skill-icon">💻</div><div class="skill-info"><h4>Development (Functional)</h4><p>HTML, CSS, JavaScript — enough to build landing pages and prototypes without a dev handoff</p></div></div>
-      <div class="skill-row"><div class="skill-icon">🚀</div><div class="skill-info"><h4>Product Strategy</h4><p>Roadmapping, user positioning, feature prioritisation, product-led growth</p></div></div>
+      <div class="skill-row"><div class="skill-icon">G</div><div class="skill-info"><h4>Growth Marketing</h4><p>GTM strategy, CRO, lifecycle email, campaign management, funnel analysis, A/B testing</p></div></div>
+      <div class="skill-row"><div class="skill-icon">D</div><div class="skill-info"><h4>Product and UX Design</h4><p>Figma, user research, usability testing, wireframing, information architecture, design systems</p></div></div>
+      <div class="skill-row"><div class="skill-icon">A</div><div class="skill-info"><h4>Analytics and Data</h4><p>Funnel analysis, data visualisation, SQL, conversion tracking, performance reporting</p></div></div>
+      <div class="skill-row"><div class="skill-icon">D</div><div class="skill-info"><h4>Development</h4><p>HTML, CSS, JavaScript enough to build landing pages and prototypes without a dev handoff</p></div></div>
+      <div class="skill-row"><div class="skill-icon">P</div><div class="skill-info"><h4>Product Strategy</h4><p>Roadmapping, user positioning, feature prioritisation, product-led growth</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- ── CONTACT ── -->
+<!-- CONTACT -->
 <section id="contact" class="contact-section">
-  <div class="section-label" style="justify-content:center;color:var(--stripe-amber)">Let's Talk</div>
-  <h2>Open to the right role</h2>
-  <p class="contact-sub">Looking for Growth Marketing, Product Marketing, and Growth + Design hybrid roles at product-led companies in Dublin and across Europe.</p>
-  <div class="target-roles">🎯 &nbsp; Open to: Growth Marketing · Product Marketing · UX/Growth Hybrid</div>
-  <div class="contact-links">
-    <a href="mailto:mathiascedric3@gmail.com" class="contact-link email">📧 &nbsp; mathiascedric3@gmail.com</a>
-    <a href="https://linkedin.com/in/cedric-mathias" class="contact-link linkedin" target="_blank">💼 &nbsp; LinkedIn</a>
-    <a href="#" class="contact-link cv">↓ &nbsp; Download CV</a>
+  <div class="section-label" style="justify-content:center;color:var(--stripe-amber)">Open to Opportunities</div>
+  <h2>Let's build something great</h2>
+  <p class="contact-sub">Currently open to full-time roles in Dublin and across Ireland. Click a role below to see what I bring to it.</p>
+
+  <div class="roles-label">Roles I am open to</div>
+  <div class="role-pills">
+    <button class="role-pill" onclick="selectRole(this, 'pm')">Product Marketing</button>
+    <button class="role-pill" onclick="selectRole(this, 'uxr')">UI/UX Researcher</button>
+    <button class="role-pill" onclick="selectRole(this, 'uxd')">UI/UX Designer</button>
+    <button class="role-pill" onclick="selectRole(this, 'dm')">Digital Marketing</button>
+    <button class="role-pill" onclick="selectRole(this, 'dbc')">Digital Business Consultant</button>
   </div>
+
+  <div class="role-description" id="roleDesc">
+    <div class="role-desc-title" id="roleDescTitle"></div>
+    <div class="role-desc-body" id="roleDescBody"></div>
+  </div>
+
+  <div class="contact-links">
+    <a href="mailto:mathiascedric3@gmail.com" class="contact-link email">mathiascedric3@gmail.com</a>
+    <a href="https://linkedin.com/in/cedric-mathias" class="contact-link linkedin" target="_blank" rel="noopener">
+      <svg class="li-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+      </svg>
+      LinkedIn
+    </a>
+  </div>
+
   <footer>
-    <p>© 2026 Cedric Mathias · Dublin, Ireland 🇮🇪</p>
-    <p>Designed & developed by Cedric Mathias</p>
+    <p>2026 Cedric Mathias · Dublin, Ireland</p>
+    <p>Designed and developed by Cedric Mathias</p>
   </footer>
 </section>
 
 <script>
-  // ── THEME LOGIC ──
+  /* ROLE DESCRIPTIONS */
+  const roles = {
+    pm: {
+      title: 'Product Marketing Manager',
+      body: 'I translate complex product capabilities into messaging that converts. At Pepsales and Kommunicate I owned positioning, GTM strategy, and launch execution including two top-5 Product Hunt launches. I understand the product deeply enough to write copy that speaks to the buyer, not the feature list.'
+    },
+    uxr: {
+      title: 'UI/UX Researcher',
+      body: 'I plan and run end-to-end user research from screener writing and interview facilitation through to synthesis and design recommendations. My USCH project involved 8 in-depth interviews and moderated usability testing with 45 students. I use research to reduce assumption, not confirm it.'
+    },
+    uxd: {
+      title: 'UI/UX Designer',
+      body: 'I design interfaces grounded in research and validated by testing. My toolkit spans wireframing, prototyping, information architecture, and hi-fi Figma work. I bring a marketing lens to design, which means I care about whether the design actually performs, not just how it looks.'
+    },
+    dm: {
+      title: 'Digital Marketing Manager',
+      body: 'I run full-funnel digital marketing across email, landing pages, and paid channels. At Kommunicate I rebuilt the email programme from 9% to 30% open rate. At Pepsales I redesigned the landing page and drove a 25x conversion lift. I measure everything and iterate on what works.'
+    },
+    dbc: {
+      title: 'Digital Business Consultant',
+      body: 'I combine systems thinking from my engineering background with strategic marketing experience and UX design skills. I help businesses identify where digital experience and growth strategy intersect, and build solutions that perform on both dimensions. My MSc in Digital Business at UCC gives me the frameworks to structure that thinking.'
+    }
+  };
+
+  let activeRole = null;
+
+  function selectRole(btn, key) {
+    const desc = document.getElementById('roleDesc');
+    const title = document.getElementById('roleDescTitle');
+    const body = document.getElementById('roleDescBody');
+
+    if (activeRole === key) {
+      btn.classList.remove('active');
+      desc.classList.remove('visible');
+      activeRole = null;
+      return;
+    }
+
+    document.querySelectorAll('.role-pill').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+
+    title.textContent = roles[key].title;
+    body.textContent = roles[key].body;
+    desc.classList.add('visible');
+    activeRole = key;
+  }
+
+  /* THEME */
   const btn = document.getElementById('themeBtn');
   const root = document.documentElement;
+  const ICONS = { light: '&#127769;', dark: '&#9728;&#65039;' };
 
-  // Icons
-  const ICONS = { light: '🌙', dark: '☀️' };
-
-  // Load saved preference or detect system preference
   function getInitialTheme() {
     const saved = localStorage.getItem('cm-theme');
     if (saved) return saved;
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
-
   function applyTheme(theme) {
     root.setAttribute('data-theme', theme);
-    btn.textContent = ICONS[theme];
+    btn.innerHTML = ICONS[theme];
     localStorage.setItem('cm-theme', theme);
   }
-
   function toggleTheme() {
-    const current = root.getAttribute('data-theme');
-    applyTheme(current === 'dark' ? 'light' : 'dark');
+    applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
   }
-
-  // Apply on load (no flash)
   applyTheme(getInitialTheme());
-
-  // Listen for system preference changes
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
     if (!localStorage.getItem('cm-theme')) applyTheme(e.matches ? 'dark' : 'light');
   });
