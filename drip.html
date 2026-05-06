@@ -419,4 +419,425 @@
   });
 </script>
 </body>
+</html><!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drip Case Study — Cedric Mathias</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:           #f5f2ec;
+      --bg-alt:       #ede9e0;
+      --bg-card:      #ffffff;
+      --ink:          #0f0f0f;
+      --slate:        #3a3a3a;
+      --muted:        #6b6560;
+      --border:       #ddd8ce;
+      --amber:        #c46200;
+      --amber-hero:   #c46200;
+      --stripe-bg:    #0f0f0f;
+      --stripe-text:  #f5f2ec;
+      --stripe-muted: rgba(245,242,236,0.55);
+      --stripe-amber: #f0a040;
+      --nav-bg:       rgba(245,242,236,0.92);
+      --toggle-bg:    #e0dbd2;
+    }
+    [data-theme="dark"] {
+      --bg:           #111110;
+      --bg-alt:       #1a1917;
+      --bg-card:      #1e1d1b;
+      --ink:          #f0ede6;
+      --slate:        #c8c2b8;
+      --muted:        #8a8278;
+      --border:       #2e2c28;
+      --amber:        #f0a040;
+      --amber-hero:   #f0a040;
+      --stripe-bg:    #0a0a09;
+      --stripe-text:  #f0ede6;
+      --stripe-muted: rgba(240,237,230,0.55);
+      --stripe-amber: #f0a040;
+      --nav-bg:       rgba(17,17,16,0.92);
+      --toggle-bg:    #2e2c28;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); overflow-x: hidden; transition: background 0.35s, color 0.35s; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 60px; background: var(--nav-bg); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); transition: background 0.35s, border-color 0.35s; }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--ink); text-decoration: none; letter-spacing: -0.02em; transition: color 0.35s; }
+    .nav-right { display: flex; gap: 24px; align-items: center; }
+    .nav-back { display: flex; align-items: center; gap: 7px; text-decoration: none; color: var(--muted); font-size: 0.82rem; font-weight: 500; letter-spacing: 0.04em; transition: color 0.2s; }
+    .nav-back:hover { color: var(--amber); }
+    .theme-toggle { width: 38px; height: 38px; background: var(--toggle-bg); border: 1px solid var(--border); border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; transition: background 0.35s, border-color 0.35s, transform 0.15s; flex-shrink: 0; }
+    .theme-toggle:hover { transform: rotate(20deg) scale(1.1); }
+
+    /* HERO */
+    .hero { padding: 140px 60px 80px; border-bottom: 1px solid var(--border); }
+    .hero-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--amber); margin-bottom: 24px; }
+    .hero-tag::before { content: ''; width: 28px; height: 1px; background: var(--amber); }
+    h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 5vw, 4.5rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.03em; color: var(--ink); max-width: 800px; margin-bottom: 20px; }
+    h1 em { font-style: italic; color: var(--amber-hero); }
+    .hero-sub { font-size: 1.05rem; color: var(--slate); max-width: 620px; line-height: 1.7; font-weight: 300; margin-bottom: 48px; }
+
+    .meta-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid var(--border); border-left: 1px solid var(--border); }
+    .meta-item { padding: 24px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .meta-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 6px; }
+    .meta-value { font-size: 0.92rem; font-weight: 600; color: var(--ink); line-height: 1.4; }
+
+    /* STATS */
+    .stats-strip { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--stripe-bg); transition: background 0.35s; }
+    .stat-block { padding: 36px 32px; border-right: 1px solid rgba(255,255,255,0.07); }
+    .stat-block:last-child { border-right: none; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 900; color: var(--stripe-amber); line-height: 1; letter-spacing: -0.03em; }
+    .stat-desc { font-size: 0.78rem; color: var(--stripe-muted); margin-top: 6px; line-height: 1.4; }
+
+    /* CONTENT */
+    .content-wrap { max-width: 780px; margin: 0 auto; padding: 80px 60px; }
+    .section-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--amber); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+    .section-label::after { content: ''; max-width: 36px; height: 1px; background: var(--amber); flex: 1; }
+    h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; color: var(--ink); line-height: 1.2; margin-bottom: 20px; letter-spacing: -0.02em; }
+    p { font-size: 0.97rem; line-height: 1.78; color: var(--slate); margin-bottom: 18px; }
+    p strong { color: var(--ink); font-weight: 600; }
+    .content-block { margin-bottom: 72px; }
+
+    blockquote { border-left: 3px solid var(--amber); padding: 20px 24px; background: var(--bg-alt); border-radius: 0 6px 6px 0; margin: 32px 0; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.08rem; color: var(--ink); line-height: 1.6; transition: background 0.35s; }
+
+    /* CONTRIBUTIONS */
+    .contrib-list { display: flex; flex-direction: column; gap: 0; margin: 28px 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .contrib-item { display: flex; align-items: flex-start; gap: 20px; padding: 24px; border-bottom: 1px solid var(--border); background: var(--bg-card); transition: background 0.35s; }
+    .contrib-item:last-child { border-bottom: none; }
+    .contrib-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: var(--amber); line-height: 1; width: 36px; flex-shrink: 0; }
+    .contrib-text h4 { font-size: 0.9rem; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+    .contrib-text p { font-size: 0.83rem; color: var(--muted); line-height: 1.6; margin: 0; }
+
+    /* DATA STATS */
+    .data-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 28px 0; }
+    .data-card { background: var(--stripe-bg); border-radius: 8px; padding: 28px 24px; text-align: center; transition: background 0.35s; }
+    .data-num { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 900; color: var(--stripe-amber); line-height: 1; margin-bottom: 8px; }
+    .data-label { font-size: 0.78rem; font-weight: 700; color: var(--stripe-text); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .data-source { font-size: 0.72rem; color: var(--stripe-muted); line-height: 1.4; }
+    .data-insight { background: rgba(240,160,64,0.08); border: 1px solid rgba(240,160,64,0.2); border-radius: 8px; padding: 20px 24px; margin-top: 20px; }
+    .data-insight h4 { font-size: 0.85rem; font-weight: 700; color: var(--stripe-amber); margin-bottom: 8px; }
+    .data-insight p { font-size: 0.83rem; color: var(--stripe-muted); line-height: 1.6; margin: 0; }
+
+    /* PERSONA */
+    .persona-highlight { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin: 28px 0; transition: background 0.35s, border-color 0.35s; }
+    .persona-header { display: flex; align-items: center; gap: 16px; padding: 24px; border-bottom: 1px solid var(--border); }
+    .persona-avatar { font-size: 2.2rem; }
+    .persona-header h4 { font-size: 1rem; font-weight: 700; color: var(--ink); }
+    .persona-role { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--amber); margin-top: 2px; }
+    .persona-quote { padding: 20px 24px; background: var(--bg-alt); border-bottom: 1px solid var(--border); font-style: italic; font-size: 0.9rem; color: var(--slate); transition: background 0.35s; }
+    .persona-cols { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+    .persona-col { padding: 20px 24px; border-right: 1px solid var(--border); }
+    .persona-col:last-child { border-right: none; }
+    .persona-col h5 { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--amber); margin-bottom: 10px; }
+    .persona-col ul { list-style: none; padding: 0; }
+    .persona-col li { font-size: 0.8rem; color: var(--muted); line-height: 1.55; padding: 4px 0; border-bottom: 1px solid var(--border); }
+    .persona-col li:last-child { border-bottom: none; }
+
+    /* EMPATHY MAP */
+    .empathy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--border); border-radius: 8px; overflow: hidden; margin: 28px 0; }
+    .empathy-quad { background: var(--bg-card); padding: 24px; transition: background 0.35s; }
+    .quad-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--amber); margin-bottom: 12px; }
+    .empathy-quad ul { list-style: none; padding: 0; }
+    .empathy-quad li { font-size: 0.82rem; color: var(--muted); line-height: 1.55; padding: 5px 0; border-bottom: 1px solid var(--border); }
+    .empathy-quad li:last-child { border-bottom: none; }
+    .finding-highlight { background: var(--bg-alt); border: 1px solid var(--border); border-radius: 8px; padding: 20px 24px; margin-top: 20px; transition: background 0.35s; }
+    .finding-highlight h4 { font-size: 0.85rem; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+    .finding-highlight p { font-size: 0.83rem; color: var(--muted); line-height: 1.6; margin: 0; }
+
+    /* FEATURES */
+    .feature-list { display: flex; flex-direction: column; gap: 16px; margin: 28px 0; }
+    .feature-item { display: flex; align-items: flex-start; gap: 18px; padding: 22px 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; transition: background 0.35s, border-color 0.35s; }
+    .feature-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+    .feature-text h4 { font-size: 0.88rem; font-weight: 700; color: var(--ink); margin-bottom: 5px; }
+    .feature-text p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; margin: 0; }
+
+    /* TOOL EVAL */
+    .tools-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 28px 0; }
+    .tools-col-header { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; padding: 8px 16px; border-radius: 4px; display: inline-block; }
+    .tools-col-header.good { background: rgba(26,107,60,0.12); color: #1a6b3c; }
+    .tools-col-header.bad { background: rgba(196,98,0,0.1); color: var(--amber); }
+    .tool-entry { padding: 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 12px; transition: background 0.35s, border-color 0.35s; }
+    .tool-entry h4 { font-size: 0.85rem; font-weight: 700; color: var(--ink); margin-bottom: 5px; }
+    .tool-entry p { font-size: 0.8rem; color: var(--muted); line-height: 1.55; margin: 0; }
+
+    /* REFLECTION */
+    .reflection-list { display: flex; flex-direction: column; gap: 16px; margin: 24px 0; }
+    .reflection-item { padding: 20px 24px; background: var(--bg-alt); border-radius: 8px; border-left: 3px solid var(--amber); transition: background 0.35s; }
+    .reflection-item h4 { font-size: 0.88rem; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+    .reflection-item p { font-size: 0.83rem; color: var(--muted); line-height: 1.6; margin: 0; }
+
+    .case-img { width: 100%; border-radius: 8px; border: 1px solid var(--border); margin: 28px 0; display: block; transition: border-color 0.35s; }
+    .img-caption { font-size: 0.75rem; color: var(--muted); text-align: center; margin-top: -18px; margin-bottom: 28px; font-style: italic; }
+
+    /* CTA */
+    .cta-strip { background: var(--stripe-bg); padding: 64px 60px; text-align: center; transition: background 0.35s; }
+    .cta-strip h3 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--stripe-text); margin-bottom: 12px; }
+    .cta-strip p { color: var(--stripe-muted); font-size: 0.95rem; margin-bottom: 32px; }
+    .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-amber { background: var(--stripe-amber); color: #0f0f0f; padding: 13px 26px; border-radius: 4px; text-decoration: none; font-weight: 700; font-size: 0.88rem; transition: opacity 0.2s; }
+    .btn-amber:hover { opacity: 0.85; }
+    .btn-ghost { background: rgba(255,255,255,0.07); color: rgba(245,242,236,0.8); border: 1px solid rgba(255,255,255,0.12); padding: 13px 26px; border-radius: 4px; text-decoration: none; font-weight: 500; font-size: 0.88rem; transition: background 0.2s; }
+    .btn-ghost:hover { background: rgba(255,255,255,0.12); }
+
+    footer { background: var(--stripe-bg); border-top: 1px solid rgba(255,255,255,0.07); padding: 20px 60px; display: flex; justify-content: space-between; align-items: center; transition: background 0.35s; }
+    footer p { font-size: 0.75rem; color: rgba(245,242,236,0.3); }
+
+    @media (max-width: 900px) {
+      nav { padding: 14px 20px; }
+      .hero, .content-wrap, .cta-strip, footer { padding-left: 20px; padding-right: 20px; }
+      h1 { font-size: 2.2rem; }
+      .meta-grid, .stats-strip, .data-grid, .tools-grid, .empathy-grid { grid-template-columns: 1fr 1fr; }
+      .persona-cols { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .meta-grid, .stats-strip, .data-grid, .tools-grid, .empathy-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">CM</a>
+  <div class="nav-right">
+    <a class="nav-back" href="index.html">← Back to Portfolio</a>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">Design Thinking · Service Design · Team Project</div>
+  <h1>Drip Circular App<br><em>Fast Fashion, Circular Economy.</em></h1>
+  <p class="hero-sub">A 12-week design sprint to help a fast fashion retailer enter the circular economy — without burning its existing business model. The product problem turned out to be a behavioural one.</p>
+  <div class="meta-grid">
+    <div class="meta-item"><div class="meta-label">Module</div><div class="meta-value">IS6147 Design Thinking for Services</div></div>
+    <div class="meta-item"><div class="meta-label">Timeline</div><div class="meta-value">12 Weeks, Sep–Dec 2025</div></div>
+    <div class="meta-item"><div class="meta-label">Team</div><div class="meta-value">5 People</div></div>
+    <div class="meta-item"><div class="meta-label">My Role</div><div class="meta-value">Research Lead · Persona Dev · Figma Co-Lead</div></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat-block"><div class="stat-num">3</div><div class="stat-desc">User personas built — Mary, Alexandra, Karen</div></div>
+  <div class="stat-block"><div class="stat-num">26</div><div class="stat-desc">Survey responses covering shopping habits and disposal behaviour</div></div>
+  <div class="stat-block"><div class="stat-num">QR</div><div class="stat-desc">Digital Passport — key feature I championed</div></div>
+  <div class="stat-block"><div class="stat-num">Hi-Fi</div><div class="stat-desc">Interactive Figma prototype, lo-fi through hi-fi</div></div>
+</div>
+
+<!-- CONTENT -->
+<div class="content-wrap">
+
+  <!-- BRIEF -->
+  <div class="content-block">
+    <div class="section-label">The Brief</div>
+    <h2>A product problem that turned out to be a behavioural one.</h2>
+    <p>Our team of five was asked to design a digital service to help Drip, a fast fashion retailer, enter the circular economy without scrapping its existing business model. That sounds like a product problem. It turned out to be more of a behavioural one.</p>
+    <p>The gap between what people say they value and what they actually do at checkout is the whole design brief. We spent the first weeks staying in that problem space longer than felt comfortable — and the final design is better because of it.</p>
+    <blockquote>"54% of Gen Z say sustainability matters but rank it below price, fit, and comfort when they buy. 60% say they buy from brands that match their values. Both things are true at the same time. That contradiction is where the design lives."</blockquote>
+    <img src="images/drip-app-screens.jpg" alt="Drip Circular App — hi-fi prototype screens" class="case-img" />
+    <p class="img-caption">Drip Circular App — hi-fi Figma prototype across all five core screens</p>
+  </div>
+
+  <!-- MY CONTRIBUTIONS -->
+  <div class="content-block">
+    <div class="section-label">My Contributions</div>
+    <h2>Four things I owned on this project.</h2>
+    <div class="contrib-list">
+      <div class="contrib-item"><div class="contrib-num">01</div><div class="contrib-text"><h4>Gen Z Secondary Research</h4><p>Led exploration phase research into Gen Z clothing behaviour and fashion waste. Systematic searches across Statista, Ellen MacArthur Foundation, and Global Fashion Agenda. Three numbers drove most of our design decisions.</p></div></div>
+      <div class="contrib-item"><div class="contrib-num">02</div><div class="contrib-text"><h4>Mary Persona</h4><p>Built the Mary persona independently — 21, Cork student, compulsive buyer triggered by sales and seasonal events. Designed to represent the users nobody was designing for yet. Building her pushed the team toward Eco Points as a front-and-centre mechanic.</p></div></div>
+      <div class="contrib-item"><div class="contrib-num">03</div><div class="contrib-text"><h4>QR-Based Digital Passport</h4><p>Championed this during ideation based on Karen's greenwashing skepticism and the EU's Ecodesign for Sustainable Products Regulation. My argument: if transparency is a brand claim, Karen doesn't believe it. If it's verifiable by scan, she does.</p></div></div>
+      <div class="contrib-item"><div class="contrib-num">04</div><div class="contrib-text"><h4>Figma Prototyping Co-Lead</h4><p>Co-led the Figma work from lo-fi sketches through to hi-fi interactive prototype. Key rule: everyone sketched independently before comparing. That gave us genuine design forks to evaluate rather than refining one idea forever.</p></div></div>
+    </div>
+  </div>
+
+  <!-- RESEARCH -->
+  <div class="content-block">
+    <div class="section-label">Research</div>
+    <h2>Three numbers that drove every design decision.</h2>
+    <p>My secondary research surfaced a cluster of Gen Z data points that the team kept returning to throughout ideation and prototyping. These were not background context — they were active design constraints.</p>
+    <div class="data-grid">
+      <div class="data-card"><div class="data-num">54%</div><div class="data-label">Say Sustainability Matters</div><div class="data-source">But rank it below price, fit, and comfort at checkout. Cotton Incorporated, 2023.</div></div>
+      <div class="data-card"><div class="data-num">60%</div><div class="data-label">Buy from Values-Aligned Brands</div><div class="data-source">Gen Z who say brand values influence purchasing. Statista, 2024.</div></div>
+      <div class="data-card"><div class="data-num">71%</div><div class="data-label">Shop Primarily on Mobile</div><div class="data-source">Gen Z primary channel. Shaped the entire interface direction. HubSpot, 2024.</div></div>
+    </div>
+    <div class="data-insight">
+      <h4>The Core Insight</h4>
+      <p>Gen Z is not lying when they say sustainability matters. They just won't sacrifice price or convenience for it. The design brief is to make the sustainable choice the convenient one — not to make people feel guilty for choosing otherwise.</p>
+    </div>
+  </div>
+
+  <!-- PERSONA -->
+  <div class="content-block">
+    <div class="section-label">Persona</div>
+    <h2>Meet Mary. The user most apps forget to design for.</h2>
+    <p>Alexandra (eco-conscious) and Karen (values-driven activist) were already in the team's thinking. <strong>Mary was my addition</strong> — and she's the one whose behaviour we most needed to understand. Alexandra is already persuaded. Mary is the whole problem.</p>
+    <div class="persona-highlight">
+      <div class="persona-header">
+        <div class="persona-avatar">🛍️</div>
+        <div><h4>Mary — Compulsive Buyer</h4><div class="persona-role">21 · Cork, Ireland · Student · Income ≤ €30k</div></div>
+      </div>
+      <div class="persona-quote">"I saw a Black Friday discount and just went for it and I didn't really think twice."</div>
+      <div class="persona-cols">
+        <div class="persona-col"><h5>Goals</h5><ul><li>Find the best deals on trending clothing quickly</li><li>Avoid buying items that won't fit or get worn</li><li>Feel good about purchases without much deliberation</li><li>Donate or pass on unwanted clothes with minimal effort</li></ul></div>
+        <div class="persona-col"><h5>Frustrations</h5><ul><li>Regrets impulse buys within days</li><li>Sustainability features feel preachy</li><li>No easy way to verify genuine sustainability claims</li><li>Items frequently don't fit as expected online</li></ul></div>
+        <div class="persona-col"><h5>Design Implications</h5><ul><li>Discounts are the #1 motivator — surface deals prominently</li><li>Frame sustainability as cost-saving, not ethical obligation</li><li>One-tap donate or resell flow post-purchase</li><li>Build trust through transparent, verifiable data</li></ul></div>
+      </div>
+    </div>
+    <p>Designing for Mary meant framing sustainability as <strong>cost-saving</strong> — not as ethical obligation. That reframe came from actually sitting with her story rather than designing for Alexandra. Most sustainable fashion apps are designed for people who are already persuaded.</p>
+    <img src="images/drip-mary-persona.jpg" alt="Mary persona card" class="case-img" />
+    <p class="img-caption">Mary persona card — Compulsive Buyer archetype, built from primary and secondary research</p>
+  </div>
+
+  <!-- EMPATHY MAP -->
+  <div class="content-block">
+    <div class="section-label">Empathy Mapping</div>
+    <h2>What Alexandra's map taught us about affordability.</h2>
+    <p>Empathy Maps were the most useful tool in the project — and the one I least expected to be. Alexandra's map revealed something that completely flipped our affordability conversation.</p>
+    <div class="empathy-grid">
+      <div class="empathy-quad"><div class="quad-label">Says</div><ul><li>Does this brand use organic or recycled materials?</li><li>I'd rather buy second-hand than fast fashion</li><li>I try to donate or recycle my old clothes</li><li>I'm willing to pay more if it's better for the planet</li></ul></div>
+      <div class="empathy-quad"><div class="quad-label">Thinks</div><ul><li>Seriously considers sustainability when buying</li><li>Frustrated by greenwashing in fashion markets</li><li>Wants to lower personal fashion footprint</li><li>Trying to make ethical choices on a limited budget</li></ul></div>
+      <div class="empathy-quad"><div class="quad-label">Does</div><ul><li>Regularly shops second-hand</li><li>Follows sustainable fashion influencers</li><li>Reads labels to check eco-credentials</li><li>Uses apps to track sustainable fashion choices</li></ul></div>
+      <div class="empathy-quad"><div class="quad-label">Feels</div><ul><li>Proud when making sustainable purchases</li><li>Frustrated by the high prices of sustainable fashion</li><li>Skeptical about vague eco-claims and greenwashing</li><li>Satisfied when extending the life of clothes</li></ul></div>
+    </div>
+    <div class="finding-highlight">
+      <h4>The Finding That Changed Everything</h4>
+      <p>Alexandra was not frustrated with Zara. She was frustrated with Patagonia — sustainable alternatives priced out of her student budget. That flipped our whole conversation: we stopped treating low prices as a constraint on sustainability and started treating them as the point.</p>
+    </div>
+    <img src="images/drip-empathy-map.jpg" alt="Alexandra empathy map" class="case-img" />
+    <p class="img-caption">Alexandra empathy map — the finding that reframed our entire affordability thinking</p>
+  </div>
+
+  <!-- QR PASSPORT -->
+  <div class="content-block">
+    <div class="section-label">Key Feature</div>
+    <h2>Verifiable transparency beats brand claims every time.</h2>
+    <p>During ideation I pushed for what became the <strong>QR-based Digital Passport</strong>. The idea came from two places: Karen's greenwashing skepticism surfaced in empathy mapping, and the EU's Ecodesign for Sustainable Products Regulation — which will require Digital Product Passports for textiles sold in the EU.</p>
+    <blockquote>"If transparency is a brand claim, Karen doesn't believe it. If it's verifiable by scan, she does."</blockquote>
+    <p>A shopper scans a QR code and gets origin, materials, and an environmental impact score. That is a different thing from a sustainability pledge in an Instagram caption. A compliance cost for slow movers is a competitive edge for whoever gets there first.</p>
+    <img src="images/drip-qr-scan.jpg" alt="Drip QR scan screen — Digital Passport feature" class="case-img" />
+    <p class="img-caption">QR Scan feature — verifiable supply chain data, not brand claims</p>
+  </div>
+
+  <!-- DESIGN PROCESS -->
+  <div class="content-block">
+    <div class="section-label">Design Process</div>
+    <h2>Lo-fi to hi-fi. With one important rule.</h2>
+    <p>We co-led the Figma prototyping work. The rule that made it work: <strong>everyone sketched independently at lo-fi before comparing</strong>. Two features that weren't in the lo-fi emerged at mid-fi — wardrobe tracking and a gamified CO2-saved dashboard. Both came from asking what would bring Mary back to the app after her first purchase.</p>
+    <img src="images/drip-lofi-sketches.jpg" alt="Drip lo-fidelity sketches" class="case-img" />
+    <p class="img-caption">Lo-fi sketches — independent before comparison, creating genuine design forks to evaluate</p>
+    <blockquote>"Once you can tap through screens in a browser, the whole team talks differently about the service. You stop saying 'the app would show...' and start pointing at specific things on screen."</blockquote>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="content-block">
+    <div class="section-label">The App</div>
+    <h2>Features designed to change behaviour, not describe values.</h2>
+    <p>Every feature was designed to serve Mary's actual motivations — not Alexandra's stated values. That distinction shaped every decision about what made the final cut.</p>
+    <div class="feature-list">
+      <div class="feature-item"><div class="feature-icon">📱</div><div class="feature-text"><h4>QR-Based Digital Passport</h4><p>Scan any clothing tag to get origin, materials, and an environmental impact score. Verifiable data, not brand claims. Built ahead of EU Ecodesign compliance requirements.</p></div></div>
+      <div class="feature-item"><div class="feature-icon">🎯</div><div class="feature-text"><h4>Eco Points and Store Credit</h4><p>Return, donate, or resell items to earn Eco Points redeemable as store credit. Sustainability framed as money saved — not moral credit earned. Mary's primary motivation is always cost.</p></div></div>
+      <div class="feature-item"><div class="feature-icon">🗣️</div><div class="feature-text"><h4>Wardrobe Tracker</h4><p>Scan existing clothes to build a digital inventory with a per-item sustainability score. Designed to bring users back between purchases — building the habit before changing the behaviour.</p></div></div>
+      <div class="feature-item"><div class="feature-icon">⏸️</div><div class="feature-text"><h4>Constructive Friction</h4><p>A sustainability score visible before purchase, plus a short cooling-off pause on impulse buys. Intentional friction — not bad UX. The opposite of a dark pattern is not neutral design, it's intentional design.</p></div></div>
+      <div class="feature-item"><div class="feature-icon">🏆</div><div class="feature-text"><h4>Gamified CO2 Dashboard</h4><p>Visual progress tracker showing CO2 saved, clothes diverted from landfill, and next reward milestone. Makes abstract environmental impact feel immediate and personal for Mary.</p></div></div>
+      <div class="feature-item"><div class="feature-icon">🔁</div><div class="feature-text"><h4>One-Tap Resell and Donate</h4><p>Post-purchase flow for unwanted items — frictionless resell or donation with minimal steps. Designed for Mary who already donates some clothes but specifically bins fast fashion.</p></div></div>
+    </div>
+    <img src="images/drip-app-screens.jpg" alt="Drip hi-fi prototype screens" class="case-img" />
+    <p class="img-caption">Hi-fi prototype — tapping through screens changed how the team talked about the service</p>
+  </div>
+
+  <!-- TOOL EVALUATION -->
+  <div class="content-block">
+    <div class="section-label">Tool Evaluation</div>
+    <h2>What worked and what needed rethinking.</h2>
+    <p>Not every design thinking tool was equally useful. Being honest about what worked and why is more valuable than listing everything used.</p>
+    <div class="tools-grid">
+      <div>
+        <div class="tools-col-header good">✓ Worked Well</div>
+        <div class="tool-entry"><h4>Empathy Maps</h4><p>Most useful tool in the project. Alexandra's map revealed she was frustrated with Patagonia, not Zara — flipping our entire affordability conversation.</p></div>
+        <div class="tool-entry"><h4>Iterative Prototyping</h4><p>Independent lo-fi sketching before group comparison prevented committing to the first idea said out loud and refining it forever.</p></div>
+        <div class="tool-entry"><h4>Storyboarding</h4><p>Made the emotional experience feel real. Following Alexandra across 8 panels forced us to ask what she felt at each step — easiest artefact to explain to someone outside the team.</p></div>
+      </div>
+      <div>
+        <div class="tools-col-header bad">↻ Needed Rethinking</div>
+        <div class="tool-entry"><h4>Stakeholder Map</h4><p>Went too broad too quickly. Cattle farmers ended up on the board. Lesson: draw the service boundary first, then map inward. We wasted two hours pulling scope back.</p></div>
+        <div class="tool-entry"><h4>Customer Journey Map</h4><p>Our five-stage map stayed too high-level. Told us roughly where problems were but not what they looked like. Detailed maps are where the design decisions live.</p></div>
+        <div class="tool-entry"><h4>Survey Analysis</h4><p>26 questions, no pre-agreed analysis plan. Nearly missed a key pattern about younger respondents. Write the analysis framework before data collection — not after.</p></div>
+      </div>
+    </div>
+    <img src="images/drip-journey-map.jpg" alt="Drip customer journey map" class="case-img" />
+    <p class="img-caption">Customer journey map — five-stage overview (stayed too high-level in hindsight)</p>
+  </div>
+
+  <!-- REFLECTION -->
+  <div class="content-block">
+    <div class="section-label">Reflection</div>
+    <h2>What I would do differently.</h2>
+    <div class="reflection-list">
+      <div class="reflection-item"><h4>Define the Analysis Framework Before Sending the Survey</h4><p>We ran a 26-question survey with no pre-agreed analysis plan. When results came back the synthesis was chaotic. Never send a survey without a coding framework already written.</p></div>
+      <div class="reflection-item"><h4>Detail the Repair Booking Flow Specifically</h4><p>The customer journey map stayed too high-level. Detailing the repair booking sub-flow would have surfaced specific friction points — like the anxiety of posting a garment to a stranger — which would have shaped the feature design.</p></div>
+      <div class="reflection-item"><h4>Draw the Service Boundary Before Mapping Stakeholders</h4><p>Cattle farmers ended up on the stakeholder map. They're part of the fashion system but completely irrelevant to the digital service. Next time: define scope first, then map inward from there.</p></div>
+      <div class="reflection-item"><h4>Test the Refundable Deposit Model with Users</h4><p>My deposit model idea was rejected in team discussion as feeling punitive. That might be right — but it should have been tested with a low-fidelity prototype before discarding. Good ideas die in conference rooms all the time for the wrong reasons.</p></div>
+    </div>
+  </div>
+
+  <!-- KEY LEARNINGS -->
+  <div class="content-block">
+    <div class="section-label">Key Learnings</div>
+    <h2>What I'm taking from this project.</h2>
+    <div class="reflection-list">
+      <div class="reflection-item"><h4>Stay in the Problem Space</h4><p>My instinct is to arrive at a positioning statement fast and start executing. This project required the opposite. The Mary persona, the value-action gap insight, the decision to lead with economic incentives — none of those would have happened if we moved to solution mode in week two.</p></div>
+      <div class="reflection-item"><h4>Constructive Friction Is Ethical UX</h4><p>E-commerce UX is built almost entirely around removing friction from the path to checkout. That keeps users like Mary in regret cycles. The designed pauses in the Drip app are not bad UX. The opposite of a dark pattern is not neutral design — it's intentional design.</p></div>
+      <div class="reflection-item"><h4>Design Thinking Transfers Directly to Marketing</h4><p>The empathy map I built for Alexandra trained me to look for value-action gaps — and those exist in SaaS buyers just as much as in fast fashion shoppers. Different context, same mechanism. Having a proper framework makes the process more deliberate and easier to explain to a team.</p></div>
+      <div class="reflection-item"><h4>Visual Language Lowers Participation Barriers</h4><p>Our team had different academic backgrounds and varying English fluency. The tools that worked best didn't require you to be articulate in a second language. Visual artefacts democratise collaboration in a way that verbal-only approaches do not.</p></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CTA -->
+<div class="cta-strip">
+  <h3>Want to see more?</h3>
+  <p>Check out the USCH case study or get in touch about roles and opportunities.</p>
+  <div class="cta-buttons">
+    <a href="usch.html" class="btn-amber">View USCH Case Study →</a>
+    <a href="index.html#contact" class="btn-ghost">Get In Touch</a>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Cedric Mathias · Dublin, Ireland 🇮🇪</p>
+  <p>Designed & developed by Cedric Mathias</p>
+</footer>
+
+<script>
+  const btn = document.getElementById('themeBtn');
+  const root = document.documentElement;
+  const ICONS = { light: '🌙', dark: '☀️' };
+  function getInitialTheme() {
+    const saved = localStorage.getItem('cm-theme');
+    if (saved) return saved;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  function applyTheme(theme) {
+    root.setAttribute('data-theme', theme);
+    btn.textContent = ICONS[theme];
+    localStorage.setItem('cm-theme', theme);
+  }
+  function toggleTheme() {
+    const current = root.getAttribute('data-theme');
+    applyTheme(current === 'dark' ? 'light' : 'dark');
+  }
+  applyTheme(getInitialTheme());
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+    if (!localStorage.getItem('cm-theme')) applyTheme(e.matches ? 'dark' : 'light');
+  });
+</script>
+</body>
 </html>
