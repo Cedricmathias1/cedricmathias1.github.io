@@ -4,362 +4,520 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>USCH Case Study — Cedric Mathias</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <meta name="description" content="Unified Student Communication Hub — UX Research and Product Design case study by Cedric Mathias." />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg:           #f5f2ec;
-      --bg-alt:       #ede9e0;
-      --bg-card:      #ffffff;
-      --ink:          #0f0f0f;
-      --slate:        #3a3a3a;
-      --muted:        #6b6560;
-      --border:       #ddd8ce;
-      --amber:        #c46200;
-      --amber-hero:   #c46200;
-      --stripe-bg:    #0f0f0f;
-      --stripe-text:  #f5f2ec;
-      --stripe-muted: rgba(245,242,236,0.55);
-      --stripe-amber: #f0a040;
-      --nav-bg:       rgba(245,242,236,0.92);
-      --toggle-bg:    #e0dbd2;
+      --bg:         #faf8f4;
+      --bg-2:       #f2efe8;
+      --bg-3:       #eae6dc;
+      --card:       #ffffff;
+      --ink:        #18181b;
+      --ink-2:      #3f3f46;
+      --ink-3:      #71717a;
+      --border:     rgba(0,0,0,0.08);
+      --amber:      #c2570a;
+      --amber-pale: rgba(194,87,10,0.07);
+      --amber-glow: rgba(194,87,10,0.15);
+      --shadow-sm:  0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md:  0 4px 16px rgba(0,0,0,0.07);
+      --shadow-lg:  0 16px 48px rgba(0,0,0,0.10);
+      --nav-bg:     rgba(250,248,244,0.85);
+      --r:          10px;
+      --toggle-bg:  #e4e0d8;
     }
     [data-theme="dark"] {
-      --bg:           #111110;
-      --bg-alt:       #1a1917;
-      --bg-card:      #1e1d1b;
-      --ink:          #f0ede6;
-      --slate:        #c8c2b8;
-      --muted:        #8a8278;
-      --border:       #2e2c28;
-      --amber:        #f0a040;
-      --amber-hero:   #f0a040;
-      --stripe-bg:    #0a0a09;
-      --stripe-text:  #f0ede6;
-      --stripe-muted: rgba(240,237,230,0.55);
-      --stripe-amber: #f0a040;
-      --nav-bg:       rgba(17,17,16,0.92);
-      --toggle-bg:    #2e2c28;
+      --bg:         #111113;
+      --bg-2:       #18181b;
+      --bg-3:       #1f1f23;
+      --card:       #1c1c20;
+      --ink:        #fafafa;
+      --ink-2:      #a1a1aa;
+      --ink-3:      #71717a;
+      --border:     rgba(255,255,255,0.08);
+      --amber:      #f0a040;
+      --amber-pale: rgba(240,160,64,0.08);
+      --amber-glow: rgba(240,160,64,0.18);
+      --shadow-sm:  0 1px 3px rgba(0,0,0,0.3);
+      --shadow-md:  0 4px 16px rgba(0,0,0,0.4);
+      --shadow-lg:  0 16px 48px rgba(0,0,0,0.5);
+      --nav-bg:     rgba(17,17,19,0.85);
+      --toggle-bg:  #27272a;
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); overflow-x: hidden; transition: background 0.35s, color 0.35s; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); overflow-x: hidden; -webkit-font-smoothing: antialiased; transition: background 0.4s, color 0.4s; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-thumb { background: var(--amber); border-radius: 2px; }
 
     /* NAV */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 18px 60px;
-      background: var(--nav-bg); backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-      transition: background 0.35s, border-color 0.35s;
-    }
-    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--ink); text-decoration: none; letter-spacing: -0.02em; transition: color 0.35s; }
-    .nav-right { display: flex; gap: 24px; align-items: center; }
-    .nav-back { display: flex; align-items: center; gap: 7px; text-decoration: none; color: var(--muted); font-size: 0.82rem; font-weight: 500; letter-spacing: 0.04em; transition: color 0.2s; }
-    .nav-back:hover { color: var(--amber); }
-    .theme-toggle { width: 38px; height: 38px; background: var(--toggle-bg); border: 1px solid var(--border); border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; transition: background 0.35s, border-color 0.35s, transform 0.15s; flex-shrink: 0; }
-    .theme-toggle:hover { transform: rotate(20deg) scale(1.1); }
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; height: 60px; padding: 0 48px; display: flex; align-items: center; justify-content: space-between; background: var(--nav-bg); backdrop-filter: blur(20px) saturate(180%); border-bottom: 1px solid var(--border); transition: background 0.4s, border-color 0.4s; }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; }
+    .nav-logo span { color: var(--amber); }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .nav-back { font-size: 0.8rem; font-weight: 500; color: var(--ink-3); display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border); transition: all 0.2s; }
+    .nav-back:hover { color: var(--amber); border-color: var(--amber-glow); }
+    .nav-back-arrow { font-size: 0.9rem; }
+    .nav-toggle { height: 32px; padding: 0 14px; border-radius: 20px; border: 1px solid var(--border); background: var(--toggle-bg); font-size: 0.72rem; font-weight: 600; color: var(--ink-2); letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
+    .nav-toggle:hover { border-color: var(--amber); color: var(--amber); }
+    .nav-toggle-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--amber); flex-shrink: 0; }
 
     /* HERO */
-    .hero {
-      padding: 140px 60px 80px;
-      border-bottom: 1px solid var(--border);
-    }
-    .hero-tag {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--amber); margin-bottom: 24px;
-    }
-    .hero-tag::before { content: ''; width: 28px; height: 1px; background: var(--amber); }
-    h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 5vw, 4.5rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.03em; color: var(--ink); max-width: 800px; margin-bottom: 20px; }
-    h1 em { font-style: italic; color: var(--amber-hero); }
-    .hero-sub { font-size: 1.05rem; color: var(--slate); max-width: 600px; line-height: 1.7; font-weight: 300; margin-bottom: 48px; }
+    .cs-hero { padding: 110px 48px 0; border-bottom: 1px solid var(--border); }
+    .cs-hero-inner { max-width: 900px; }
+    .cs-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); margin-bottom: 24px; }
+    .cs-tag::before { content: ''; width: 20px; height: 1.5px; background: var(--amber); }
+    .cs-headline { font-family: 'Playfair Display', serif; font-size: clamp(2.6rem, 5vw, 4.2rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.03em; color: var(--ink); margin-bottom: 24px; }
+    .cs-headline em { font-style: italic; color: var(--amber); }
+    .cs-sub { font-size: 1.05rem; color: var(--ink-2); max-width: 580px; line-height: 1.75; font-weight: 300; margin-bottom: 48px; }
 
-    .meta-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid var(--border); border-left: 1px solid var(--border); margin-bottom: 0; }
-    .meta-item { padding: 24px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .meta-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 6px; }
-    .meta-value { font-size: 0.92rem; font-weight: 600; color: var(--ink); line-height: 1.4; }
+    .cs-meta { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--border); }
+    .cs-meta-item { padding: 24px 28px; border-right: 1px solid var(--border); }
+    .cs-meta-item:last-child { border-right: none; }
+    .cs-meta-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); margin-bottom: 6px; }
+    .cs-meta-value { font-size: 0.88rem; font-weight: 600; color: var(--ink); line-height: 1.4; }
 
-    /* STATS BAR */
-    .stats-strip { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--stripe-bg); transition: background 0.35s; }
-    .stat-block { padding: 36px 32px; border-right: 1px solid rgba(255,255,255,0.07); }
-    .stat-block:last-child { border-right: none; }
-    .stat-num { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 900; color: var(--stripe-amber); line-height: 1; letter-spacing: -0.03em; }
-    .stat-desc { font-size: 0.78rem; color: var(--stripe-muted); margin-top: 6px; line-height: 1.4; }
+    /* STATS */
+    .cs-stats { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--ink); transition: background 0.4s; }
+    [data-theme="dark"] .cs-stats { background: var(--bg-3); }
+    .cs-stat { padding: 36px 28px; border-right: 1px solid rgba(255,255,255,0.07); }
+    [data-theme="dark"] .cs-stat { border-right-color: var(--border); }
+    .cs-stat:last-child { border-right: none; }
+    .cs-stat-num { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 900; color: var(--amber); line-height: 1; letter-spacing: -0.04em; margin-bottom: 6px; }
+    .cs-stat-desc { font-size: 0.75rem; color: rgba(250,248,244,0.5); line-height: 1.4; font-weight: 400; }
+    [data-theme="dark"] .cs-stat-desc { color: var(--ink-3); }
 
-    /* CONTENT */
-    .content-wrap { max-width: 780px; margin: 0 auto; padding: 80px 60px; }
-    .section-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--amber); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
-    .section-label::after { content: ''; max-width: 36px; height: 1px; background: var(--amber); flex: 1; }
-    h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; color: var(--ink); line-height: 1.2; margin-bottom: 20px; letter-spacing: -0.02em; }
-    p { font-size: 0.97rem; line-height: 1.78; color: var(--slate); margin-bottom: 18px; }
-    p strong { color: var(--ink); font-weight: 600; }
+    /* BODY */
+    .cs-body { max-width: 740px; margin: 0 auto; padding: 88px 48px; }
+    .cs-block { margin-bottom: 80px; }
 
-    .content-block { margin-bottom: 72px; }
+    .cs-kicker { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--amber); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .cs-kicker::before { content: ''; width: 16px; height: 1.5px; background: var(--amber); flex-shrink: 0; }
 
-    /* BLOCKQUOTE */
-    blockquote {
-      border-left: 3px solid var(--amber); padding: 20px 24px;
-      background: var(--bg-alt); border-radius: 0 6px 6px 0;
-      margin: 32px 0;
-      font-family: 'Playfair Display', serif; font-style: italic;
-      font-size: 1.08rem; color: var(--ink); line-height: 1.6;
-      transition: background 0.35s;
-    }
+    h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 700; color: var(--ink); line-height: 1.2; margin-bottom: 18px; letter-spacing: -0.02em; }
+    .cs-p { font-size: 0.96rem; line-height: 1.82; color: var(--ink-2); margin-bottom: 18px; font-weight: 300; }
+    .cs-p strong { color: var(--ink); font-weight: 600; }
+    .cs-p:last-child { margin-bottom: 0; }
 
-    /* PAIN POINTS */
-    .pain-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 32px 0; }
-    .pain-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 24px; transition: background 0.35s, border-color 0.35s; }
-    .pain-icon { font-size: 1.5rem; margin-bottom: 12px; }
-    .pain-card h4 { font-size: 0.88rem; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
-    .pain-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.55; margin: 0; }
-
-    /* FINDINGS */
-    .finding-list { display: flex; flex-direction: column; gap: 0; margin: 28px 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-    .finding-item { display: flex; align-items: flex-start; gap: 20px; padding: 22px 24px; border-bottom: 1px solid var(--border); background: var(--bg-card); transition: background 0.35s; }
-    .finding-item:last-child { border-bottom: none; }
-    .finding-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: var(--amber); line-height: 1; width: 36px; flex-shrink: 0; }
-    .finding-text h4 { font-size: 0.88rem; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
-    .finding-text p { font-size: 0.82rem; color: var(--muted); line-height: 1.55; margin: 0; }
-
-    /* PERSONAS */
-    .persona-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 28px 0; }
-    .persona-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 24px; text-align: center; transition: background 0.35s, border-color 0.35s; }
-    .persona-icon { font-size: 2rem; margin-bottom: 10px; }
-    .persona-card h4 { font-size: 0.9rem; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
-    .persona-role { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--amber); margin-bottom: 10px; }
-    .persona-card p { font-size: 0.8rem; color: var(--muted); line-height: 1.55; margin: 0; }
-
-    /* PROCESS */
-    .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin: 28px 0; background: var(--border); border-radius: 8px; overflow: hidden; }
-    .process-step { background: var(--bg-card); padding: 24px 20px; text-align: center; transition: background 0.35s; }
-    .step-num { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: var(--amber); margin-bottom: 8px; }
-    .step-title { font-size: 0.82rem; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
-    .step-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
-
-    /* RESULTS */
-    .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0; }
-    .result-card { background: var(--stripe-bg); border-radius: 8px; padding: 28px; text-align: center; transition: background 0.35s; }
-    .result-num { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: var(--stripe-amber); line-height: 1; margin-bottom: 8px; }
-    .result-label { font-size: 0.78rem; color: var(--stripe-muted); text-transform: uppercase; letter-spacing: 0.07em; font-weight: 600; }
-
-    /* REFLECTION */
-    .reflection-list { display: flex; flex-direction: column; gap: 16px; margin: 24px 0; }
-    .reflection-item { padding: 20px 24px; background: var(--bg-alt); border-radius: 8px; border-left: 3px solid var(--amber); transition: background 0.35s; }
-    .reflection-item h4 { font-size: 0.88rem; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
-    .reflection-item p { font-size: 0.83rem; color: var(--muted); line-height: 1.6; margin: 0; }
+    .cs-quote { border-left: 2px solid var(--amber); padding: 18px 24px; background: var(--bg-2); border-radius: 0 8px 8px 0; margin: 28px 0; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.05rem; color: var(--ink); line-height: 1.65; transition: background 0.4s; }
 
     /* IMAGE */
-    .case-img { width: 100%; border-radius: 8px; border: 1px solid var(--border); margin: 28px 0; display: block; transition: border-color 0.35s; }
-    .img-caption { font-size: 0.75rem; color: var(--muted); text-align: center; margin-top: -18px; margin-bottom: 28px; font-style: italic; }
+    .cs-img { width: 100%; border-radius: var(--r); border: 1px solid var(--border); margin: 28px 0; transition: border-color 0.4s; }
+    .cs-caption { font-size: 0.75rem; color: var(--ink-3); text-align: center; margin-top: -16px; margin-bottom: 28px; font-style: italic; }
 
-    /* CTA FOOTER */
-    .cta-strip { background: var(--stripe-bg); padding: 64px 60px; text-align: center; transition: background 0.35s; }
-    .cta-strip h3 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--stripe-text); margin-bottom: 12px; }
-    .cta-strip p { color: var(--stripe-muted); font-size: 0.95rem; margin-bottom: 32px; }
-    .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-    .btn-amber { background: var(--stripe-amber); color: #0f0f0f; padding: 13px 26px; border-radius: 4px; text-decoration: none; font-weight: 700; font-size: 0.88rem; transition: opacity 0.2s; }
-    .btn-amber:hover { opacity: 0.85; }
-    .btn-ghost { background: rgba(255,255,255,0.07); color: rgba(245,242,236,0.8); border: 1px solid rgba(255,255,255,0.12); padding: 13px 26px; border-radius: 4px; text-decoration: none; font-weight: 500; font-size: 0.88rem; transition: background 0.2s; }
-    .btn-ghost:hover { background: rgba(255,255,255,0.12); }
+    /* PAIN GRID */
+    .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 28px 0; }
+    .pain-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--r); padding: 24px; transition: box-shadow 0.25s, transform 0.25s, background 0.4s; }
+    .pain-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .pain-num { font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 500; color: var(--amber); letter-spacing: 0.06em; margin-bottom: 12px; }
+    .pain-card h4 { font-size: 0.88rem; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+    .pain-card p { font-size: 0.8rem; color: var(--ink-3); line-height: 1.6; margin: 0; }
 
-    footer { background: var(--stripe-bg); border-top: 1px solid rgba(255,255,255,0.07); padding: 20px 60px; display: flex; justify-content: space-between; align-items: center; transition: background 0.35s; }
-    footer p { font-size: 0.75rem; color: rgba(245,242,236,0.3); }
+    /* FINDINGS */
+    .finding-list { border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; margin: 28px 0; }
+    .finding-row { display: flex; align-items: flex-start; gap: 20px; padding: 22px 24px; border-bottom: 1px solid var(--border); background: var(--card); transition: background 0.2s; }
+    .finding-row:last-child { border-bottom: none; }
+    .finding-row:hover { background: var(--bg-2); }
+    .finding-n { font-family: 'DM Mono', monospace; font-size: 0.7rem; font-weight: 500; color: var(--amber); width: 28px; flex-shrink: 0; padding-top: 2px; }
+    .finding-content h4 { font-size: 0.88rem; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+    .finding-content p { font-size: 0.82rem; color: var(--ink-3); line-height: 1.6; margin: 0; }
 
-    @media (max-width: 900px) {
-      nav { padding: 14px 20px; }
-      .hero, .content-wrap, .cta-strip, footer { padding-left: 20px; padding-right: 20px; }
-      h1 { font-size: 2.2rem; }
-      .meta-grid, .stats-strip, .pain-grid, .persona-grid, .process-steps, .results-grid { grid-template-columns: 1fr 1fr; }
-      .process-steps { grid-template-columns: 1fr 1fr; }
+    /* PERSONAS */
+    .persona-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 28px 0; }
+    .persona-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--r); padding: 24px; transition: background 0.4s, box-shadow 0.25s; }
+    .persona-card:hover { box-shadow: var(--shadow-md); }
+    .persona-initial { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--amber); line-height: 1; margin-bottom: 12px; }
+    .persona-name { font-size: 0.9rem; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+    .persona-role-tag { font-size: 0.67rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--amber); margin-bottom: 10px; }
+    .persona-card p { font-size: 0.8rem; color: var(--ink-3); line-height: 1.6; margin: 0; }
+
+    /* PROCESS */
+    .process-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin: 28px 0; background: var(--border); border-radius: var(--r); overflow: hidden; }
+    .process-step { background: var(--card); padding: 24px 20px; transition: background 0.4s; }
+    .process-step-n { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--amber); font-weight: 500; letter-spacing: 0.06em; margin-bottom: 10px; }
+    .process-step-title { font-size: 0.85rem; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+    .process-step-desc { font-size: 0.77rem; color: var(--ink-3); line-height: 1.55; }
+
+    /* RESULTS */
+    .results-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 28px 0; }
+    .result-card { background: var(--ink); border-radius: var(--r); padding: 32px 28px; transition: background 0.4s; }
+    [data-theme="dark"] .result-card { background: var(--bg-3); border: 1px solid var(--border); }
+    .result-num { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: var(--amber); line-height: 1; margin-bottom: 8px; letter-spacing: -0.04em; }
+    .result-label { font-size: 0.78rem; color: rgba(250,248,244,0.5); font-weight: 500; }
+    [data-theme="dark"] .result-label { color: var(--ink-3); }
+
+    /* REFLECTION */
+    .reflection-list { display: flex; flex-direction: column; gap: 10px; margin: 28px 0; }
+    .reflection-item { padding: 20px 24px; background: var(--bg-2); border-radius: var(--r); border-left: 2px solid var(--amber); transition: background 0.4s; }
+    .reflection-item h4 { font-size: 0.88rem; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+    .reflection-item p { font-size: 0.82rem; color: var(--ink-3); line-height: 1.65; margin: 0; }
+
+    /* DIVIDER */
+    .cs-divider { height: 1px; background: var(--border); margin: 0 0 80px; }
+
+    /* NEXT CASE */
+    .next-case { background: var(--ink); padding: 72px 48px; display: flex; align-items: center; justify-content: space-between; gap: 32px; transition: background 0.4s; }
+    [data-theme="dark"] .next-case { background: var(--bg-3); border-top: 1px solid var(--border); }
+    .next-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,248,244,0.35); margin-bottom: 8px; }
+    [data-theme="dark"] .next-label { color: var(--ink-3); }
+    .next-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: rgba(250,248,244,0.9); line-height: 1.2; }
+    [data-theme="dark"] .next-title { color: var(--ink); }
+    .next-btn { flex-shrink: 0; height: 44px; padding: 0 28px; background: var(--amber); color: white; border-radius: 8px; font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: opacity 0.2s, transform 0.2s; white-space: nowrap; }
+    .next-btn:hover { opacity: 0.85; transform: translateX(3px); }
+
+    .footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,0.06); padding: 22px 48px; display: flex; justify-content: space-between; align-items: center; }
+    [data-theme="dark"] .footer { background: var(--bg-2); border-top-color: var(--border); }
+    .footer p { font-size: 0.75rem; color: rgba(250,248,244,0.3); }
+    [data-theme="dark"] .footer p { color: var(--ink-3); }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav { padding: 0 20px; }
+      .cs-hero { padding: 90px 20px 0; }
+      .cs-body { padding: 64px 20px; }
+      .next-case { padding: 48px 20px; flex-direction: column; align-items: flex-start; }
+      .footer { padding: 20px; flex-direction: column; gap: 6px; text-align: center; }
+      .cs-meta { grid-template-columns: 1fr 1fr; }
+      .cs-stats { grid-template-columns: 1fr 1fr; }
+      .pain-grid, .persona-grid, .process-row, .results-grid { grid-template-columns: 1fr 1fr; }
     }
-    @media (max-width: 600px) {
-      .meta-grid, .stats-strip, .pain-grid, .persona-grid, .process-steps, .results-grid { grid-template-columns: 1fr; }
+    @media (max-width: 480px) {
+      .pain-grid, .persona-grid { grid-template-columns: 1fr; }
+      .cs-meta, .cs-stats { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
 <body>
 
-<nav>
-  <a class="nav-logo" href="index.html">CM</a>
+<header class="nav">
+  <a href="index.html" class="nav-logo">Cedric<span>.</span></a>
   <div class="nav-right">
-    <a class="nav-back" href="index.html">← Back to Portfolio</a>
-    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" id="themeBtn">🌙</button>
+    <a href="index.html" class="nav-back"><span class="nav-back-arrow">&#8592;</span> Portfolio</a>
+    <button class="nav-toggle" onclick="toggleTheme()" id="themeBtn" aria-label="Toggle theme">
+      <span class="nav-toggle-dot"></span>
+      <span id="themeLabel">Dark</span>
+    </button>
   </div>
-</nav>
+</header>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-tag">UX Research · Product Design · 0→1 Project</div>
-  <h1>Unified Student<br><em>Communication Hub</em></h1>
-  <p class="hero-sub">Reducing student communication overload by 80% through human-centred design — consolidating five fragmented platforms into one unified experience, validated with 45 real UCC students.</p>
-
-  <div class="meta-grid">
-    <div class="meta-item"><div class="meta-label">Timeline</div><div class="meta-value">12 Weeks, Sep–Dec 2025</div></div>
-    <div class="meta-item"><div class="meta-label">Context</div><div class="meta-value">UCC Interaction Design Course</div></div>
-    <div class="meta-item"><div class="meta-label">My Role</div><div class="meta-value">End-to-end UX Research & Design</div></div>
-    <div class="meta-item"><div class="meta-label">Tools</div><div class="meta-value">Figma · User Interviews · Usability Testing</div></div>
+<section class="cs-hero">
+  <div class="cs-hero-inner">
+    <div class="cs-tag">UX Research &nbsp;·&nbsp; Product Design &nbsp;·&nbsp; 0 to 1 Project</div>
+    <h1 class="cs-headline">Unified Student<br><em>Communication Hub</em></h1>
+    <p class="cs-sub">Students at UCC were drowning in five platforms to manage one degree. I researched the real problem, designed a unified solution, and validated it with 45 students — bringing communication overload down by 80%.</p>
+    <div class="cs-meta">
+      <div class="cs-meta-item">
+        <div class="cs-meta-label">Timeline</div>
+        <div class="cs-meta-value">12 Weeks, Sep–Dec 2025</div>
+      </div>
+      <div class="cs-meta-item">
+        <div class="cs-meta-label">Context</div>
+        <div class="cs-meta-value">UCC Interaction Design Course</div>
+      </div>
+      <div class="cs-meta-item">
+        <div class="cs-meta-label">My Role</div>
+        <div class="cs-meta-value">End-to-end UX Research and Design</div>
+      </div>
+      <div class="cs-meta-item">
+        <div class="cs-meta-label">Tools</div>
+        <div class="cs-meta-value">Figma · Interviews · Usability Testing</div>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- STATS -->
-<div class="stats-strip">
-  <div class="stat-block"><div class="stat-num">80%</div><div class="stat-desc">Communication overload reduced — usability testing</div></div>
-  <div class="stat-block"><div class="stat-num">90%</div><div class="stat-desc">Ease of use score — post-testing survey</div></div>
-  <div class="stat-block"><div class="stat-num">45</div><div class="stat-desc">Students tested across two moderated rounds</div></div>
-  <div class="stat-block"><div class="stat-num">5+</div><div class="stat-desc">Platforms consolidated — Canvas, Gmail, Teams, WhatsApp, Moodle</div></div>
+<div class="cs-stats">
+  <div class="cs-stat">
+    <div class="cs-stat-num">80%</div>
+    <div class="cs-stat-desc">Overload reduced — validated in testing</div>
+  </div>
+  <div class="cs-stat">
+    <div class="cs-stat-num">90%</div>
+    <div class="cs-stat-desc">Ease of use score — post-testing survey</div>
+  </div>
+  <div class="cs-stat">
+    <div class="cs-stat-num">45</div>
+    <div class="cs-stat-desc">Students tested across two moderated rounds</div>
+  </div>
+  <div class="cs-stat">
+    <div class="cs-stat-num">5+</div>
+    <div class="cs-stat-desc">Platforms consolidated into one</div>
+  </div>
 </div>
 
-<!-- CONTENT -->
-<div class="content-wrap">
+<!-- BODY -->
+<div class="cs-body">
 
   <!-- OVERVIEW -->
-  <div class="content-block">
-    <div class="section-label">Overview</div>
+  <div class="cs-block reveal">
+    <div class="cs-kicker">Overview</div>
     <h2>The problem worth solving.</h2>
-    <p>Students at UCC are bombarded with messages from multiple platforms — Canvas, Gmail, WhatsApp, Teams — making it difficult to prioritise and manage academic communication effectively. This fragmentation leads to information overload, missed deadlines, and increased stress.</p>
-    <p>The problem hits hardest for international students navigating a second language and students balancing part-time work with studies. But it affects almost everyone.</p>
-    <blockquote>"How might we reduce cognitive load and help students manage academic communication more effectively across multiple fragmented platforms?"</blockquote>
-    <img src="images/Dashboard.png" alt="USCH Dashboard — unified academic communication hub" class="case-img" />
-    <p class="img-caption">USCH Dashboard — unified view with priority actions, upcoming events, and important messages</p>
+    <p class="cs-p">Students at UCC juggle Canvas, Gmail, WhatsApp, Teams, and Moodle just to stay on top of one degree. The fragmentation is not an inconvenience — it is actively causing missed deadlines, increased anxiety, and cognitive fatigue that gets in the way of learning.</p>
+    <p class="cs-p">The problem hits hardest for international students navigating a second language and students balancing part-time work. But it affects almost everyone with a full course load.</p>
+    <div class="cs-quote">"How might we reduce cognitive load and help students manage academic communication more effectively across multiple fragmented platforms?"</div>
+    <img src="images/Dashboard.png" alt="USCH Dashboard — unified academic communication" class="cs-img" />
+    <p class="cs-caption">USCH Dashboard — unified view with priority actions, upcoming events, and important messages</p>
   </div>
+
+  <div class="cs-divider"></div>
 
   <!-- PAIN POINTS -->
-  <div class="content-block">
-    <div class="section-label">The Problem</div>
+  <div class="cs-block reveal">
+    <div class="cs-kicker">The Problem</div>
     <h2>Three pain points, one root cause.</h2>
-    <p>Initial research showed the fragmentation was not just inconvenient — it was causing real anxiety and affecting academic performance.</p>
+    <p class="cs-p">Initial research showed the fragmentation was not just inconvenient — it was causing real anxiety and affecting academic performance.</p>
     <div class="pain-grid">
-      <div class="pain-card"><div class="pain-icon">📱</div><h4>Platform Fragmentation</h4><p>Messages scattered across Canvas, Gmail, Teams, and WhatsApp. No single source of truth for anything academic.</p></div>
-      <div class="pain-card"><div class="pain-icon">🔔</div><h4>Notification Overload</h4><p>Duplicate notifications and constant interruptions causing stress and cognitive fatigue throughout the day.</p></div>
-      <div class="pain-card"><div class="pain-icon">⏰</div><h4>Missed Information</h4><p>Important deadlines buried in noise. Directly affecting academic performance and increasing anxiety.</p></div>
+      <div class="pain-card">
+        <div class="pain-num">01</div>
+        <h4>Platform Fragmentation</h4>
+        <p>Messages scattered across Canvas, Gmail, Teams, and WhatsApp. No single source of truth for anything academic.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-num">02</div>
+        <h4>Notification Overload</h4>
+        <p>Duplicate notifications and constant interruptions causing stress and cognitive fatigue throughout the day.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-num">03</div>
+        <h4>Missed Information</h4>
+        <p>Important deadlines buried in noise. Directly affecting academic performance and increasing anxiety.</p>
+      </div>
     </div>
   </div>
+
+  <div class="cs-divider"></div>
 
   <!-- RESEARCH -->
-  <div class="content-block">
-    <div class="section-label">Research</div>
+  <div class="cs-block reveal">
+    <div class="cs-kicker">Research</div>
     <h2>Eight interviews, four findings.</h2>
-    <p>I ran <strong>eight semi-structured interviews</strong> with UCC students from diverse backgrounds — international students, working students, and mature students. The goal was to understand communication behaviour at depth, not confirm assumptions.</p>
+    <p class="cs-p">I ran <strong>eight semi-structured interviews</strong> with UCC students from diverse backgrounds — international students, working students, and mature students. The goal was to understand communication behaviour at depth, not confirm assumptions.</p>
     <div class="finding-list">
-      <div class="finding-item"><div class="finding-num">01</div><div class="finding-text"><h4>Communication Fatigue</h4><p>Students check 4–6 different platforms daily. An average of 45 minutes spent managing notifications before any actual academic work.</p></div></div>
-      <div class="finding-item"><div class="finding-num">02</div><div class="finding-text"><h4>Anxiety and FOMO</h4><p>Fear of missing information leads to compulsive platform-checking and heightened stress, especially around deadlines.</p></div></div>
-      <div class="finding-item"><div class="finding-num">03</div><div class="finding-text"><h4>No Prioritisation System</h4><p>No clear way to distinguish urgent academic messages from general social notifications across any existing platform.</p></div></div>
-      <div class="finding-item"><div class="finding-num">04</div><div class="finding-text"><h4>Redundant Messages</h4><p>Same announcements appearing across multiple platforms causing confusion about which version is authoritative.</p></div></div>
+      <div class="finding-row">
+        <div class="finding-n">01</div>
+        <div class="finding-content">
+          <h4>Communication Fatigue</h4>
+          <p>Students check 4–6 different platforms daily. An average of 45 minutes spent managing notifications before any actual academic work.</p>
+        </div>
+      </div>
+      <div class="finding-row">
+        <div class="finding-n">02</div>
+        <div class="finding-content">
+          <h4>Anxiety and FOMO</h4>
+          <p>Fear of missing information leads to compulsive platform-checking and heightened stress, especially around deadlines.</p>
+        </div>
+      </div>
+      <div class="finding-row">
+        <div class="finding-n">03</div>
+        <div class="finding-content">
+          <h4>No Prioritisation System</h4>
+          <p>No clear way to distinguish urgent academic messages from general social notifications across any existing platform.</p>
+        </div>
+      </div>
+      <div class="finding-row">
+        <div class="finding-n">04</div>
+        <div class="finding-content">
+          <h4>Redundant Messages</h4>
+          <p>Same announcements appearing across multiple platforms causing confusion about which version is authoritative.</p>
+        </div>
+      </div>
     </div>
   </div>
+
+  <div class="cs-divider"></div>
 
   <!-- PERSONAS -->
-  <div class="content-block">
-    <div class="section-label">Personas</div>
+  <div class="cs-block reveal">
+    <div class="cs-kicker">Personas</div>
     <h2>Three students, one shared frustration.</h2>
     <div class="persona-grid">
-      <div class="persona-card"><div class="persona-icon">👩‍🎓</div><h4>Jenny</h4><div class="persona-role">International Student</div><p>Anxious about missing important information. Checks platforms compulsively. Language barriers add extra cognitive load to every notification.</p></div>
-      <div class="persona-card"><div class="persona-icon">👨‍💼</div><h4>Daniel</h4><div class="persona-role">Working Student</div><p>Values efficiency above everything. Deeply frustrated by constant app-switching. Wants communication that respects his limited time.</p></div>
-      <div class="persona-card"><div class="persona-icon">👩‍💻</div><h4>Aisling</h4><div class="persona-role">Mature Student</div><p>Organised but easily overwhelmed. Has started muting apps as self-protection but misses important updates as a result.</p></div>
+      <div class="persona-card">
+        <div class="persona-initial">J</div>
+        <div class="persona-name">Jenny</div>
+        <div class="persona-role-tag">International Student</div>
+        <p>Anxious about missing important information. Checks platforms compulsively. Language barriers add extra cognitive load to every notification.</p>
+      </div>
+      <div class="persona-card">
+        <div class="persona-initial">D</div>
+        <div class="persona-name">Daniel</div>
+        <div class="persona-role-tag">Working Student</div>
+        <p>Values efficiency above everything. Deeply frustrated by constant app-switching. Wants communication that respects his limited time.</p>
+      </div>
+      <div class="persona-card">
+        <div class="persona-initial">A</div>
+        <div class="persona-name">Aisling</div>
+        <div class="persona-role-tag">Mature Student</div>
+        <p>Organised but easily overwhelmed. Has started muting apps as self-protection but misses important updates as a result.</p>
+      </div>
     </div>
-    <img src="images/Notifications.png" alt="USCH Notifications screen" class="case-img" />
-    <p class="img-caption">Priority notifications — consolidated and categorised by urgency</p>
-    <img src="images/Focus_Mode.png" alt="USCH Focus Mode" class="case-img" />
-    <p class="img-caption">Focus Mode — surfaces only urgent academic items</p>
+    <img src="images/Notifications.png" alt="USCH Notifications screen" class="cs-img" />
+    <p class="cs-caption">Priority notifications — consolidated and categorised by urgency</p>
+    <img src="images/Focus_Mode.png" alt="USCH Focus Mode" class="cs-img" />
+    <p class="cs-caption">Focus Mode — surfaces only urgent academic items when you need to concentrate</p>
   </div>
 
-  <!-- DESIGN PROCESS -->
-  <div class="content-block">
-    <div class="section-label">Design Process</div>
+  <div class="cs-divider"></div>
+
+  <!-- PROCESS -->
+  <div class="cs-block reveal">
+    <div class="cs-kicker">Design Process</div>
     <h2>Research first. Prototype second.</h2>
-    <p>Every design decision was grounded in the research. I moved through four phases and iterated on each before advancing to the next.</p>
-    <div class="process-steps">
-      <div class="process-step"><div class="step-num">01</div><div class="step-title">Lo-Fi Wireframes</div><div class="step-desc">Structure and functionality without visual bias.</div></div>
-      <div class="process-step"><div class="step-num">02</div><div class="step-title">Mid-Fi Prototypes</div><div class="step-desc">Refined hierarchy and user flows from early feedback.</div></div>
-      <div class="process-step"><div class="step-num">03</div><div class="step-title">Hi-Fi Mockups</div><div class="step-desc">Visual design system applied in Figma.</div></div>
-      <div class="process-step"><div class="step-num">04</div><div class="step-title">Usability Testing</div><div class="step-desc">45 students, 2 moderated rounds, iterated after each.</div></div>
+    <p class="cs-p">Every design decision was grounded in the research. I moved through four phases and iterated on each before advancing to the next — resisting the urge to jump to solutions before understanding the problem fully.</p>
+    <div class="process-row">
+      <div class="process-step">
+        <div class="process-step-n">01</div>
+        <div class="process-step-title">Lo-Fi Wireframes</div>
+        <div class="process-step-desc">Structure and functionality without visual bias.</div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-n">02</div>
+        <div class="process-step-title">Mid-Fi Prototypes</div>
+        <div class="process-step-desc">Refined hierarchy and user flows from early feedback.</div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-n">03</div>
+        <div class="process-step-title">Hi-Fi Mockups</div>
+        <div class="process-step-desc">Visual design system applied in Figma.</div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-n">04</div>
+        <div class="process-step-title">Usability Testing</div>
+        <div class="process-step-desc">45 students, 2 moderated rounds, iterated after each.</div>
+      </div>
     </div>
-    <img src="images/Emails.png" alt="USCH unified email inbox" class="case-img" />
-    <p class="img-caption">Unified Email Inbox — all academic communication in one place</p>
-    <img src="images/Calendar.png" alt="USCH Calendar" class="case-img" />
-    <p class="img-caption">Integrated Calendar — deadlines, events, and messages in one view</p>
-    <img src="images/Library.png" alt="USCH Library" class="case-img" />
-    <p class="img-caption">Course Library — organised resources by module</p>
+    <img src="images/Emails.png" alt="USCH unified email inbox" class="cs-img" />
+    <p class="cs-caption">Unified Email Inbox — all academic communication in one place</p>
+    <img src="images/Calendar.png" alt="USCH Calendar view" class="cs-img" />
+    <p class="cs-caption">Integrated Calendar — deadlines, events, and messages in one view</p>
+    <img src="images/Library.png" alt="USCH Course Library" class="cs-img" />
+    <p class="cs-caption">Course Library — organised resources by module</p>
   </div>
+
+  <div class="cs-divider"></div>
 
   <!-- RESULTS -->
-  <div class="content-block">
-    <div class="section-label">Results</div>
-    <h2>The numbers that validated the decisions.</h2>
-    <p>Usability testing with <strong>45 students across two moderated rounds</strong> produced consistent results. Zero participants found the interface too complex — validating the core principle of clarity over features.</p>
+  <div class="cs-block reveal">
+    <div class="cs-kicker">Results</div>
+    <h2>Numbers that validated the decisions.</h2>
+    <p class="cs-p">Usability testing with <strong>45 students across two moderated rounds</strong> produced consistent results. Zero participants found the interface too complex — validating the core principle of clarity over features.</p>
     <div class="results-grid">
-      <div class="result-card"><div class="result-num">80%</div><div class="result-label">Intend to use regularly</div></div>
-      <div class="result-card"><div class="result-num">90%</div><div class="result-label">Found it easy to use</div></div>
-      <div class="result-card"><div class="result-num">0%</div><div class="result-label">Found it too complex</div></div>
-      <div class="result-card"><div class="result-num">80%</div><div class="result-label">Felt confident using it</div></div>
+      <div class="result-card">
+        <div class="result-num">80%</div>
+        <div class="result-label">Intend to use regularly</div>
+      </div>
+      <div class="result-card">
+        <div class="result-num">90%</div>
+        <div class="result-label">Found it easy to use</div>
+      </div>
+      <div class="result-card">
+        <div class="result-num">0%</div>
+        <div class="result-label">Found it too complex</div>
+      </div>
+      <div class="result-card">
+        <div class="result-num">80%</div>
+        <div class="result-label">Felt confident using it</div>
+      </div>
     </div>
   </div>
+
+  <div class="cs-divider"></div>
 
   <!-- REFLECTION -->
-  <div class="content-block">
-    <div class="section-label">Reflection</div>
+  <div class="cs-block reveal">
+    <div class="cs-kicker">Reflection</div>
     <h2>What I would do differently.</h2>
     <div class="reflection-list">
-      <div class="reflection-item"><h4>Run Diary Studies, Not Just Interviews</h4><p>Interviews captured stated pain but not lived behaviour. Diary studies over a week would have caught moments of actual overload in real time — more valuable design data than retrospective recall.</p></div>
-      <div class="reflection-item"><h4>Test Earlier with Lower Fidelity</h4><p>I moved to mid-fi before testing the lo-fi properly. Some navigation decisions challenged in round 2 could have been caught earlier with paper prototype testing.</p></div>
-      <div class="reflection-item"><h4>Include Academic Staff as a Persona</h4><p>The system only works if lecturers actually use it. Designing entirely from the student side left important constraints about the sending end of the communication problem unexplored.</p></div>
-      <div class="reflection-item"><h4>Define Success Metrics Before Building</h4><p>I measured overload reduction and ease of use in testing but didn't define what "success" looked like before starting design. Pre-set benchmarks would have made the evaluation cleaner and more defensible.</p></div>
+      <div class="reflection-item">
+        <h4>Run Diary Studies, Not Just Interviews</h4>
+        <p>Interviews captured stated pain but not lived behaviour. Diary studies over a week would have caught moments of actual overload in real time — far more valuable design data than retrospective recall.</p>
+      </div>
+      <div class="reflection-item">
+        <h4>Test Earlier with Lower Fidelity</h4>
+        <p>I moved to mid-fi before testing the lo-fi properly. Navigation decisions challenged in round 2 could have been caught earlier and cheaper with paper prototype testing.</p>
+      </div>
+      <div class="reflection-item">
+        <h4>Include Academic Staff as a Persona</h4>
+        <p>The system only works if lecturers actually use it to send announcements. Designing entirely from the student side left important constraints about the sending end unexplored.</p>
+      </div>
+      <div class="reflection-item">
+        <h4>Define Success Metrics Before Building</h4>
+        <p>I measured overload reduction and ease of use in testing, but did not define what success looked like before starting design. Pre-set benchmarks would have made the evaluation cleaner and more defensible.</p>
+      </div>
     </div>
   </div>
 
-  <!-- KEY LEARNINGS -->
-  <div class="content-block">
-    <div class="section-label">Key Learnings</div>
+  <div class="cs-divider"></div>
+
+  <!-- LEARNINGS -->
+  <div class="cs-block reveal">
+    <div class="cs-kicker">Key Learnings</div>
     <h2>What the project taught me.</h2>
     <div class="reflection-list">
-      <div class="reflection-item"><h4>Clarity Beats Features</h4><p>Users preferred clean and minimal over feature-heavy. Visual hierarchy and clear categorisation reduced cognitive load more effectively than adding more controls ever could.</p></div>
-      <div class="reflection-item"><h4>Research Validates Every Decision</h4><p>Every significant design choice had a direct line back to an interview insight. The ones that didn't were the ones challenged in testing. That correlation was not a coincidence.</p></div>
-      <div class="reflection-item"><h4>Integration Is an Architecture Problem</h4><p>The biggest UX problems were rooted in data architecture decisions. Building a unified inbox means thinking about how different systems talk to each other from day one.</p></div>
-      <div class="reflection-item"><h4>Anxiety Comes From Caring Too Much</h4><p>The students who struggled most were not the least organised — they were the most committed. Overload is a symptom of engagement, not laziness. That reframe shaped every design decision.</p></div>
+      <div class="reflection-item">
+        <h4>Clarity Beats Features</h4>
+        <p>Users preferred clean and minimal over feature-heavy every time. Visual hierarchy and clear categorisation reduced cognitive load more effectively than adding more controls ever could.</p>
+      </div>
+      <div class="reflection-item">
+        <h4>Research Validates Every Decision</h4>
+        <p>Every significant design choice had a direct line back to an interview insight. The ones that did not were the ones challenged in testing. That correlation was not a coincidence.</p>
+      </div>
+      <div class="reflection-item">
+        <h4>Integration Is an Architecture Problem</h4>
+        <p>The biggest UX problems were rooted in data architecture decisions. Building a unified inbox means thinking about how different systems talk to each other from day one — not as an afterthought.</p>
+      </div>
+      <div class="reflection-item">
+        <h4>Anxiety Comes From Caring Too Much</h4>
+        <p>The students who struggled most were not the least organised — they were the most committed. Overload is a symptom of engagement, not laziness. That reframe shaped every design decision I made.</p>
+      </div>
     </div>
   </div>
 
 </div>
 
-<!-- CTA -->
-<div class="cta-strip">
-  <h3>Want to see more?</h3>
-  <p>Check out the Drip case study or get in touch about roles and opportunities.</p>
-  <div class="cta-buttons">
-    <a href="drip.html" class="btn-amber">View Drip Case Study →</a>
-    <a href="index.html#contact" class="btn-ghost">Get In Touch</a>
+<!-- NEXT CASE -->
+<div class="next-case">
+  <div>
+    <div class="next-label">Next Case Study</div>
+    <div class="next-title">Drip Circular App</div>
   </div>
+  <a href="drip.html" class="next-btn">View case study &#8594;</a>
 </div>
 
-<footer>
-  <p>© 2026 Cedric Mathias · Dublin, Ireland 🇮🇪</p>
-  <p>Designed & developed by Cedric Mathias</p>
+<footer class="footer">
+  <p>2026 Cedric Mathias — Dublin, Ireland</p>
+  <p>Designed and built by Cedric Mathias</p>
 </footer>
 
 <script>
-  const btn = document.getElementById('themeBtn');
   const root = document.documentElement;
-  const ICONS = { light: '🌙', dark: '☀️' };
+  const btn = document.getElementById('themeBtn');
+  const label = document.getElementById('themeLabel');
   function getInitialTheme() {
-    const saved = localStorage.getItem('cm-theme');
-    if (saved) return saved;
+    const s = localStorage.getItem('cm-theme');
+    if (s) return s;
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
-  function applyTheme(theme) {
-    root.setAttribute('data-theme', theme);
-    btn.textContent = ICONS[theme];
-    localStorage.setItem('cm-theme', theme);
+  function applyTheme(t) {
+    root.setAttribute('data-theme', t);
+    label.textContent = t === 'dark' ? 'Light' : 'Dark';
+    localStorage.setItem('cm-theme', t);
   }
-  function toggleTheme() {
-    const current = root.getAttribute('data-theme');
-    applyTheme(current === 'dark' ? 'light' : 'dark');
-  }
+  function toggleTheme() { applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); }
   applyTheme(getInitialTheme());
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-    if (!localStorage.getItem('cm-theme')) applyTheme(e.matches ? 'dark' : 'light');
-  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
