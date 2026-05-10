@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cedric Mathias — Growth Marketer and Product Designer, Dublin</title>
-  <meta name="description" content="Cedric Mathias — Growth Marketer and Product Designer based in Dublin. 3+ years in B2B SaaS growth, UX design, and product strategy." />
+  <title>Cedric Mathias Growth Marketer and Product Designer, Dublin</title>
+  <meta name="description" content="Cedric Mathias Growth Marketer and Product Designer based in Dublin. 3+ years in B2B SaaS growth, UX design, and product strategy." />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     /* ─────────────────────────────────────────
@@ -133,21 +133,62 @@
     ───────────────────────────────────────── */
     .hero {
       min-height: 100vh;
-      padding: 120px 48px 80px;
+      padding: 80px 48px 60px;
       display: grid;
-      grid-template-rows: 1fr auto;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
       position: relative;
       overflow: hidden;
     }
     .hero-glow {
       position: absolute;
-      width: 600px; height: 600px;
+      width: 700px; height: 700px;
       background: radial-gradient(ellipse at center, var(--amber-glow) 0%, transparent 70%);
-      top: -100px; right: -100px;
+      top: -150px; right: -150px;
       pointer-events: none;
       transition: opacity 0.4s;
     }
-    .hero-content { display: flex; flex-direction: column; justify-content: center; max-width: 900px; }
+    .hero-content { display: flex; flex-direction: column; justify-content: center; padding-top: 40px; }
+
+    /* HERO RIGHT VISUAL */
+    .hero-visual {
+      display: flex; flex-direction: column; gap: 14px;
+      padding-top: 40px;
+      opacity: 0; animation: reveal 0.8s 0.45s ease forwards;
+    }
+    .hero-visual-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      transition: background 0.4s, border-color 0.4s;
+    }
+    .hero-visual-img { width: 100%; display: block; border-bottom: 1px solid var(--border); }
+    .hero-visual-footer {
+      padding: 14px 18px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .hero-visual-label { font-size: 0.72rem; font-weight: 600; color: var(--ink-3); letter-spacing: 0.04em; }
+    .hero-visual-badge {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--amber); background: var(--amber-pale);
+      padding: 3px 10px; border-radius: 20px;
+    }
+    .hero-mini-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .hero-mini-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 18px 20px;
+      box-shadow: var(--shadow-sm);
+      transition: background 0.4s, border-color 0.4s;
+    }
+    .hero-mini-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem; font-weight: 900; color: var(--amber);
+      line-height: 1; letter-spacing: -0.04em; margin-bottom: 4px;
+    }
+    .hero-mini-label { font-size: 0.72rem; font-weight: 500; color: var(--ink-3); line-height: 1.4; }
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 10px;
       margin-bottom: 32px;
@@ -707,11 +748,15 @@
       .case-featured-inner { grid-template-columns: 1fr; }
       .case-featured-right { border-top: 1px solid rgba(255,255,255,0.08); }
     }
+    @media (max-width: 1024px) {
+      .hero { grid-template-columns: 1fr; gap: 40px; }
+      .hero-visual { display: none; }
+    }
     @media (max-width: 768px) {
       .nav { padding: 0 20px; }
       .nav-center { display: none; }
       .section { padding: 72px 20px; }
-      .hero { padding: 100px 20px 64px; }
+      .hero { padding: 100px 20px 64px; grid-template-columns: 1fr; }
       .hero-headline { font-size: 2.8rem; }
       .hero-stats { flex-wrap: wrap; gap: 24px; }
       .hero-stat { border-right: none; margin-right: 0; padding-right: 0; min-width: 45%; }
@@ -745,6 +790,8 @@
 <!-- HERO -->
 <section class="hero" aria-label="Introduction">
   <div class="hero-glow" aria-hidden="true"></div>
+
+  <!-- LEFT: TEXT -->
   <div class="hero-content">
     <div class="hero-eyebrow">
       <div class="hero-available">
@@ -762,8 +809,8 @@
     </h1>
 
     <p class="hero-body">
-      I am Cedric — a Growth Marketer who designs, and a Designer who ships results.
-      Three years in B2B SaaS taught me that <strong>the best campaigns start before the campaign does</strong> — in the product, the page, the first impression.
+      I am Cedric, a Growth Marketer who designs and a Designer who ships results.
+      Three years in B2B SaaS taught me that <strong>the best campaigns start before the campaign does</strong>, in the product, the page, the first impression.
     </p>
 
     <div class="hero-actions">
@@ -789,12 +836,37 @@
         <div class="hero-stat-label">Years in<br>B2B SaaS growth</div>
       </div>
     </div>
+  </div>
 
-    <div class="hero-scroll" aria-hidden="true">
-      <span class="hero-scroll-line"></span>
-      Scroll to explore
+  <!-- RIGHT: VISUAL -->
+  <div class="hero-visual" aria-hidden="true">
+    <div class="hero-visual-card">
+      <img src="images/USCH_Dashboard.png" alt="USCH Dashboard design" class="hero-visual-img" />
+      <div class="hero-visual-footer">
+        <span class="hero-visual-label">Unified Student Communication Hub</span>
+        <span class="hero-visual-badge">Case Study</span>
+      </div>
+    </div>
+    <div class="hero-mini-cards">
+      <div class="hero-mini-card">
+        <div class="hero-mini-num">25x</div>
+        <div class="hero-mini-label">Conversion lift at Pepsales AI</div>
+      </div>
+      <div class="hero-mini-card">
+        <div class="hero-mini-num">#3</div>
+        <div class="hero-mini-label">Product Hunt ranking, top 5 twice</div>
+      </div>
+      <div class="hero-mini-card">
+        <div class="hero-mini-num">45</div>
+        <div class="hero-mini-label">Students in usability testing</div>
+      </div>
+      <div class="hero-mini-card">
+        <div class="hero-mini-num">30%</div>
+        <div class="hero-mini-label">Email open rate, up from 9%</div>
+      </div>
     </div>
   </div>
+
 </section>
 
 <!-- MARKETING -->
@@ -813,7 +885,7 @@
           <div class="case-tag">Featured Case Study</div>
           <div class="case-company" style="color:rgba(250,248,244,0.35); margin-bottom:12px;">Pepsales AI</div>
           <div class="case-featured-title">Landing Page Redesign and Lead Conversion Overhaul</div>
-          <div class="case-featured-desc">The page was converting at 0.2%. I audited the funnel, rebuilt the page from scratch — structure, copy, CTA hierarchy — then ran campaigns against the new experience. The design decisions drove the result as much as the ads did.</div>
+          <div class="case-featured-desc">The page was converting at 0.2%. I audited the funnel, rebuilt the page from scratch structure, copy, CTA hierarchy then ran campaigns against the new experience. The design decisions drove the result as much as the ads did.</div>
           <div class="case-featured-tags">
             <span class="tag-dark">CRO</span>
             <span class="tag-dark">UX Design</span>
@@ -850,7 +922,7 @@
       </div>
       <div class="case-body">
         <div class="case-title">Email Programme Rebuild</div>
-        <div class="case-desc">Open rates were stuck at 9%. I rebuilt end-to-end — tighter segmentation, subject lines mapped to intent, and sequences that matched where people actually were in the funnel.</div>
+        <div class="case-desc">Open rates were stuck at 9%. I rebuilt end-to-end tighter segmentation, subject lines mapped to intent, and sequences that matched where people actually were in the funnel.</div>
         <div class="case-tags">
           <span class="tag">Email Design</span>
           <span class="tag">Segmentation</span>
@@ -902,7 +974,7 @@
     <!-- USCH -->
     <div class="design-card reveal">
       <div class="design-card-thumb">
-        <img src="images/USCH_Dashboard.png" alt="USCH Dashboard — unified student communication" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;" />
+        <img src="images/USCH_Dashboard.png" alt="USCH Dashboard unified student communication" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;" />
         <div class="design-card-overlay">
           <div class="design-card-type">UX Research · 0 to 1 · Figma</div>
         </div>
@@ -987,10 +1059,10 @@
       </div>
 
       <p class="about-p">
-        I came up through <strong>Mechanical Engineering</strong>, which means I think in systems. I went deep into marketing through an <strong>MBA</strong>, which means I speak in numbers. The combination turns out to be genuinely rare — and genuinely useful when you are trying to get designers and growth teams to care about the same thing at the same time.
+        I came up through <strong>Mechanical Engineering</strong>, which means I think in systems. I went deep into marketing through an <strong>MBA</strong>, which means I speak in numbers. The combination turns out to be genuinely rare and genuinely useful when you are trying to get designers and growth teams to care about the same thing at the same time.
       </p>
       <p class="about-p">
-        Three years at B2B SaaS startups gave me the real education. At Pepsales the biggest lever was not the campaign — it was the landing page. At Kommunicate the biggest driver was not the targeting — it was the email design. Every time, the answer was one step upstream. That kept pulling me toward product and UX.
+        Three years at B2B SaaS startups gave me the real education. At Pepsales the biggest lever was not the campaign it was the landing page. At Kommunicate the biggest driver was not the targeting it was the email design. Every time, the answer was one step upstream. That kept pulling me toward product and UX.
       </p>
       <p class="about-p">
         Right now I am finishing an <strong>MSc in Digital Business at UCC</strong>, building real projects, and looking for a role where growth and design share a seat. Ideally at a product-led company in the Irish or European tech market.
@@ -1023,7 +1095,7 @@
         <div class="skill-num">04</div>
         <div class="skill-content">
           <div class="skill-name">Development</div>
-          <div class="skill-desc">HTML, CSS, JavaScript — enough to build landing pages and prototypes without a dev handoff</div>
+          <div class="skill-desc">HTML, CSS, JavaScript enough to build landing pages and prototypes without a dev handoff</div>
         </div>
       </div>
       <div class="skill-item">
@@ -1044,7 +1116,7 @@
       <div class="section-kicker" style="color:var(--amber);">Get in touch</div>
       <h2 class="section-title" id="contact-title">Open to the<br>right role.</h2>
       <p class="section-sub" style="margin-bottom:32px;">
-        Currently looking for full-time roles in Dublin and across Ireland. If your team needs someone who can do both — let's talk.
+        Currently looking for full-time roles in Dublin and across Ireland. If your team needs someone who can do both let's talk.
       </p>
       <a href="mailto:mathiascedric3@gmail.com" class="contact-email-link">
         mathiascedric3@gmail.com
@@ -1061,7 +1133,7 @@
     </div>
 
     <div class="roles-panel reveal">
-      <div class="roles-header">Roles I am open to — click to see what I bring</div>
+      <div class="roles-header">Roles I am open to click to see what I bring</div>
 
       <button class="role-btn active" onclick="toggleRole(this)">
         <span class="role-btn-name">Product Marketing</span>
@@ -1092,7 +1164,7 @@
         <span class="role-btn-arrow">&#8250;</span>
       </button>
       <div class="role-desc">
-        Three years of hands-on digital marketing: email programmes, paid campaigns, lifecycle strategy, and CRO. I do not just run campaigns — I redesign the experience the campaign lands on, which is usually where the real leverage is.
+        Three years of hands-on digital marketing: email programmes, paid campaigns, lifecycle strategy, and CRO. I do not just run campaigns I redesign the experience the campaign lands on, which is usually where the real leverage is.
       </div>
 
       <button class="role-btn" onclick="toggleRole(this)">
@@ -1100,14 +1172,14 @@
         <span class="role-btn-arrow">&#8250;</span>
       </button>
       <div class="role-desc">
-        MSc in Digital Business at UCC, MBA, and 3+ years of applied growth work. I can translate between engineering, design, and commercial teams — and I can back every recommendation with data. I think strategically and execute practically.
+        MSc in Digital Business at UCC, MBA, and 3+ years of applied growth work. I can translate between engineering, design, and commercial teams and I can back every recommendation with data. I think strategically and execute practically.
       </div>
     </div>
   </div>
 </section>
 
 <footer class="footer">
-  <p>2026 Cedric Mathias — Dublin, Ireland</p>
+  <p>2026 Cedric Mathias Dublin, Ireland</p>
   <p>Designed and built by Cedric Mathias</p>
 </footer>
 
