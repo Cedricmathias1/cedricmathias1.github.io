@@ -151,44 +151,84 @@
     }
     .hero-content { display: flex; flex-direction: column; justify-content: center; padding-top: 40px; }
 
-    /* HERO RIGHT VISUAL */
+    /* HERO RIGHT VISUAL — STACKED CARDS */
     .hero-visual {
-      display: flex; flex-direction: column; gap: 14px;
+      display: flex; align-items: center; justify-content: center;
       padding-top: 40px;
       opacity: 0; animation: reveal 0.8s 0.45s ease forwards;
     }
-    .hero-visual-card {
+    .hero-cards-stack {
+      position: relative;
+      width: 100%; max-width: 480px;
+      height: 380px;
+    }
+    .hero-stack-card {
+      position: absolute;
+      width: 88%;
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--r-lg);
       overflow: hidden;
       box-shadow: var(--shadow-lg);
+      transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s, border-color 0.4s;
+    }
+    .hero-stack-back {
+      bottom: 0; right: 0;
+      transform: rotate(3deg) translateY(10px);
+      z-index: 1;
+    }
+    .hero-stack-front {
+      bottom: 20px; left: 0;
+      transform: rotate(-2deg);
+      z-index: 2;
+    }
+    .hero-cards-stack:hover .hero-stack-front { transform: rotate(-4deg) translateY(-6px); }
+    .hero-cards-stack:hover .hero-stack-back { transform: rotate(5deg) translateY(6px); }
+    .hero-stack-img {
+      width: 100%; display: block;
+      height: 240px; object-fit: cover; object-position: top;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-stack-footer {
+      padding: 12px 16px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .hero-stack-dot {
+      width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+    }
+    .hero-stack-label {
+      font-size: 0.75rem; font-weight: 600; color: var(--ink-2);
+      flex: 1; letter-spacing: 0.01em;
+    }
+    .hero-stack-tag {
+      font-size: 0.62rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--ink-3);
+      background: var(--bg-2); padding: 3px 8px; border-radius: 20px;
+    }
+    /* Floating metric pills */
+    .hero-float-pill {
+      position: absolute; z-index: 10;
+      background: var(--ink);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 8px 16px;
+      display: flex; align-items: center; gap: 8px;
+      box-shadow: var(--shadow-md);
       transition: background 0.4s, border-color 0.4s;
     }
-    .hero-visual-img { width: 100%; display: block; border-bottom: 1px solid var(--border); }
-    .hero-visual-footer {
-      padding: 14px 18px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .hero-visual-label { font-size: 0.72rem; font-weight: 600; color: var(--ink-3); letter-spacing: 0.04em; }
-    .hero-visual-badge {
-      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--amber); background: var(--amber-pale);
-      padding: 3px 10px; border-radius: 20px;
-    }
-    .hero-mini-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .hero-mini-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--r); padding: 18px 20px;
-      box-shadow: var(--shadow-sm);
-      transition: background 0.4s, border-color 0.4s;
-    }
-    .hero-mini-num {
+    [data-theme="dark"] .hero-float-pill { background: var(--bg-3); border-color: var(--border); }
+    .hero-float-top { top: 0; right: 0; }
+    .hero-float-bottom { bottom: 0; left: 50%; transform: translateX(-50%); }
+    .hero-float-num {
       font-family: 'Playfair Display', serif;
-      font-size: 1.9rem; font-weight: 900; color: var(--amber);
-      line-height: 1; letter-spacing: -0.04em; margin-bottom: 4px;
+      font-size: 1rem; font-weight: 900;
+      color: var(--amber); letter-spacing: -0.02em;
     }
-    .hero-mini-label { font-size: 0.72rem; font-weight: 500; color: var(--ink-3); line-height: 1.4; }
+    .hero-float-text {
+      font-size: 0.72rem; font-weight: 500;
+      color: rgba(250,248,244,0.7);
+    }
+    [data-theme="dark"] .hero-float-text { color: var(--ink-2); }
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 10px;
       margin-bottom: 32px;
@@ -840,30 +880,40 @@
 
   <!-- RIGHT: VISUAL -->
   <div class="hero-visual" aria-hidden="true">
-    <div class="hero-visual-card">
-      <img src="images/USCH_Dashboard.png" alt="USCH Dashboard design" class="hero-visual-img" />
-      <div class="hero-visual-footer">
-        <span class="hero-visual-label">Unified Student Communication Hub</span>
-        <span class="hero-visual-badge">Case Study</span>
+    <div class="hero-cards-stack">
+
+      <!-- Back card: Drip -->
+      <div class="hero-stack-card hero-stack-back">
+        <img src="images/drip-profile.png" alt="Drip Circular App" class="hero-stack-img" />
+        <div class="hero-stack-footer">
+          <div class="hero-stack-dot" style="background:#4ade80;"></div>
+          <span class="hero-stack-label">Drip Circular App</span>
+          <span class="hero-stack-tag">Design Thinking</span>
+        </div>
       </div>
-    </div>
-    <div class="hero-mini-cards">
-      <div class="hero-mini-card">
-        <div class="hero-mini-num">25x</div>
-        <div class="hero-mini-label">Conversion lift at Pepsales AI</div>
+
+      <!-- Front card: USCH -->
+      <div class="hero-stack-card hero-stack-front">
+        <img src="images/USCH_Dashboard.png" alt="USCH Dashboard" class="hero-stack-img" />
+        <div class="hero-stack-footer">
+          <div class="hero-stack-dot" style="background:var(--amber);"></div>
+          <span class="hero-stack-label">Student Comm. Hub</span>
+          <span class="hero-stack-tag">UX Research</span>
+        </div>
       </div>
-      <div class="hero-mini-card">
-        <div class="hero-mini-num">#3</div>
-        <div class="hero-mini-label">Product Hunt ranking, top 5 twice</div>
+
+      <!-- Floating metric pill -->
+      <div class="hero-float-pill hero-float-top">
+        <span class="hero-float-num">25x</span>
+        <span class="hero-float-text">Conversion lift</span>
       </div>
-      <div class="hero-mini-card">
-        <div class="hero-mini-num">45</div>
-        <div class="hero-mini-label">Students in usability testing</div>
+
+      <!-- Floating metric pill bottom -->
+      <div class="hero-float-pill hero-float-bottom">
+        <span class="hero-float-num">45</span>
+        <span class="hero-float-text">Students tested</span>
       </div>
-      <div class="hero-mini-card">
-        <div class="hero-mini-num">30%</div>
-        <div class="hero-mini-label">Email open rate, up from 9%</div>
-      </div>
+
     </div>
   </div>
 
