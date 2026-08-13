@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frank &amp; Honest Reusable Cup Initiative Cedric Mathias</title>
+  <meta name="description" content="Frank & Honest / Musgrave loyalty apps reusable cup initiative — UX research, behavioural design and prototyping case study by Cedric Mathias." />
+  <link rel="canonical" href="https://cedricmathias1.github.io/musgrave.html" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:         #faf8f4;
+      --bg-2:       #f2efe8;
+      --bg-3:       #eae6dc;
+      --card:       #ffffff;
+      --ink:        #18181b;
+      --ink-2:      #3f3f46;
+      --ink-3:      #71717a;
+      --border:     rgba(0,0,0,0.08);
+      --amber:      #c2570a;
+      --amber-pale: rgba(194,87,10,0.07);
+      --amber-glow: rgba(194,87,10,0.15);
+      --shadow-sm:  0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md:  0 4px 16px rgba(0,0,0,0.07);
+      --shadow-lg:  0 16px 48px rgba(0,0,0,0.10);
+      --nav-bg:     rgba(250,248,244,0.85);
+      --r:          10px;
+      --toggle-bg:  #e4e0d8;
+    }
+    [data-theme="dark"] {
+      --bg:         #111113;
+      --bg-2:       #18181b;
+      --bg-3:       #1f1f23;
+      --card:       #1c1c20;
+      --ink:        #fafafa;
+      --ink-2:      #a1a1aa;
+      --ink-3:      #71717a;
+      --border:     rgba(255,255,255,0.08);
+      --amber:      #f0a040;
+      --amber-pale: rgba(240,160,64,0.08);
+      --amber-glow: rgba(240,160,64,0.18);
+      --shadow-sm:  0 1px 3px rgba(0,0,0,0.3);
+      --shadow-md:  0 4px 16px rgba(0,0,0,0.4);
+      --shadow-lg:  0 16px 48px rgba(0,0,0,0.5);
+      --nav-bg:     rgba(17,17,19,0.85);
+      --toggle-bg:  #27272a;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); overflow-x: hidden; -webkit-font-smoothing: antialiased; transition: background 0.4s, color 0.4s; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-thumb { background: var(--amber); border-radius: 2px; }
+
+    /* NAV */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; height: 60px; padding: 0 48px; display: flex; align-items: center; justify-content: space-between; background: var(--nav-bg); backdrop-filter: blur(20px) saturate(180%); border-bottom: 1px solid var(--border); transition: background 0.4s, border-color 0.4s; }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; }
+    .nav-logo span { color: var(--amber); }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .nav-back { font-size: 0.8rem; font-weight: 500; color: var(--ink-3); display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border); transition: all 0.2s; }
+    .nav-back:hover { color: var(--amber); border-color: var(--amber-glow); }
+    .nav-toggle { height: 32px; padding: 0 14px; border-radius: 20px; border: 1px solid var(--border); background: var(--toggle-bg); font-size: 0.72rem; font-weight: 600; color: var(--ink-2); letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
+    .nav-toggle:hover { border-color: var(--amber); color: var(--amber); }
+    .nav-toggle-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--amber); flex-shrink: 0; }
+
+    /* HERO */
+    .cs-hero { padding: 110px 48px 0; border-bottom: 1px solid var(--border); }
+    .cs-hero-inner { max-width: 900px; }
+    .cs-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); margin-bottom: 24px; }
+    .cs-tag::before { content: ''; width: 20px; height: 1.5px; background: var(--amber); }
+    .cs-headline { font-family: 'Playfair Display', serif; font-size: clamp(2.6rem, 5vw, 4.2rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.03em; color: var(--ink); margin-bottom: 24px; }
+    .cs-headline em { font-style: italic; color: var(--amber); }
+    .cs-sub { font-size: 1.05rem; color: var(--ink-2); max-width: 620px; line-height: 1.75; font-weight: 300; margin-bottom: 48px; }
+
+    .cs-meta { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--border); }
+    .cs-meta-item { padding: 24px 28px; border-right: 1px solid var(--border); }
+    .cs-meta-item:last-child { border-right: none; }
+    .cs-meta-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); margin-bottom: 6px; }
+    .cs-meta-value { font-size: 0.88rem; font-weight: 600; color: var(--ink); line-height: 1.4; }
+
+    /* STATS */
+    .cs-stats { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--ink); transition: background 0.4s; }
+    [data-theme="dark"] .cs-stats { background: var(--bg-3); }
+    .cs-stat { padding: 36px 28px; border-right: 1px solid rgba(255,255,255,0.07); }
+    [data-theme="dark"] .cs-stat { border-right-color: var(--border); }
+    .cs-stat:last-child { border-right: none; }
+    .cs-stat-num { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 900; color: var(--amber); line-height: 1; letter-spacing: -0.04em; margin-bottom: 6px; }
+    .cs-stat-desc { font-size: 0.75rem; color: rgba(250,248,244,0.5); line-height: 1.4; font-weight: 400; }
+    [data-theme="dark"] .cs-stat-desc { color: var(--ink-3); }
+
+    /* BODY */
+    .cs-body { max-width: 740px; margin: 0 auto; padding: 88px 48px; }
+    .cs-block { margin-bottom: 80px; }
+
+    .cs-kicker { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--amber); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .cs-kicker::before { content: ''; width: 16px; height: 1.5px; background: var(--amber); flex-shrink: 0; }
+
+    h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 700; color: var(--ink); line-height: 1.2; margin-bottom: 18px; letter-spacing: -0.02em; }
+    .cs-p { font-size: 0.96rem; line-height: 1.82; color: var(--ink-2); margin-bottom: 18px; font-weight: 300; }
+    .cs-p strong { color: var(--ink); font-weight: 600; }
+
+    .cs-quote { border-left: 2px solid var(--amber); padding: 18px 24px; background: var(--bg-2); border-radius: 0 8px 8px 0; margin: 28px 0; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.05rem; color: var(--ink); line-height: 1.65; transition: background 0.4s; }
+
+    .cs-divider { height: 1px; background: var(--border); margin: 0 0 80px; }
+
+    /* DATA STATS */
+    .data-trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 28px 0; }
+    .data-card { background: var(--ink); border-radius: var(--r); padding: 28px 24px; text-align: center; transition: background 0.4s; }
+    [data-theme="dark"] .data-card { background: var(--bg-3); border: 1px solid var(--border); }
+    .data-num { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 900; color: var(--amber); line-height: 1; margin-bottom: 8px; letter-spacing: -0.04em; }
+    .data-label { font-size: 0.8rem; font-weight: 600; color: rgba(250,248,244,0.8); margin-bottom: 4px; }
+    [data-theme="dark"] .data-label { color: var(--ink-2); }
+    .data-source { font-size: 0.7rem; color: rgba(250,248,244,0.35); line-height: 1.4; }
+    [data-theme="dark"] .data-source { color: var(--ink-3); }
+    .data-insight { background: var(--amber-pale); border: 1px solid var(--amber-glow); border-radius: var(--r); padding: 20px 24px; margin-top: 16px; }
+    .data-insight h4 { font-size: 0.85rem; font-weight: 700; color: var(--amber); margin-bottom: 8px; }
+    .data-insight p { font-size: 0.83rem; color: var(--ink-2); line-height: 1.65; margin: 0; }
+
+    /* CONTRIBUTIONS */
+    .contrib-list { border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; margin: 28px 0; }
+    .contrib-row { display: flex; align-items: flex-start; gap: 20px; padding: 24px; border-bottom: 1px solid var(--border); background: var(--card); transition: background 0.2s; }
+    .contrib-row:last-child { border-bottom: none; }
+    .contrib-row:hover { background: var(--bg-2); }
+    .contrib-n { font-family: 'DM Mono', monospace; font-size: 0.7rem; font-weight: 500; color: var(--amber); width: 28px; flex-shrink: 0; padding-top: 2px; }
+    .contrib-content h4 { font-size: 0.88rem; font-weight: 700; color: var(--ink); margin-bottom: 5px; }
+    .contrib-content p { font-size: 0.82rem; color: var(--ink-3); line-height: 1.65; margin: 0; }
+
+    /* PERSONA CARD */
+    .persona-full { background: var(--card); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; margin: 28px 0; transition: background 0.4s; }
+    .persona-header { display: flex; align-items: center; gap: 16px; padding: 24px; border-bottom: 1px solid var(--border); }
+    .persona-initial { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 900; color: var(--amber); line-height: 1; }
+    .persona-header-info h4 { font-size: 1rem; font-weight: 700; color: var(--ink); }
+    .persona-role-tag { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--amber); margin-top: 3px; }
+    .persona-quote-strip { padding: 18px 24px; background: var(--bg-2); border-bottom: 1px solid var(--border); font-style: italic; font-size: 0.9rem; color: var(--ink-2); line-height: 1.6; transition: background 0.4s; }
+    .persona-cols { display: grid; grid-template-columns: 1fr 1fr 1fr; }
+    .persona-col { padding: 20px 24px; border-right: 1px solid var(--border); }
+    .persona-col:last-child { border-right: none; }
+    .persona-col-title { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--amber); margin-bottom: 12px; }
+    .persona-col ul { list-style: none; }
+    .persona-col li { font-size: 0.8rem; color: var(--ink-3); line-height: 1.55; padding: 5px 0; border-bottom: 1px solid var(--border); }
+    .persona-col li:last-child { border-bottom: none; }
+
+    /* FEATURES */
+    .feature-list { display: flex; flex-direction: column; gap: 10px; margin: 28px 0; }
+    .feature-item { display: flex; align-items: flex-start; gap: 20px; padding: 20px 24px; background: var(--card); border: 1px solid var(--border); border-radius: var(--r); transition: box-shadow 0.25s, background 0.4s; }
+    .feature-item:hover { box-shadow: var(--shadow-md); }
+    .feature-n { font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 500; color: var(--amber); width: 24px; flex-shrink: 0; padding-top: 2px; }
+    .feature-content h4 { font-size: 0.88rem; font-weight: 700; color: var(--ink); margin-bottom: 5px; }
+    .feature-content p { font-size: 0.82rem; color: var(--ink-3); line-height: 1.65; margin: 0; }
+
+    /* APP TOUCHPOINTS */
+    .touchpoint-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 28px 0; }
+    .touchpoint-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--r); padding: 22px 20px; transition: background 0.4s, box-shadow 0.25s; }
+    .touchpoint-card:hover { box-shadow: var(--shadow-md); }
+    .touchpoint-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); margin-bottom: 12px; }
+    .touchpoint-card h4 { font-size: 0.88rem; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+    .touchpoint-card p { font-size: 0.78rem; color: var(--ink-3); line-height: 1.6; margin: 0; }
+
+    /* REFLECTION */
+    .reflection-list { display: flex; flex-direction: column; gap: 10px; margin: 28px 0; }
+    .reflection-item { padding: 20px 24px; background: var(--bg-2); border-radius: var(--r); border-left: 2px solid var(--amber); transition: background 0.4s; }
+    .reflection-item h4 { font-size: 0.88rem; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+    .reflection-item p { font-size: 0.82rem; color: var(--ink-3); line-height: 1.65; margin: 0; }
+
+    /* NEXT */
+    .next-case { background: var(--ink); padding: 72px 48px; display: flex; align-items: center; justify-content: space-between; gap: 32px; transition: background 0.4s; }
+    [data-theme="dark"] .next-case { background: var(--bg-3); border-top: 1px solid var(--border); }
+    .next-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,248,244,0.35); margin-bottom: 8px; }
+    [data-theme="dark"] .next-label { color: var(--ink-3); }
+    .next-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: rgba(250,248,244,0.9); line-height: 1.2; }
+    [data-theme="dark"] .next-title { color: var(--ink); }
+    .next-btn { flex-shrink: 0; height: 44px; padding: 0 28px; background: var(--amber); color: white; border-radius: 8px; font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: opacity 0.2s, transform 0.2s; white-space: nowrap; }
+    .next-btn:hover { opacity: 0.85; transform: translateX(3px); }
+
+    .footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,0.06); padding: 22px 48px; display: flex; justify-content: space-between; align-items: center; }
+    [data-theme="dark"] .footer { background: var(--bg-2); border-top-color: var(--border); }
+    .footer p { font-size: 0.75rem; color: rgba(250,248,244,0.3); }
+    [data-theme="dark"] .footer p { color: var(--ink-3); }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .cs-note { font-size: 0.78rem; color: var(--ink-3); background: var(--bg-2); border: 1px dashed var(--border); border-radius: var(--r); padding: 14px 18px; margin: 20px 0; line-height: 1.6; }
+
+    @media (max-width: 768px) {
+      .nav { padding: 0 20px; }
+      .cs-hero { padding: 90px 20px 0; }
+      .cs-body { padding: 64px 20px; }
+      .next-case { padding: 48px 20px; flex-direction: column; align-items: flex-start; }
+      .footer { padding: 20px; flex-direction: column; gap: 6px; text-align: center; }
+      .cs-meta { grid-template-columns: 1fr 1fr; }
+      .cs-stats { grid-template-columns: 1fr 1fr; }
+      .data-trio { grid-template-columns: 1fr; }
+      .persona-cols { grid-template-columns: 1fr; }
+      .touchpoint-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="nav">
+  <a href="index.html" class="nav-logo">Cedric<span>.</span></a>
+  <div class="nav-right">
+    <a href="index.html" class="nav-back"><span>&#8592;</span> Portfolio</a>
+    <button class="nav-toggle" onclick="toggleTheme()" id="themeBtn" aria-label="Toggle theme">
+      <span class="nav-toggle-dot"></span>
+      <span id="themeLabel">Dark</span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="cs-hero">
+  <div class="cs-hero-inner">
+    <div class="cs-tag">UX Research &nbsp;·&nbsp; Behavioural Design &nbsp;·&nbsp; Team Capstone</div>
+    <h1 class="cs-headline">Frank &amp; Honest<br><em>Reusable Cup Initiative</em></h1>
+    <p class="cs-sub">Musgrave gave five students on my MSc a live client brief: a 40 cent discount for bringing a reusable cup, redeemed by almost nobody. We spent four sprints working out why, and built a loyalty-based fix across three real Musgrave apps.</p>
+    <div class="cs-meta">
+      <div class="cs-meta-item">
+        <div class="cs-meta-label">Client</div>
+        <div class="cs-meta-value">Musgrave &amp; Frank &amp; Honest</div>
+      </div>
+      <div class="cs-meta-item">
+        <div class="cs-meta-label">Programme</div>
+        <div class="cs-meta-value">MSc Design &amp; Development of Digital Business, UCC</div>
+      </div>
+      <div class="cs-meta-item">
+        <div class="cs-meta-label">Timeline</div>
+        <div class="cs-meta-value">4 Sprints, March – 31 July 2026</div>
+      </div>
+      <div class="cs-meta-item">
+        <div class="cs-meta-label">Team</div>
+        <div class="cs-meta-value">5 People</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="cs-stats">
+  <div class="cs-stat">
+    <div class="cs-stat-num">3.3%</div>
+    <div class="cs-stat-desc">Centra customers who redeem the existing reusable cup discount</div>
+  </div>
+  <div class="cs-stat">
+    <div class="cs-stat-num">83%</div>
+    <div class="cs-stat-desc">Irish adults who already own a reusable cup (DECC, 2023)</div>
+  </div>
+  <div class="cs-stat">
+    <div class="cs-stat-num">3</div>
+    <div class="cs-stat-desc">Connected app prototypes — Frank &amp; Honest, My Centra, SuperValu</div>
+  </div>
+  <div class="cs-stat">
+    <div class="cs-stat-num">1,314</div>
+    <div class="cs-stat-desc">Respondents in the national survey underpinning our research</div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="cs-body">
+
+  <div class="cs-note reveal">Screenshots from the Figma prototype and the 3D-printed cup are being added to this case study — the write-up below reflects the finished project as presented to Musgrave stakeholders on 31 July 2026.</div>
+
+  <!-- BRIEF -->
+  <div class="cs-block reveal">
+    <div class="cs-kicker">The Brief</div>
+    <h2>A discount nobody uses.</h2>
+    <p class="cs-p">Frank &amp; Honest already offers a 40 cent discount to any customer who brings a reusable cup. Almost nobody claims it — just 3.3% of Centra customers and 2.9% of SuperValu customers, despite 83% of Irish adults already owning a reusable cup. Musgrave brought that statistic to our team of five as the brief. It reframed the whole problem for me the moment I heard it: this was never about persuading people that reusability mattered. It was about closing the gap between already owning a cup and actually using it, in the ten seconds before a barista defaults to a disposable one.</p>
+    <p class="cs-p">We worked with Musgrave stakeholders <strong>Jennifer McWhinney</strong> and <strong>Claire O'Grady</strong> across four sprints, from an early foldable-cup concept through to three connected, coded app prototypes and a business case presented live on 31 July.</p>
+    <div class="cs-quote">"83% of Irish adults own a reusable cup. Only 33% use one consistently. The question was never how to get people to own a cup — it was why ownership wasn't turning into everyday use."</div>
+  </div>
+
+  <div class="cs-divider"></div>
+
+  <!-- MY CONTRIBUTIONS -->
+  <div class="cs-block reveal">
+    <div class="cs-kicker">My Contributions</div>
+    <h2>What I owned across four sprints.</h2>
+    <div class="contrib-list">
+      <div class="contrib-row">
+        <div class="contrib-n">01</div>
+        <div class="contrib-content">
+          <h4>Secondary Research &amp; Ethics Application</h4>
+          <p>Built the evidence base from the Allegra Project Café Ireland 2025 report, Repak waste data and the DECC 2023 consumer survey — the source of the 83% vs 33% statistic the whole pitch was built around. Drafted large parts of the group's ethics application ahead of primary research.</p>
+        </div>
+      </div>
+      <div class="contrib-row">
+        <div class="contrib-n">02</div>
+        <div class="contrib-content">
+          <h4>Nudge Theory Framework</h4>
+          <p>Researched Thaler and Sunstein's nudge theory and used it to argue against two ideas on the table early on — a general awareness campaign and "save the planet" messaging — since our own interviews showed persuasion wasn't the bottleneck. This is why Smart Notifications ended up opt-in and tied to a customer's own coffee routine rather than a generic push.</p>
+        </div>
+      </div>
+      <div class="contrib-row">
+        <div class="contrib-n">03</div>
+        <div class="contrib-content">
+          <h4>Competitor Analysis &amp; the Jodie Persona</h4>
+          <p>Analysed how other coffee brands position sustainability and reusable cup incentives. Led the write-up of Jodie — a 27-year-old Cork marketing manager with two unused reusable cups at home — built from recurring patterns across interview transcripts rather than one memorable quote.</p>
+        </div>
+      </div>
+      <div class="contrib-row">
+        <div class="contrib-n">04</div>
+        <div class="contrib-content">
+          <h4>Problem Reframing</h4>
+          <p>Worked with teammate Kamran to dig into why our early foldable-cup concept wasn't gaining traction, separating genuine behavioural barriers from assumptions we'd inherited from the brief. That work shifted the group's problem statement away from the cup as an object and toward the decision moment at the till.</p>
+        </div>
+      </div>
+      <div class="contrib-row">
+        <div class="contrib-n">05</div>
+        <div class="contrib-content">
+          <h4>Figma Prototyping Lead</h4>
+          <p>Took a lead role building and maintaining the interactive prototype across three connected apps — Frank &amp; Honest, My Centra and SuperValu — including onboarding, the home dashboard, Smart Notifications, the rewards catalogue, the scan screen and the eco-impact dashboard, keeping all three visually and functionally consistent.</p>
+        </div>
+      </div>
+      <div class="contrib-row">
+        <div class="contrib-n">06</div>
+        <div class="contrib-content">
+          <h4>Coded MVP &amp; Business Model</h4>
+          <p>Contributed to the coded version of the app, deployed via GitHub and Vercel so stakeholders could interact with a working build. Fed into the Business Model Canvas — particularly value proposition and customer relationships — and attended every client and supervisor meeting across all four sprints.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-divider"></div>
+
+  <!-- RESEARCH -->
+  <div class="cs-block reveal">
+    <div class="cs-kicker">Research</div>
+    <h2>Five reasons ownership wasn't turning into use.</h2>
+    <p class="cs-p">National survey data (DECC, 2023), in-depth interviews with customers, store staff and managers across Centra and SuperValu, and later prototype usability testing under our approved ethics application, all pointed to the same conclusion: the barrier wasn't motivation.</p>
+    <div class="data-trio">
+      <div class="data-card">
+        <div class="data-num">40%</div>
+        <div class="data-label">Cite forgetting as the main barrier</div>
+        <div class="data-source">DECC 2023 public consultation, n = 1,314.</div>
+      </div>
+      <div class="data-card">
+        <div class="data-num">2.9%</div>
+        <div class="data-label">SuperValu redemption rate</div>
+        <div class="data-source">Vs. 3.3% at Centra — both far below cup ownership.</div>
+      </div>
+      <div class="data-card">
+        <div class="data-num">7.4/10</div>
+        <div class="data-label">Desirability score, early deposit-return concept</div>
+        <div class="data-source">Set aside over hygiene and cup-return logistics.</div>
+      </div>
+    </div>
+    <div class="data-insight">
+      <h4>The Core Insight</h4>
+      <p>Customers weren't lying when they said sustainability mattered — most already owned a reusable cup, some owned two. What they lacked was a prompt at the exact right moment and a reward worth noticing immediately. That reframed the brief from a motivation problem into a behaviour-design problem, in line with the COM-B model's emphasis on opportunity and prompts alongside capability and motivation.</p>
+    </div>
+  </div>
+
+  <div class="cs-divider"></div>
+
+  <!-- PERSONA -->
+  <div class="cs-block reveal">
+    <div class="cs-kicker">Persona</div>
+    <h2>Meet Jodie. Not opposed — indifferent.</h2>
+    <p class="cs-p">I led the write-up of Jodie from interview transcripts. She wasn't a hard case to convince — she already owned two reusable cups sitting unused at home. The insight was that sustainability had to compete with a busy job and a routine she wasn't going to rethink for the sake of a cup, and a concrete, immediate, countable reward mattered more than an appeal to conscience she'd already half-agreed with.</p>
+    <div class="persona-full">
+      <div class="persona-header">
+        <div class="persona-initial">J</div>
+        <div class="persona-header-info">
+          <h4>Jodie — Busy, Not Unwilling</h4>
+          <div class="persona-role-tag">27 · Cork, Ireland · Marketing Manager</div>
+        </div>
+      </div>
+      <div class="persona-quote-strip">"Too many things are competing for my attention to actively think about my environmental impact on any given morning."</div>
+      <div class="persona-cols">
+        <div class="persona-col">
+          <div class="persona-col-title">Goals</div>
+          <ul>
+            <li>Get coffee quickly on the way to work</li>
+            <li>Feel good about sustainable choices, without extra effort</li>
+            <li>Use the reusable cups she already owns</li>
+          </ul>
+        </div>
+        <div class="persona-col">
+          <div class="persona-col-title">Frustrations</div>
+          <ul>
+            <li>Forgets her cup most mornings</li>
+            <li>Didn't know the 40c discount existed</li>
+            <li>Coffee purchases are rarely planned in advance</li>
+          </ul>
+        </div>
+        <div class="persona-col">
+          <div class="persona-col-title">Design Implications</div>
+          <ul>
+            <li>A reminder tied to her actual coffee routine, not a generic push</li>
+            <li>Countable, immediate rewards over environmental messaging</li>
+            <li>Zero extra steps at the till</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-divider"></div>
+
+  <!-- THE SOLUTION -->
+  <div class="cs-block reveal">
+    <div class="cs-kicker">The Solution</div>
+    <h2>One scan. One loyalty account. No new hardware.</h2>
+    <p class="cs-p">The project started with a deposit-return cup scheme, which tested well on desirability but ran into hygiene and cup-return logistics. Stakeholder feedback pushed the group toward something lighter: work through the loyalty infrastructure Musgrave already operates rather than introduce a new physical object or process. Customers scan their existing loyalty barcode with any reusable cup at the till — no sticker, no second scan, no dedicated hardware.</p>
+    <div class="feature-list">
+      <div class="feature-item">
+        <div class="feature-n">01</div>
+        <div class="feature-content">
+          <h4>Smart Notifications</h4>
+          <p>Opt-in, user-controlled reminders rather than a generic push. "Coffee Routine" prompts around a customer's usual coffee times, plus a location-based nudge near a participating store — covering both moments our research flagged as highest-risk for forgetting.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-n">02</div>
+        <div class="feature-content">
+          <h4>Tiered Rewards — Seedling to Devoted</h4>
+          <p>A four-tier loyalty ladder (Seedling, Sprouting, Regular, Devoted) with visible, escalating rewards. Survey data showed customers preferred tangible rewards over decorative gamification, so locked rewards are shown greyed out rather than hidden.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-n">03</div>
+        <div class="feature-content">
+          <h4>Single-Scan Design</h4>
+          <p>Reuses the customer's existing loyalty barcode instead of introducing a new action — applying Nielsen's heuristic of recognition over recall, and directly responding to stakeholder feedback that a second scan would slow the till down.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-n">04</div>
+        <div class="feature-content">
+          <h4>Cross-Brand Loyalty via My Centra</h4>
+          <p>One account, one reusable-cup record, usable anywhere across Frank &amp; Honest, Centra, SuperValu and Donnybrook Fair — the clearest expression of the group's central design decision.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-n">05</div>
+        <div class="feature-content">
+          <h4>Avatar Personalisation</h4>
+          <p>An in-app character, inspired by the Nintendo Wii Mii system, unlocking new items as loyalty tiers are reached — a non-financial reason to keep engaging beyond the discount itself.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-n">06</div>
+        <div class="feature-content">
+          <h4>Physical &amp; 3D-Printed Cup Prototype</h4>
+          <p>A branded, foldable silicone cup with an embedded QR/NFC point, revised from an early V1 into a more conventional travel-cup form after stakeholder feedback, then produced as a 3D-printed model for the final presentation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-divider"></div>
+
+  <!-- TOUCHPOINTS -->
+  <div class="cs-block reveal">
+    <div class="cs-kicker">App Touchpoints</div>
+    <h2>Built across three real Musgrave apps.</h2>
+    <p class="cs-p">The prototype spans three touchpoints across Musgrave's estate, all authenticating against the same underlying loyalty account. I led the Figma work keeping all three consistent with each other, and contributed to the coded build deployed via GitHub and Vercel.</p>
+    <div class="touchpoint-grid">
+      <div class="touchpoint-card">
+        <div class="touchpoint-dot"></div>
+        <h4>Frank &amp; Honest App</h4>
+        <p>The coffee-specific touchpoint — onboarding, home dashboard, Smart Notifications, rewards catalogue, scan screen, Eco Rewards and avatar personalisation.</p>
+      </div>
+      <div class="touchpoint-card">
+        <div class="touchpoint-dot"></div>
+        <h4>SuperValu App</h4>
+        <p>The reward embedded directly in the grocery app's home feed via a Coffee Corner card, since most Frank &amp; Honest purchases happen alongside a grocery shop.</p>
+      </div>
+      <div class="touchpoint-card">
+        <div class="touchpoint-dot"></div>
+        <h4>My Centra App</h4>
+        <p>The cross-brand loyalty hub — a single barcode, a combined reusable-cup save count, and one activity feed spanning every linked brand.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-divider"></div>
+
+  <!-- MVP / TECH -->
+  <div class="cs-block reveal">
+    <div class="cs-kicker">MVP &amp; Delivery</div>
+    <h2>Not a mock-up — a working pilot proposal.</h2>
+    <p class="cs-p">The MVP was scoped as the smallest set of changes to Musgrave's existing digital and physical infrastructure needed to test whether a loyalty-linked reusable cup system changes behaviour at the till — a barcode-first pilot proposed for Centra Drumcondra, chosen for its footfall and existing cup-washing station. No new customer-facing hardware: the existing barcode scanners and till software carry the reusable-cup flag alongside the loyalty scan.</p>
+    <p class="cs-p">The team built and deployed a coded version of the app via <strong>GitHub and Vercel</strong> so Musgrave stakeholders could interact with a working build rather than a clickable mock-up, backed by an Entity Relationship Diagram and Data Flow Diagram modelling the customer, loyalty account, transaction and sustainability-log data needed to support the reward and reporting layers — kept deliberately narrow to limit personal data collection under GDPR.</p>
+  </div>
+
+  <div class="cs-divider"></div>
+
+  <!-- REFLECTION -->
+  <div class="cs-block reveal">
+    <div class="cs-kicker">Reflection</div>
+    <h2>What I'd do differently.</h2>
+    <div class="reflection-list">
+      <div class="reflection-item">
+        <h4>Budget Real Time for Admin Work</h4>
+        <p>We underestimated how long the ethics application would take, which cost the group close to two weeks of research time. I now treat paperwork with real lead time built in, not something to fit in around the more visible design work.</p>
+      </div>
+      <div class="reflection-item">
+        <h4>Sequence Parallel Workstreams Deliberately</h4>
+        <p>Our busiest technical week — coding the MVP, building the physical cup prototype and writing the sprint diary all at once — felt fragmented because the workstreams weren't sequenced against each other. Being explicit up front about ownership would have reduced the friction.</p>
+      </div>
+      <div class="reflection-item">
+        <h4>Agree How to Handle Disagreement Before the Pressure Hits</h4>
+        <p>The week before our final presentation surfaced real disagreements under time pressure. We worked through them and delivered a presentation I was proud of, but I'd want the team to agree explicitly, earlier, on how we'd handle friction under deadline pressure.</p>
+      </div>
+      <div class="reflection-item">
+        <h4>Theory Only Becomes a Design Principle Once It Matches Evidence</h4>
+        <p>I'd read about nudge theory academically before this project. It only became a real design principle for me once it matched what our own interviews were independently telling us — that alignment between theory and evidence is what actually shapes a screen, not the theory alone.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- NEXT -->
+<div class="next-case">
+  <div>
+    <div class="next-label">Next Case Study</div>
+    <div class="next-title">Unified Student Communication Hub</div>
+  </div>
+  <a href="usch.html" class="next-btn">View case study &#8594;</a>
+</div>
+
+<footer class="footer">
+  <p><span id="footerYear">2026</span> Cedric Mathias, Dublin, Ireland</p>
+  <p>Designed and built by Cedric Mathias</p>
+</footer>
+
+<script>
+  document.getElementById('footerYear').textContent = new Date().getFullYear();
+  const root = document.documentElement;
+  const btn = document.getElementById('themeBtn');
+  const label = document.getElementById('themeLabel');
+  function getInitialTheme() {
+    const s = localStorage.getItem('cm-theme');
+    if (s) return s;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  function applyTheme(t) {
+    root.setAttribute('data-theme', t);
+    label.textContent = t === 'dark' ? 'Light' : 'Dark';
+    localStorage.setItem('cm-theme', t);
+  }
+  function toggleTheme() { applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); }
+  applyTheme(getInitialTheme());
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

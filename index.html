@@ -5,7 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cedric Mathias Growth Marketer and Product Designer, Dublin</title>
   <meta name="description" content="Cedric Mathias Growth Marketer and Product Designer based in Dublin. 3+ years in B2B SaaS growth, UX design, and product strategy." />
+  <link rel="canonical" href="https://cedricmathias1.github.io/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2318181b'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='58' font-weight='900' fill='%23c2570a' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Cedric Mathias — Growth Marketer and Product Designer, Dublin" />
+  <meta property="og:description" content="Growth Marketer and Product Designer based in Dublin. 3+ years in B2B SaaS growth, UX design, and product strategy." />
+  <meta property="og:url" content="https://cedricmathias1.github.io/" />
+  <meta property="og:image" content="https://cedricmathias1.github.io/images/USCH_Dashboard.png" />
+  <meta property="og:site_name" content="Cedric Mathias" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Cedric Mathias — Growth Marketer and Product Designer, Dublin" />
+  <meta name="twitter:description" content="Growth Marketer and Product Designer based in Dublin. 3+ years in B2B SaaS growth, UX design, and product strategy." />
+  <meta name="twitter:image" content="https://cedricmathias1.github.io/images/USCH_Dashboard.png" />
+
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Cedric Mathias",
+    "url": "https://cedricmathias1.github.io/",
+    "jobTitle": "Growth Marketer and Product Designer",
+    "email": "mailto:mathiascedric3@gmail.com",
+    "address": { "@type": "PostalAddress", "addressLocality": "Dublin", "addressCountry": "IE" },
+    "sameAs": ["https://linkedin.com/in/cedric-mathias"]
+  }
+  </script>
+
   <style>
     /* ─────────────────────────────────────────
        TOKENS
@@ -127,6 +161,42 @@
       transition: transform 0.4s ease;
     }
     [data-theme="dark"] .nav-toggle-icon { box-shadow: 0 0 8px var(--amber-glow); }
+    .nav-burger {
+      display: none;
+      width: 32px; height: 32px;
+      border: 1px solid var(--border); border-radius: 8px;
+      background: var(--toggle-bg);
+      align-items: center; justify-content: center;
+      cursor: pointer; flex-shrink: 0;
+    }
+    .nav-burger-lines, .nav-burger-lines::before, .nav-burger-lines::after {
+      display: block; width: 15px; height: 1.5px; background: var(--ink-2);
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+    .nav-burger-lines { position: relative; }
+    .nav-burger-lines::before, .nav-burger-lines::after { content: ''; position: absolute; left: 0; }
+    .nav-burger-lines::before { top: -5px; }
+    .nav-burger-lines::after { top: 5px; }
+    .nav.open .nav-burger-lines { background: transparent; }
+    .nav.open .nav-burger-lines::before { transform: translateY(5px) rotate(45deg); }
+    .nav.open .nav-burger-lines::after { transform: translateY(-5px) rotate(-45deg); }
+    .nav-mobile-menu {
+      display: none;
+      position: fixed; top: 60px; left: 0; right: 0; z-index: 199;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      flex-direction: column;
+      padding: 8px 20px 20px;
+      box-shadow: var(--shadow-md);
+    }
+    .nav.open .nav-mobile-menu { display: flex; }
+    .nav-mobile-link {
+      padding: 14px 4px;
+      font-size: 0.95rem; font-weight: 500;
+      color: var(--ink-2);
+      border-bottom: 1px solid var(--border-2);
+    }
+    .nav-mobile-link:last-child { border-bottom: none; }
 
     /* ─────────────────────────────────────────
        HERO
@@ -521,7 +591,7 @@
     /* ─────────────────────────────────────────
        DESIGN CASES
     ───────────────────────────────────────── */
-    .design-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .design-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
     .design-card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -795,6 +865,7 @@
     @media (max-width: 768px) {
       .nav { padding: 0 20px; }
       .nav-center { display: none; }
+      .nav-burger { display: flex; }
       .section { padding: 72px 20px; }
       .hero { padding: 100px 20px 64px; grid-template-columns: 1fr; }
       .hero-headline { font-size: 2.8rem; }
@@ -811,7 +882,7 @@
 <body>
 
 <!-- NAV -->
-<header class="nav">
+<header class="nav" id="siteNav">
   <a href="#" class="nav-logo">Cedric<span>.</span></a>
   <nav class="nav-center" aria-label="Main navigation">
     <a href="#marketing" class="nav-link">Marketing</a>
@@ -824,7 +895,16 @@
       <span class="nav-toggle-icon"></span>
       <span id="themeLabel">Dark</span>
     </button>
+    <button class="nav-burger" onclick="toggleMobileNav()" aria-label="Toggle menu" aria-expanded="false">
+      <span class="nav-burger-lines"></span>
+    </button>
   </div>
+  <nav class="nav-mobile-menu" aria-label="Mobile navigation">
+    <a href="#marketing" class="nav-mobile-link" onclick="closeMobileNav()">Marketing</a>
+    <a href="#design" class="nav-mobile-link" onclick="closeMobileNav()">Design</a>
+    <a href="#about" class="nav-mobile-link" onclick="closeMobileNav()">About</a>
+    <a href="#contact" class="nav-mobile-link" onclick="closeMobileNav()">Contact</a>
+  </nav>
 </header>
 
 <!-- HERO -->
@@ -884,7 +964,7 @@
 
       <!-- Back card: Drip -->
       <div class="hero-stack-card hero-stack-back">
-        <img src="images/drip-profile.png" alt="Drip Circular App" class="hero-stack-img" />
+        <img src="images/drip-profile.png" alt="Drip Circular App" class="hero-stack-img" width="480" height="240" />
         <div class="hero-stack-footer">
           <div class="hero-stack-dot" style="background:#4ade80;"></div>
           <span class="hero-stack-label">Drip Circular App</span>
@@ -894,7 +974,7 @@
 
       <!-- Front card: USCH -->
       <div class="hero-stack-card hero-stack-front">
-        <img src="images/USCH_Dashboard.png" alt="USCH Dashboard" class="hero-stack-img" />
+        <img src="images/USCH_Dashboard.png" alt="USCH Dashboard" class="hero-stack-img" width="480" height="240" />
         <div class="hero-stack-footer">
           <div class="hero-stack-dot" style="background:var(--amber);"></div>
           <span class="hero-stack-label">Student Comm. Hub</span>
@@ -1024,7 +1104,7 @@
     <!-- USCH -->
     <div class="design-card reveal">
       <div class="design-card-thumb">
-        <img src="images/USCH_Dashboard.png" alt="USCH Dashboard unified student communication" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;" />
+        <img src="images/USCH_Dashboard.png" alt="USCH Dashboard unified student communication" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;" />
         <div class="design-card-overlay">
           <div class="design-card-type">UX Research · 0 to 1 · Figma</div>
         </div>
@@ -1052,7 +1132,7 @@
     <!-- Drip -->
     <div class="design-card reveal">
       <div class="design-card-thumb">
-        <img src="images/drip-profile.png" alt="Drip Circular App — sustainability profile" style="width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 0.5s ease;" />
+        <img src="images/drip-profile.png" alt="Drip Circular App — sustainability profile" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 0.5s ease;" />
         <div class="design-card-overlay">
           <div class="design-card-type">Design Thinking · Service Design · Team</div>
         </div>
@@ -1072,6 +1152,36 @@
           <span class="tag">User Research</span>
         </div>
         <a href="drip.html" class="design-card-link">
+          View case study <span class="design-card-link-arrow">&#8594;</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Frank & Honest / Musgrave -->
+    <div class="design-card reveal">
+      <div class="design-card-thumb">
+        <div class="design-card-thumb-placeholder" style="background: linear-gradient(135deg, #00b5b0, #1a2e3a);">
+          <span class="thumb-text">F&amp;H</span>
+        </div>
+        <div class="design-card-overlay">
+          <div class="design-card-type">UX Research · Behavioural Design · Team Capstone</div>
+        </div>
+      </div>
+      <div class="design-card-body">
+        <div class="design-card-title">Frank &amp; Honest Reusable Cup Initiative</div>
+        <div class="design-card-desc">Musgrave's reusable cup discount was redeemed by 3.3% of customers. I led Figma prototyping across three connected loyalty apps and helped reframe the concept around behavioural science, working directly with Musgrave stakeholders.</div>
+        <div class="design-card-metrics">
+          <div class="dcm"><span class="dcm-num">3</span><span class="dcm-label">App prototypes</span></div>
+          <div class="dcm"><span class="dcm-num">1,314</span><span class="dcm-label">Survey respondents</span></div>
+          <div class="dcm"><span class="dcm-num">4</span><span class="dcm-label">Sprints</span></div>
+        </div>
+        <div class="design-card-tags">
+          <span class="tag">UX Research</span>
+          <span class="tag">Behavioural Design</span>
+          <span class="tag">Figma</span>
+          <span class="tag">Stakeholder Management</span>
+        </div>
+        <a href="musgrave.html" class="design-card-link">
           View case study <span class="design-card-link-arrow">&#8594;</span>
         </a>
       </div>
@@ -1227,7 +1337,7 @@
 </section>
 
 <footer class="footer">
-  <p>2026 Cedric Mathias Dublin, Ireland</p>
+  <p><span id="footerYear">2026</span> Cedric Mathias, Dublin, Ireland</p>
   <p>Designed and built by Cedric Mathias</p>
 </footer>
 
@@ -1265,6 +1375,19 @@
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+  /* ── MOBILE NAV ── */
+  const siteNav = document.getElementById('siteNav');
+  function toggleMobileNav() {
+    const open = siteNav.classList.toggle('open');
+    siteNav.querySelector('.nav-burger').setAttribute('aria-expanded', open);
+  }
+  function closeMobileNav() {
+    siteNav.classList.remove('open');
+    siteNav.querySelector('.nav-burger').setAttribute('aria-expanded', false);
+  }
 
   /* ── ROLES ── */
   function toggleRole(btn) {
