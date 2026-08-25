@@ -4,8 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Frank &amp; Honest Reusable Cup Initiative Cedric Mathias</title>
-  <meta name="description" content="Frank & Honest / Musgrave loyalty apps reusable cup initiative — UX research, behavioural design and prototyping case study by Cedric Mathias." />
+  <meta name="description" content="Frank &amp; Honest / Musgrave loyalty apps reusable cup initiative — UX research, behavioural design and prototyping case study by Cedric Mathias." />
   <link rel="canonical" href="https://cedricmathias1.github.io/musgrave.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Frank &amp; Honest Reusable Cup Initiative — Cedric Mathias" />
+  <meta property="og:description" content="Musgrave loyalty apps reusable cup initiative — UX research, behavioural design, and prototyping case study by Cedric Mathias." />
+  <meta property="og:url" content="https://cedricmathias1.github.io/musgrave.html" />
+  <meta property="og:image" content="https://cedricmathias1.github.io/images/musgrave-home.png" />
+  <meta property="og:site_name" content="Cedric Mathias" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Frank &amp; Honest Reusable Cup Initiative — Cedric Mathias" />
+  <meta name="twitter:description" content="Musgrave loyalty apps reusable cup initiative — UX research, behavioural design, and prototyping case study by Cedric Mathias." />
+  <meta name="twitter:image" content="https://cedricmathias1.github.io/images/musgrave-home.png" />
+
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -53,6 +65,9 @@
     img { display: block; max-width: 100%; }
     ::-webkit-scrollbar { width: 3px; }
     ::-webkit-scrollbar-thumb { background: var(--amber); border-radius: 2px; }
+
+    .skip-link { position: absolute; left: -9999px; top: 0; z-index: 999; background: var(--ink); color: var(--bg); padding: 12px 22px; border-radius: 0 0 8px 0; font-size: 0.85rem; font-weight: 600; }
+    .skip-link:focus { left: 0; }
 
     /* NAV */
     .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; height: 60px; padding: 0 48px; display: flex; align-items: center; justify-content: space-between; background: var(--nav-bg); backdrop-filter: blur(20px) saturate(180%); border-bottom: 1px solid var(--border); transition: background 0.4s, border-color 0.4s; }
@@ -105,6 +120,16 @@
 
     .cs-divider { height: 1px; background: var(--border); margin: 0 0 80px; }
 
+    /* PHONE SCREENSHOT GALLERY */
+    .phone-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin: 32px 0; align-items: start; }
+    .phone-grid-item { text-align: center; }
+    .phone-shot { width: 100%; max-width: 300px; border-radius: 18px; border: 1px solid var(--border); box-shadow: var(--shadow-md); margin: 0 auto; display: block; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .phone-grid-item:hover .phone-shot { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+    .phone-shot-cap { font-size: 0.75rem; color: var(--ink-3); line-height: 1.5; margin-top: 12px; max-width: 300px; margin-left: auto; margin-right: auto; }
+    @media (max-width: 600px) {
+      .phone-grid { grid-template-columns: 1fr; }
+    }
+
     /* DATA STATS */
     .data-trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 28px 0; }
     .data-card { background: var(--ink); border-radius: var(--r); padding: 28px 24px; text-align: center; transition: background 0.4s; }
@@ -112,7 +137,7 @@
     .data-num { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 900; color: var(--amber); line-height: 1; margin-bottom: 8px; letter-spacing: -0.04em; }
     .data-label { font-size: 0.8rem; font-weight: 600; color: rgba(250,248,244,0.8); margin-bottom: 4px; }
     [data-theme="dark"] .data-label { color: var(--ink-2); }
-    .data-source { font-size: 0.7rem; color: rgba(250,248,244,0.35); line-height: 1.4; }
+    .data-source { font-size: 0.7rem; color: rgba(250,248,244,0.5); line-height: 1.4; }
     [data-theme="dark"] .data-source { color: var(--ink-3); }
     .data-insight { background: var(--amber-pale); border: 1px solid var(--amber-glow); border-radius: var(--r); padding: 20px 24px; margin-top: 16px; }
     .data-insight h4 { font-size: 0.85rem; font-weight: 700; color: var(--amber); margin-bottom: 8px; }
@@ -157,6 +182,8 @@
     .touchpoint-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); margin-bottom: 12px; }
     .touchpoint-card h4 { font-size: 0.88rem; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
     .touchpoint-card p { font-size: 0.78rem; color: var(--ink-3); line-height: 1.6; margin: 0; }
+    .touchpoint-link { display: inline-flex; align-items: center; gap: 5px; font-size: 0.75rem; font-weight: 600; color: var(--amber); margin-top: 14px; transition: gap 0.2s; }
+    .touchpoint-link:hover { gap: 8px; }
 
     /* REFLECTION */
     .reflection-list { display: flex; flex-direction: column; gap: 10px; margin: 28px 0; }
@@ -167,7 +194,7 @@
     /* NEXT */
     .next-case { background: var(--ink); padding: 72px 48px; display: flex; align-items: center; justify-content: space-between; gap: 32px; transition: background 0.4s; }
     [data-theme="dark"] .next-case { background: var(--bg-3); border-top: 1px solid var(--border); }
-    .next-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,248,244,0.35); margin-bottom: 8px; }
+    .next-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,248,244,0.5); margin-bottom: 8px; }
     [data-theme="dark"] .next-label { color: var(--ink-3); }
     .next-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: rgba(250,248,244,0.9); line-height: 1.2; }
     [data-theme="dark"] .next-title { color: var(--ink); }
@@ -176,13 +203,11 @@
 
     .footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,0.06); padding: 22px 48px; display: flex; justify-content: space-between; align-items: center; }
     [data-theme="dark"] .footer { background: var(--bg-2); border-top-color: var(--border); }
-    .footer p { font-size: 0.75rem; color: rgba(250,248,244,0.3); }
+    .footer p { font-size: 0.75rem; color: rgba(250,248,244,0.5); }
     [data-theme="dark"] .footer p { color: var(--ink-3); }
 
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    .cs-note { font-size: 0.78rem; color: var(--ink-3); background: var(--bg-2); border: 1px dashed var(--border); border-radius: var(--r); padding: 14px 18px; margin: 20px 0; line-height: 1.6; }
 
     @media (max-width: 768px) {
       .nav { padding: 0 20px; }
@@ -200,6 +225,8 @@
 </head>
 <body>
 
+<a href="#main" class="skip-link">Skip to content</a>
+
 <header class="nav">
   <a href="index.html" class="nav-logo">Cedric<span>.</span></a>
   <div class="nav-right">
@@ -212,7 +239,7 @@
 </header>
 
 <!-- HERO -->
-<section class="cs-hero">
+<section class="cs-hero" id="main">
   <div class="cs-hero-inner">
     <div class="cs-tag">UX Research &nbsp;·&nbsp; Behavioural Design &nbsp;·&nbsp; Team Capstone</div>
     <h1 class="cs-headline">Frank &amp; Honest<br><em>Reusable Cup Initiative</em></h1>
@@ -260,8 +287,6 @@
 
 <!-- BODY -->
 <div class="cs-body">
-
-  <div class="cs-note reveal">Screenshots from the Figma prototype and the 3D-printed cup are being added to this case study — the write-up below reflects the finished project as presented to Musgrave stakeholders on 31 July 2026.</div>
 
   <!-- BRIEF -->
   <div class="cs-block reveal">
@@ -406,6 +431,16 @@
     <div class="cs-kicker">The Solution</div>
     <h2>One scan. One loyalty account. No new hardware.</h2>
     <p class="cs-p">The project started with a deposit-return cup scheme, which tested well on desirability but ran into hygiene and cup-return logistics. Stakeholder feedback pushed the group toward something lighter: work through the loyalty infrastructure Musgrave already operates rather than introduce a new physical object or process. Customers scan their existing loyalty barcode with any reusable cup at the till — no sticker, no second scan, no dedicated hardware.</p>
+    <div class="phone-grid">
+      <div class="phone-grid-item">
+        <img src="images/musgrave-home.png" alt="Frank &amp; Honest app home dashboard showing the Cup Journey progress ring, free-coffee punch card, and Coffee Routine reminders" class="phone-shot" loading="lazy" />
+        <p class="phone-shot-cap">Home dashboard — Cup Journey progress, the free-coffee punch card, and opt-in Coffee Routine reminders.</p>
+      </div>
+      <div class="phone-grid-item">
+        <img src="images/musgrave-scan.png" alt="Frank &amp; Honest app scan screen prompting the customer to scan the QR code on their reusable cup" class="phone-shot" loading="lazy" />
+        <p class="phone-shot-cap">The single-scan flow — one QR scan on the cup logs the save and credits the loyalty account.</p>
+      </div>
+    </div>
     <div class="feature-list">
       <div class="feature-item">
         <div class="feature-n">01</div>
@@ -450,6 +485,16 @@
         </div>
       </div>
     </div>
+    <div class="phone-grid">
+      <div class="phone-grid-item">
+        <img src="images/musgrave-rewards.png" alt="Frank &amp; Honest app rewards catalogue showing the four-tier loyalty ladder from Seedling to Devoted" class="phone-shot" loading="lazy" />
+        <p class="phone-shot-cap">The tiered rewards catalogue — locked rewards stay visible but greyed out, so the next unlock is always in view.</p>
+      </div>
+      <div class="phone-grid-item">
+        <img src="images/musgrave-eco.png" alt="Frank &amp; Honest app Eco Rewards screen tracking reusable cup uses and recent activity" class="phone-shot" loading="lazy" />
+        <p class="phone-shot-cap">Eco Rewards — reusable cup uses tracked against the next discount threshold, with a live activity feed.</p>
+      </div>
+    </div>
   </div>
 
   <div class="cs-divider"></div>
@@ -464,16 +509,19 @@
         <div class="touchpoint-dot"></div>
         <h4>Frank &amp; Honest App</h4>
         <p>The coffee-specific touchpoint — onboarding, home dashboard, Smart Notifications, rewards catalogue, scan screen, Eco Rewards and avatar personalisation.</p>
+        <a href="https://frank-and-honest-app.vercel.app/" class="touchpoint-link" target="_blank" rel="noopener noreferrer">Try it live &#8594;</a>
       </div>
       <div class="touchpoint-card">
         <div class="touchpoint-dot"></div>
         <h4>SuperValu App</h4>
         <p>The reward embedded directly in the grocery app's home feed via a Coffee Corner card, since most Frank &amp; Honest purchases happen alongside a grocery shop.</p>
+        <a href="https://super-valu-app.vercel.app/" class="touchpoint-link" target="_blank" rel="noopener noreferrer">Try it live &#8594;</a>
       </div>
       <div class="touchpoint-card">
         <div class="touchpoint-dot"></div>
         <h4>My Centra App</h4>
         <p>The cross-brand loyalty hub — a single barcode, a combined reusable-cup save count, and one activity feed spanning every linked brand.</p>
+        <a href="https://my-centra-app-cfl2-sigma.vercel.app/" class="touchpoint-link" target="_blank" rel="noopener noreferrer">Try it live &#8594;</a>
       </div>
     </div>
   </div>
