@@ -5,6 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Drip Circular App Cedric Mathias</title>
   <meta name="description" content="Drip Circular App Design Thinking and Service Design case study by Cedric Mathias." />
+  <link rel="canonical" href="https://cedricmathias1.github.io/drip.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Drip Circular App — Cedric Mathias" />
+  <meta property="og:description" content="Drip Circular App Design Thinking and Service Design case study by Cedric Mathias." />
+  <meta property="og:url" content="https://cedricmathias1.github.io/drip.html" />
+  <meta property="og:image" content="https://cedricmathias1.github.io/images/drip-profile.png" />
+  <meta property="og:site_name" content="Cedric Mathias" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Drip Circular App — Cedric Mathias" />
+  <meta name="twitter:description" content="Drip Circular App Design Thinking and Service Design case study by Cedric Mathias." />
+  <meta name="twitter:image" content="https://cedricmathias1.github.io/images/drip-profile.png" />
+
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -52,6 +65,9 @@
     img { display: block; max-width: 100%; }
     ::-webkit-scrollbar { width: 3px; }
     ::-webkit-scrollbar-thumb { background: var(--amber); border-radius: 2px; }
+
+    .skip-link { position: absolute; left: -9999px; top: 0; z-index: 999; background: var(--ink); color: var(--bg); padding: 12px 22px; border-radius: 0 0 8px 0; font-size: 0.85rem; font-weight: 600; }
+    .skip-link:focus { left: 0; }
 
     /* NAV */
     .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; height: 60px; padding: 0 48px; display: flex; align-items: center; justify-content: space-between; background: var(--nav-bg); backdrop-filter: blur(20px) saturate(180%); border-bottom: 1px solid var(--border); transition: background 0.4s, border-color 0.4s; }
@@ -113,7 +129,7 @@
     .data-num { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 900; color: var(--amber); line-height: 1; margin-bottom: 8px; letter-spacing: -0.04em; }
     .data-label { font-size: 0.8rem; font-weight: 600; color: rgba(250,248,244,0.8); margin-bottom: 4px; }
     [data-theme="dark"] .data-label { color: var(--ink-2); }
-    .data-source { font-size: 0.7rem; color: rgba(250,248,244,0.35); line-height: 1.4; }
+    .data-source { font-size: 0.7rem; color: rgba(250,248,244,0.5); line-height: 1.4; }
     [data-theme="dark"] .data-source { color: var(--ink-3); }
     .data-insight { background: var(--amber-pale); border: 1px solid var(--amber-glow); border-radius: var(--r); padding: 20px 24px; margin-top: 16px; }
     .data-insight h4 { font-size: 0.85rem; font-weight: 700; color: var(--amber); margin-bottom: 8px; }
@@ -181,7 +197,7 @@
     /* NEXT */
     .next-case { background: var(--ink); padding: 72px 48px; display: flex; align-items: center; justify-content: space-between; gap: 32px; transition: background 0.4s; }
     [data-theme="dark"] .next-case { background: var(--bg-3); border-top: 1px solid var(--border); }
-    .next-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,248,244,0.35); margin-bottom: 8px; }
+    .next-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,248,244,0.5); margin-bottom: 8px; }
     [data-theme="dark"] .next-label { color: var(--ink-3); }
     .next-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: rgba(250,248,244,0.9); line-height: 1.2; }
     [data-theme="dark"] .next-title { color: var(--ink); }
@@ -190,7 +206,7 @@
 
     .footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,0.06); padding: 22px 48px; display: flex; justify-content: space-between; align-items: center; }
     [data-theme="dark"] .footer { background: var(--bg-2); border-top-color: var(--border); }
-    .footer p { font-size: 0.75rem; color: rgba(250,248,244,0.3); }
+    .footer p { font-size: 0.75rem; color: rgba(250,248,244,0.5); }
     [data-theme="dark"] .footer p { color: var(--ink-3); }
 
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
@@ -213,6 +229,8 @@
 </head>
 <body>
 
+<a href="#main" class="skip-link">Skip to content</a>
+
 <header class="nav">
   <a href="index.html" class="nav-logo">Cedric<span>.</span></a>
   <div class="nav-right">
@@ -225,7 +243,7 @@
 </header>
 
 <!-- HERO -->
-<section class="cs-hero">
+<section class="cs-hero" id="main">
   <div class="cs-hero-inner">
     <div class="cs-tag">Design Thinking &nbsp;·&nbsp; Service Design &nbsp;·&nbsp; Team Project</div>
     <h1 class="cs-headline">Drip<br><em>Circular App</em></h1>
@@ -649,11 +667,12 @@
 </div>
 
 <footer class="footer">
-  <p>2026 Cedric Mathias Dublin, Ireland</p>
+  <p><span id="footerYear">2026</span> Cedric Mathias, Dublin, Ireland</p>
   <p>Designed and built by Cedric Mathias</p>
 </footer>
 
 <script>
+  document.getElementById('footerYear').textContent = new Date().getFullYear();
   const root = document.documentElement;
   const btn = document.getElementById('themeBtn');
   const label = document.getElementById('themeLabel');
