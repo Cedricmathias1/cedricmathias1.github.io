@@ -35,6 +35,7 @@
          (e.g. .next-case), regardless of the active theme. Do not
          redefine this under [data-theme="dark"]. */
       --on-dark: #f7f5f0;
+      --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
     }
     [data-theme="dark"] {
       --paper:   #0a0a0a;
@@ -65,11 +66,12 @@
     .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; }
     .nav-logo span { color: var(--accent); }
     .nav-right { display: flex; align-items: center; gap: 14px; }
-    .nav-back { font-size: 0.8rem; font-weight: 500; color: var(--ink-3); display: flex; align-items: center; gap: 7px; padding: 7px 14px; border: 1px solid var(--line); transition: all 0.2s; }
+    .nav-back { font-size: 0.8rem; font-weight: 500; color: var(--ink-3); display: flex; align-items: center; gap: 7px; padding: 7px 14px; border: 1px solid var(--line); transition: color 0.2s var(--ease-out), border-color 0.2s var(--ease-out); }
     .nav-back:hover { color: var(--accent); border-color: var(--accent); }
     .nav-back-arrow { font-size: 0.9rem; }
-    .nav-toggle { height: 32px; padding: 0 14px; border: 1px solid var(--line); background: transparent; font-size: 0.68rem; font-weight: 600; color: var(--ink-2); letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 7px; transition: all 0.2s; font-family: 'DM Mono', monospace; }
+    .nav-toggle { height: 32px; padding: 0 14px; border: 1px solid var(--line); background: transparent; font-size: 0.68rem; font-weight: 600; color: var(--ink-2); letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 7px; transition: border-color 0.2s var(--ease-out), color 0.2s var(--ease-out), transform 0.12s var(--ease-out); font-family: 'DM Mono', monospace; }
     .nav-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .nav-toggle:active { transform: scale(0.96); }
     .nav-toggle-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
 
     /* HERO */
@@ -165,8 +167,9 @@
     [data-theme="dark"] .next-case { background: var(--paper-2); border-top: 1px solid var(--line); }
     .next-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(247,245,240,0.5); margin-bottom: 10px; font-family: 'DM Mono', monospace; }
     .next-title { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 700; color: var(--on-dark); line-height: 1.2; }
-    .next-btn { flex-shrink: 0; height: 46px; padding: 0 28px; border: 1px solid var(--accent); color: var(--accent); font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s; white-space: nowrap; }
+    .next-btn { flex-shrink: 0; height: 46px; padding: 0 28px; border: 1px solid var(--accent); color: var(--accent); font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: background-color 0.2s var(--ease-out), color 0.2s var(--ease-out), transform 0.12s var(--ease-out); white-space: nowrap; }
     .next-btn:hover { background: var(--accent); color: var(--white); }
+    .next-btn:active { transform: scale(0.97); }
 
     .footer { padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--line); }
     .footer p { font-size: 0.76rem; color: var(--ink-3); }
@@ -174,6 +177,12 @@
     /* REVEAL */
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { transition: opacity 0.3s ease; transform: none; }
+      .reveal.visible { transform: none; }
+      * { scroll-behavior: auto !important; }
+    }
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
