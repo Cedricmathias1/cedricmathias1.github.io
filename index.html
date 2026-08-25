@@ -112,6 +112,17 @@
     ::-webkit-scrollbar-thumb { background: var(--amber); border-radius: 2px; }
 
     /* ─────────────────────────────────────────
+       SKIP LINK
+    ───────────────────────────────────────── */
+    .skip-link {
+      position: absolute; left: -9999px; top: 0; z-index: 999;
+      background: var(--ink); color: var(--bg);
+      padding: 12px 22px; border-radius: 0 0 8px 0;
+      font-size: 0.85rem; font-weight: 600;
+    }
+    .skip-link:focus { left: 0; }
+
+    /* ─────────────────────────────────────────
        NAV
     ───────────────────────────────────────── */
     .nav {
@@ -568,7 +579,7 @@
     .tag-dark {
       font-size: 0.67rem; font-weight: 600;
       letter-spacing: 0.05em; text-transform: uppercase;
-      color: rgba(250,248,244,0.4);
+      color: rgba(250,248,244,0.6);
       border: 1px solid rgba(255,255,255,0.1);
       padding: 3px 10px; border-radius: 20px;
     }
@@ -584,7 +595,7 @@
     }
     .featured-metric-label {
       font-size: 0.75rem; font-weight: 500;
-      color: rgba(250,248,244,0.45); margin-top: 4px;
+      color: rgba(250,248,244,0.6); margin-top: 4px;
     }
     [data-theme="dark"] .featured-metric-label { color: var(--ink-3); }
 
@@ -770,7 +781,7 @@
     .contact-btn-icon { width: 16px; height: 16px; }
     .contact-note {
       margin-top: 20px;
-      font-size: 0.8rem; color: rgba(250,248,244,0.35); line-height: 1.6;
+      font-size: 0.8rem; color: rgba(250,248,244,0.5); line-height: 1.6;
     }
     [data-theme="dark"] .contact-note { color: var(--ink-3); }
 
@@ -785,7 +796,7 @@
       padding: 20px 24px;
       border-bottom: 1px solid rgba(255,255,255,0.08);
       font-size: 0.72rem; font-weight: 700;
-      color: rgba(250,248,244,0.4);
+      color: rgba(250,248,244,0.55);
       letter-spacing: 0.1em; text-transform: uppercase;
     }
     [data-theme="dark"] .roles-header { color: var(--ink-3); border-bottom-color: var(--border); }
@@ -812,7 +823,7 @@
     [data-theme="dark"] .role-btn-name { color: var(--ink-2); }
     .role-btn.active .role-btn-name { color: var(--amber); font-weight: 600; }
     .role-btn-arrow {
-      font-size: 0.8rem; color: rgba(250,248,244,0.25);
+      font-size: 0.8rem; color: rgba(250,248,244,0.45);
       transition: transform 0.2s, color 0.2s;
     }
     [data-theme="dark"] .role-btn-arrow { color: var(--ink-3); }
@@ -837,7 +848,7 @@
       display: flex; justify-content: space-between; align-items: center;
     }
     [data-theme="dark"] .footer { background: var(--bg-2); border-top-color: var(--border); }
-    .footer p { font-size: 0.75rem; color: rgba(250,248,244,0.3); }
+    .footer p { font-size: 0.75rem; color: rgba(250,248,244,0.5); }
     [data-theme="dark"] .footer p { color: var(--ink-3); }
 
     /* ─────────────────────────────────────────
@@ -881,6 +892,8 @@
 </head>
 <body>
 
+<a href="#main" class="skip-link">Skip to content</a>
+
 <!-- NAV -->
 <header class="nav" id="siteNav">
   <a href="#" class="nav-logo">Cedric<span>.</span></a>
@@ -908,7 +921,7 @@
 </header>
 
 <!-- HERO -->
-<section class="hero" aria-label="Introduction">
+<section class="hero" id="main" aria-label="Introduction">
   <div class="hero-glow" aria-hidden="true"></div>
 
   <!-- LEFT: TEXT -->
@@ -1013,7 +1026,7 @@
       <div class="case-featured-inner">
         <div class="case-featured-left">
           <div class="case-tag">Featured Case Study</div>
-          <div class="case-company" style="color:rgba(250,248,244,0.35); margin-bottom:12px;">Pepsales AI</div>
+          <div class="case-company" style="color:rgba(250,248,244,0.55); margin-bottom:12px;">Pepsales AI</div>
           <div class="case-featured-title">Landing Page Redesign and Lead Conversion Overhaul</div>
           <div class="case-featured-desc">The page was converting at 0.2%. I audited the funnel, rebuilt the page from scratch structure, copy, CTA hierarchy then ran campaigns against the new experience. The design decisions drove the result as much as the ads did.</div>
           <div class="case-featured-tags">
@@ -1031,7 +1044,7 @@
           </div>
           <div style="display:flex;align-items:center;gap:12px;">
             <div style="flex:1;height:1px;background:rgba(255,255,255,0.08);"></div>
-            <div style="font-size:0.7rem;color:rgba(250,248,244,0.3);font-weight:600;letter-spacing:0.06em;">TO</div>
+            <div style="font-size:0.7rem;color:rgba(250,248,244,0.5);font-weight:600;letter-spacing:0.06em;">TO</div>
             <div style="flex:1;height:1px;background:rgba(255,255,255,0.08);"></div>
           </div>
           <div class="featured-metric">
@@ -1160,9 +1173,7 @@
     <!-- Frank & Honest / Musgrave -->
     <div class="design-card reveal">
       <div class="design-card-thumb">
-        <div class="design-card-thumb-placeholder" style="background: linear-gradient(135deg, #00b5b0, #1a2e3a);">
-          <span class="thumb-text">F&amp;H</span>
-        </div>
+        <img src="images/musgrave-home.png" alt="Frank &amp; Honest app home dashboard with Cup Journey loyalty ring" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 0.5s ease;" />
         <div class="design-card-overlay">
           <div class="design-card-type">UX Research · Behavioural Design · Team Capstone</div>
         </div>
