@@ -31,6 +31,10 @@
       --accent:  #c2570a;
       --white:   #ffffff;
       --nav-bg:  rgba(247,245,240,0.88);
+      /* Fixed light color for text on surfaces that are ALWAYS dark
+         (e.g. .next-case), regardless of the active theme. Do not
+         redefine this under [data-theme="dark"]. */
+      --on-dark: #f7f5f0;
     }
     [data-theme="dark"] {
       --paper:   #0a0a0a;
@@ -160,9 +164,9 @@
     .next-case { background: var(--ink); padding: 84px 48px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
     [data-theme="dark"] .next-case { background: var(--paper-2); border-top: 1px solid var(--line); }
     .next-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(247,245,240,0.5); margin-bottom: 10px; font-family: 'DM Mono', monospace; }
-    .next-title { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 700; color: var(--paper); line-height: 1.2; }
+    .next-title { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 700; color: var(--on-dark); line-height: 1.2; }
     .next-btn { flex-shrink: 0; height: 46px; padding: 0 28px; border: 1px solid var(--accent); color: var(--accent); font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s; white-space: nowrap; }
-    .next-btn:hover { background: var(--accent); color: var(--ink); }
+    .next-btn:hover { background: var(--accent); color: var(--white); }
 
     .footer { padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--line); }
     .footer p { font-size: 0.76rem; color: var(--ink-3); }
@@ -207,7 +211,7 @@
 <section class="cs-hero" id="main">
   <div class="cs-hero-inner">
     <div class="cs-eyebrow">
-      <span class="cs-eyebrow-num">Case 01</span>
+      <span class="cs-eyebrow-num">Case 03</span>
       <span class="cs-eyebrow-line"></span>
       <span class="cs-tag">UX Research &nbsp;·&nbsp; Product Design &nbsp;·&nbsp; 0 to 1 Project</span>
     </div>
@@ -487,9 +491,9 @@
 <div class="next-case">
   <div>
     <div class="next-label">Next Case Study</div>
-    <div class="next-title">Drip Circular App</div>
+    <div class="next-title">Frank &amp; Honest Reusable Cup Initiative</div>
   </div>
-  <a href="drip.html" class="next-btn">View case study &#8594;</a>
+  <a href="musgrave.html" class="next-btn">View case study &#8594;</a>
 </div>
 
 <footer class="footer">
