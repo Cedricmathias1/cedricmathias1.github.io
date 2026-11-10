@@ -69,7 +69,7 @@
     fillMetrics($('dialog-metrics'), project.metrics);
     const link = $('dialog-link');
     link.href = project.url;
-    link.textContent = project.category === 'design' ? 'Read full case study ↗' : 'Explore my role ↗';
+    link.textContent = project.category === 'design' ? 'Read full case study ↗︎' : 'Explore my role ↗︎';
     renderScreen();
     dialog.scrollTop = 0;
   }
@@ -104,32 +104,54 @@
     $('close-project').focus();
   });
 
-  const tabs = Array.from(document.querySelectorAll('.company-list [role="tab"]'));
-  function selectCompany(tab, focus = false) {
-    tabs.forEach(item => {
-      const selected = item === tab;
-      item.setAttribute('aria-selected', String(selected));
-      item.tabIndex = selected ? 0 : -1;
-      const panel = $(item.getAttribute('aria-controls'));
-      panel.hidden = !selected;
-      panel.setAttribute('role', 'tabpanel');
-      panel.setAttribute('aria-labelledby', item.id);
-      panel.tabIndex = 0;
+  function initializeTabs(list, onSelect) {
+    const tabs = Array.from(list.querySelectorAll('[role="tab"]'));
+    function select(tab) {
+      const previous = tabs.find(item => item.getAttribute('aria-selected') === 'true');
+      tabs.forEach(item => {
+        const selected = item === tab;
+        item.setAttribute('aria-selected', String(selected));
+        item.tabIndex = selected ? 0 : -1;
+        const panel = $(item.getAttribute('aria-controls'));
+        panel.hidden = !selected;
+        panel.setAttribute('role', 'tabpanel');
+        panel.setAttribute('aria-labelledby', item.id);
+        panel.tabIndex = 0;
+      });
+      if (tab !== previous) onSelect?.($(tab.getAttribute('aria-controls')));
+    }
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => select(tab));
+      tab.addEventListener('keydown', event => {
+        const vertical = list.getAttribute('aria-orientation') === 'vertical';
+        let next;
+        if (event.key === (vertical ? 'ArrowDown' : 'ArrowRight')) next = (index + 1) % tabs.length;
+        else if (event.key === (vertical ? 'ArrowUp' : 'ArrowLeft')) next = (index - 1 + tabs.length) % tabs.length;
+        else if (event.key === 'Home') next = 0;
+        else if (event.key === 'End') next = tabs.length - 1;
+        else return;
+        event.preventDefault();
+        select(tabs[next]);
+        tabs[next].focus();
+      });
     });
-    if (focus) tab.focus({ preventScroll: true });
+    select(tabs[0]);
+    list.hidden = false;
+    return select;
   }
-  tabs.forEach((tab, index) => {
-    tab.addEventListener('click', () => selectCompany(tab));
-    tab.addEventListener('keydown', event => {
-      let next = index;
-      if (['ArrowDown', 'ArrowRight'].includes(event.key)) next = (index + 1) % tabs.length;
-      else if (['ArrowUp', 'ArrowLeft'].includes(event.key)) next = (index - 1 + tabs.length) % tabs.length;
-      else if (event.key === 'Home') next = 0;
-      else if (event.key === 'End') next = tabs.length - 1;
-      else return;
-      event.preventDefault(); selectCompany(tabs[next], true);
-    });
+
+  const motion = window.matchMedia('(prefers-reduced-motion: no-preference)');
+  let prototypeAnimation;
+  initializeTabs(document.querySelector('.prototype-tabs'), panel => {
+    prototypeAnimation?.cancel();
+    if (motion.matches && panel.animate) {
+      prototypeAnimation = panel.animate(
+        [{ opacity: .7, transform: 'translateY(4px)' }, { opacity: 1, transform: 'none' }],
+        { duration: 180, easing: getComputedStyle(document.documentElement).getPropertyValue('--ease').trim() }
+      );
+    }
   });
+  const selectCompany = initializeTabs(document.querySelector('.company-list'));
   $('dialog-link').addEventListener('click', () => {
     if (!activeProject || activeProject.category !== 'growth') return;
     selectCompany($(`tab-${activeProject.id}`));
@@ -140,8 +162,6 @@
   document.querySelectorAll('.work-card[data-category="growth"] .text-link').forEach(link => {
     link.addEventListener('click', () => selectCompany($(`tab-${link.closest('.work-card').dataset.project}`)));
   });
-  selectCompany(tabs[0]);
-  document.querySelector('.company-list').hidden = false;
   document.querySelector('.filter-row').hidden = false;
   document.documentElement.classList.add('enhanced');
 })();
