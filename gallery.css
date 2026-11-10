@@ -77,8 +77,9 @@
   .intro-type { grid-column: 1 / -1; }
   .intro h1 { font-size: clamp(5rem, 22vw, 8rem); }
   .intro-note { margin-top: 24px; }
-  .portrait { grid-column: 2; margin-top: -4px; }
-  .intro-bottom { grid-column: 1; grid-row: 2; display: block; margin: 0; padding-top: 12px; }
+  .portrait { grid-column: 1 / -1; margin-top: 0; }
+  .portrait img { aspect-ratio: 4 / 5; object-position: center 25%; }
+  .intro-bottom { grid-column: 1 / -1; display: flex; align-items: center; margin: 0; padding-top: 12px; }
   .intro-bottom a { display: flex; margin-top: 12px; }
   .gallery-home .section { padding-block: 48px; }
   .gallery-home .work-grid { grid-template-columns: 1fr; gap: 40px; }
