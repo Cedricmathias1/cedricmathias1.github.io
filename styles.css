@@ -76,3 +76,7 @@ p { color: var(--secondary); }
   body { background: white; color: black; }
   .section { padding-block: 24px; }
 }
+
+.about-portrait { margin-top: 24px; max-width: 280px; }
+.about-portrait img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 25%; border-radius: 8px; }
+.about-portrait figcaption { margin-top: 8px; color: var(--muted); font-size: .8125rem; }
