@@ -1,14 +1,14 @@
 /* Design pass informed by Unslop by Damir Sokolovsky (heydamir.design/unslop). */
 :root {
   color-scheme: light;
-  --paper: #f7f4ee;
-  --surface: #fffdf8;
-  --board: #ece6da;
-  --ink: #231e19;
-  --secondary: #574e44;
-  --muted: #695e52;
-  --line: #d5ccbf;
-  --accent: #8c3c27;
+  --paper: #f7f7f1;
+  --surface: #fffefa;
+  --board: #e9ece3;
+  --ink: #202820;
+  --secondary: #495349;
+  --muted: #525d53;
+  --line: #d6ddd2;
+  --accent: #245c48;
   --ease: cubic-bezier(.22, 1, .36, 1);
   --sans: system-ui, sans-serif;
   --serif: Georgia, "Times New Roman", serif;
@@ -23,13 +23,13 @@ button { font: inherit; }
 img { display: block; max-width: 100%; height: auto; }
 h1, h2, h3, p, figure { margin: 0; }
 h1, h2, h3 { font: 400 2rem/1.08 var(--serif); text-wrap: balance; }
-h1 { font-size: clamp(2.75rem, 6.15vw, 5.5rem); letter-spacing: -.055em; }
-h2 { font-size: clamp(2.25rem, 4.5vw, 4rem); letter-spacing: -.045em; }
+h1 { font-size: clamp(2.75rem, 6.15vw, 5.5rem); letter-spacing: -.045em; }
+h2 { font-size: clamp(2.25rem, 4.5vw, 4rem); letter-spacing: -.035em; }
 p { color: var(--secondary); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 ::selection { background: var(--accent); color: white; }
 .wrap, .nav { width: min(1200px, calc(100% - 64px)); margin-inline: auto; }
-.section { padding-block: 80px; }
+.section { padding-block: 96px; }
 .eyebrow, .availability, .caption, .fine-print { font-size: .8125rem; color: var(--muted); }
 .eyebrow { margin-bottom: 12px; }
 .folio { display: inline-block; margin-right: 8px; color: var(--accent); font-variant-numeric: tabular-nums; }
@@ -37,16 +37,16 @@ p { color: var(--secondary); }
 .lede { margin-top: 20px; max-width: 60ch; font-size: clamp(1.05rem, 1.6vw, 1.25rem); }
 .skip { position: fixed; z-index: 3; top: 8px; left: 8px; padding: 12px; background: var(--surface); transform: translateY(-150%); }
 .skip:focus { transform: none; }
-.nav-shell { border-bottom: 1px solid var(--line); }
+.nav-shell { background: var(--paper); border-bottom: 1px solid var(--line); }
 .nav, .nav-links { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .nav { min-height: 68px; }
-.brand { font: 400 1.3rem/1.2 var(--serif); }
+.brand { font-weight: 600; }
 .nav-links a, .text-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: .875rem; }
 .nav-links a:hover, .text-link:hover, .footer a:hover { text-decoration: underline; text-underline-offset: 4px; }
 .text-link, .contact-link { color: var(--accent); }
 .actions { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; margin-top: 24px; }
 .button { display: inline-flex; justify-content: center; align-items: center; gap: 8px; min-height: 48px; padding: 8px 16px; border: 1px solid transparent; border-radius: var(--radius); background: var(--accent); color: white; font-size: .875rem; }
-.button:hover { background: #71301f; }
+.button:hover { background: #194533; }
 .button.secondary { color: var(--ink); background: var(--surface); border-color: var(--line); }
 .button.secondary:hover { background: var(--board); }
 .approach { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; margin-top: 32px; }
@@ -56,7 +56,11 @@ p { color: var(--secondary); }
 .about p + p { margin-top: 16px; }
 .stack, .skill-pills { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-block: 20px 12px; font-size: .8125rem; color: var(--muted); }
 .stack span, .skill-pills span { border-bottom: 1px solid var(--line); padding-bottom: 4px; }
-.contact { background: var(--board); }
+.contact { background: #1f352b; color: #fffefa; }
+.contact .lede { color: #e1ebe2; }
+.contact .button:not(.secondary) { background: #dce9da; color: #1f352b; }
+.contact .button:not(.secondary):hover { background: #c7dcc6; }
+.contact :focus-visible { outline-color: white; }
 .footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; padding-block: 24px; color: var(--muted); font-size: .8125rem; }
 @media (max-width: 720px) {
   .wrap, .nav { width: calc(100% - 40px); }

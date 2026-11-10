@@ -1,13 +1,23 @@
-.hero { padding-block: 64px 40px; }
-.hero-grid { display: grid; grid-template-columns: .92fr 1.08fr; align-items: center; gap: 48px; }
-.hero h1 { text-wrap: initial; }
+.hero { padding-block: 80px 48px; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); align-items: center; gap: 48px; }
+.hero h1 { font-size: clamp(2.75rem, 5.4vw, 5.25rem); text-wrap: balance; }
 .hero .availability { margin-top: 16px; }
-.hero-feature { min-width: 0; }
-.hero-visual { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: end; justify-items: center; gap: 20px; padding: 32px 32px 0; height: clamp(320px, 39vw, 488px); overflow: hidden; background: #203d34; border-radius: 12px; }
-.hero-visual img { width: 100%; max-width: 236px; align-self: start; border-radius: 12px; }
-.hero-visual img + img { margin-top: 48px; }
-.hero-feature figcaption { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; color: var(--secondary); font-size: .8125rem; border-bottom: 1px solid var(--line); }
-.hero-feature figcaption a { margin-left: auto; }
+.hero-feature { min-width: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+.prototype-bar, .prototype-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px 16px; padding: 8px 16px; font-size: .8125rem; }
+.prototype-bar { min-height: 48px; }
+.prototype-bar > span:last-child { color: var(--muted); }
+.prototype-stages { background: #203d34; color: #fffefa; }
+.prototype-stage { display: grid; grid-template-columns: minmax(0, .84fr) minmax(0, 1fr); align-items: end; grid-template-rows: minmax(0, 1fr); gap: 16px; height: clamp(296px, 33vw, 456px); padding: 24px 24px 0; overflow: hidden; }
+.prototype-stage figcaption { align-self: center; padding-block-end: 24px; }
+.prototype-stage strong { display: block; font: 400 clamp(1.75rem, 3.2vw, 3.5rem)/1.05 var(--serif); text-wrap: balance; }
+.prototype-stage figcaption span { display: block; color: #dce9da; font-size: .875rem; margin-top: 12px; }
+.prototype-stage a { display: block; width: min(100%, 252px); height: 100%; min-height: 0; align-self: start; }
+.prototype-stage a:focus-visible { outline-color: white; outline-offset: 4px; }
+.prototype-stage img { width: 100%; border-radius: 12px 12px 0 0; }
+.prototype-tabs { display: flex; flex-wrap: wrap; gap: 4px; }
+.prototype-tabs button { border: 0; border-radius: 6px; min-height: 44px; padding-inline: 8px; background: transparent; color: var(--secondary); cursor: pointer; }
+.prototype-tabs button:hover, .prototype-tabs button[aria-selected=true] { color: var(--accent); background: var(--board); }
+.prototype-footer > a { margin-left: auto; }
 .proof { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; padding-block: 24px; border-block: 1px solid var(--line); }
 .proof strong, .job-metrics strong, .dialog-metrics strong, .metric-art strong, .art-conversion, .launch-ranks { display: block; color: var(--ink); font: 400 clamp(1.5rem, 3.5vw, 2.75rem)/1.15 var(--serif); font-variant-numeric: tabular-nums; }
 .proof small { color: var(--muted); }
@@ -28,12 +38,12 @@
 .card-art img { width: min(220px, 100%); border-radius: 8px; }
 .art-musgrave { background: #28473d; }
 .art-musgrave img { width: min(252px, 100%); }
-.art-drip { background: #e5dfe8; }
+.art-drip { background: #e7e2e9; }
 .art-usch { background: #dce5eb; align-items: center; padding-bottom: 24px; }
 .art-usch img { width: 100%; }
 .art-pepsales, .art-kommunicate { height: 200px; align-content: center; gap: 12px; padding: 24px; text-align: center; }
 .art-conversion, .launch-ranks { font-size: clamp(2.25rem, 5vw, 4.25rem); }
-.art-conversion strong, .launch-ranks strong { font-weight: 400; }
+.art-conversion strong, .launch-ranks strong { display: inline; color: var(--accent); font: inherit; }
 .art-conversion i, .company-period i { font-style: normal; }
 .art-kicker, .art-caption, .card-role { font-size: .8125rem; color: var(--muted); }
 .card-copy { padding: 24px; align-self: center; }
@@ -50,7 +60,7 @@
 .company-list button[aria-selected=true] { border-color: var(--accent); box-shadow: inset 3px 0 var(--accent); background: var(--board); }
 .company-list small, .company-period, .job-metrics span, .dialog-metrics span, .metric-art span { display: block; color: var(--muted); font-size: .8125rem; }
 .job-panel { padding: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
-.job-panel + .job-panel { margin-top: 16px; }
+.job-panel + .job-panel:not([role=tabpanel]) { margin-top: 16px; }
 .job-intro, .experience-note { margin-top: 16px; }
 .experience-note { font-size: .8125rem; }
 .job-panel ul, .story-chapters ul { padding-left: 20px; color: var(--secondary); }
@@ -79,18 +89,21 @@
 .dialog-story > .button { margin-top: 20px; }
 .modal-open { overflow: hidden; }
 @media (prefers-reduced-motion: no-preference) {
-  .filter-enter, #project-dialog[open] { animation: appear 180ms var(--ease); }
+  .filter-enter { animation: appear 160ms var(--ease); }
+  #project-dialog[open] { animation: arrive 220ms var(--ease); }
+  .hero-copy { animation: arrive 300ms var(--ease); }
+  @keyframes arrive { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
   .button, .quick-button, .icon-button { transition: background-color 160ms var(--ease); }
   @keyframes appear { from { opacity: .6; } to { opacity: 1; } }
 }
 @media (max-width: 800px) {
   .hero-grid { gap: 24px; }
-  .hero-visual { height: 320px; padding: 24px 16px 0; gap: 12px; }
+
 }
 @media (max-width: 700px) {
   .hero { padding-block: 40px 24px; }
   .hero-grid, .work-grid, .work-card.card-featured, .experience-layout:has(.company-list:not([hidden])), .dialog-content { grid-template-columns: 1fr; }
-  .hero-visual { height: clamp(280px, 70vw, 404px); }
+  .prototype-stage { height: clamp(248px, 58vw, 380px); padding: 16px 16px 0; }
   .card-featured .card-art { border-radius: 11px 11px 0 0; height: 304px; }
   .explorer-heading, .filter-row { align-items: start; flex-direction: column; }
   .dialog-gallery img { max-height: 260px; }
