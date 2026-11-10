@@ -54,3 +54,31 @@
     transform: translate(2px, -2px);
   }
 }
+
+.case-guide { margin-bottom: 36px; }
+.case-guide > .eyebrow { margin-bottom: 12px; }
+.case-guide > div { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.case-guide a {
+  display: grid;
+  gap: 6px;
+  padding: 16px 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+.case-guide a:hover, .case-guide a:focus-visible { border-color: var(--accent); }
+.case-guide small { color: var(--accent); font: 11px/1.45 var(--mono); }
+.case-guide strong { display: flex; justify-content: space-between; color: var(--text); }
+.case-guide a > span { color: var(--muted); font-size: 13px; line-height: 1.4; }
+.case-guide strong span { color: var(--accent); }
+@media (max-width: 650px) {
+  .case-guide > div { grid-template-columns: 1fr; }
+}
+@media screen and (prefers-reduced-motion: no-preference) {
+  .hero h1 span { animation: headline-accent 850ms var(--ease) 80ms backwards; }
+  .art-in-view img { animation-duration: 750ms; }
+  @keyframes headline-accent {
+    from { opacity: .4; transform: translateY(18px); }
+    to { opacity: 1; transform: none; }
+  }
+}
