@@ -140,17 +140,6 @@
     return select;
   }
 
-  const motion = window.matchMedia('(prefers-reduced-motion: no-preference)');
-  let prototypeAnimation;
-  initializeTabs(document.querySelector('.prototype-tabs'), panel => {
-    prototypeAnimation?.cancel();
-    if (motion.matches && panel.animate) {
-      prototypeAnimation = panel.animate(
-        [{ opacity: .7, transform: 'translateY(4px)' }, { opacity: 1, transform: 'none' }],
-        { duration: 180, easing: getComputedStyle(document.documentElement).getPropertyValue('--ease').trim() }
-      );
-    }
-  });
   const selectCompany = initializeTabs(document.querySelector('.company-list'));
   $('dialog-link').addEventListener('click', () => {
     if (!activeProject || activeProject.category !== 'growth') return;
