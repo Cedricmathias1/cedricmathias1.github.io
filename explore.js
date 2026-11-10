@@ -18,14 +18,13 @@
     filters.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === activeFilter)));
     cards.forEach(card => {
       const visible = activeFilter === 'all' || card.dataset.category === activeFilter;
-      if (!visible || card.hidden) card.classList.toggle('filter-enter', visible);
+      card.classList.toggle('filter-enter', visible && card.hidden);
       card.hidden = !visible;
       if (visible) count++;
     });
     plain('project-count', `${count} ${count === 1 ? 'project' : 'projects'}`);
   }
   filters.forEach(button => button.addEventListener('click', () => filterProjects(button.dataset.filter)));
-  document.querySelectorAll('[data-enter]').forEach(link => link.addEventListener('click', () => filterProjects(link.dataset.enter)));
 
   function fillMetrics(parent, metrics) {
     parent.replaceChildren();
@@ -146,24 +145,3 @@
   document.querySelector('.filter-row').hidden = false;
   document.documentElement.classList.add('enhanced');
 })();
-
-// Animate the artwork once as visitors reach it. The cards themselves stay readable.
-if ('IntersectionObserver' in window && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
-  const artworkObserver = new IntersectionObserver((entries, observer) => {
-    for (const { target, isIntersecting } of entries) {
-      if (!isIntersecting || target.closest('[hidden]')) continue;
-      observer.unobserve(target);
-      const image = target.querySelector('img');
-      const clearEntrance = () => {
-        target.classList.remove('art-in-view');
-        image.removeEventListener('animationend', clearEntrance);
-        image.removeEventListener('animationcancel', clearEntrance);
-      };
-      image.addEventListener('animationend', clearEntrance);
-      image.addEventListener('animationcancel', clearEntrance);
-      target.classList.add('art-in-view');
-    }
-  }, { threshold: 0.2 });
-
-  document.querySelectorAll('.card-art:has(img)').forEach(art => artworkObserver.observe(art));
-}
