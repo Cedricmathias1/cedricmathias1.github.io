@@ -1,4 +1,4 @@
-/* Design pass informed by Unslop by Damir Sokolovsky (heydamir.design/unslop). */
+/* Design pass informed by Unslop by Damir Sokolovsky (@heydamir, https://heydamir.design/unslop), CC BY 4.0. */
 :root {
   color-scheme: light;
   --paper: #f7f7f1;
@@ -13,6 +13,7 @@
   --sans: system-ui, sans-serif;
   --serif: Georgia, "Times New Roman", serif;
   --radius: 8px;
+  --panel-radius: 12px;
 }
 * { box-sizing: border-box; }
 html { scroll-padding-top: 24px; }
@@ -29,17 +30,16 @@ p { color: var(--secondary); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 ::selection { background: var(--accent); color: white; }
 .wrap, .nav { width: min(1200px, calc(100% - 64px)); margin-inline: auto; }
-.section { padding-block: 96px; }
+.section { padding-block: 80px; }
+.section + .section:not(.contact) { border-top: 1px solid var(--line); }
 .eyebrow, .availability, .caption, .fine-print { font-size: .8125rem; color: var(--muted); }
 .eyebrow { margin-bottom: 12px; }
-.folio { display: inline-block; margin-right: 8px; color: var(--accent); font-variant-numeric: tabular-nums; }
-.folio::after { content: " /"; color: var(--muted); }
 .lede { margin-top: 20px; max-width: 60ch; font-size: clamp(1.05rem, 1.6vw, 1.25rem); }
 .skip { position: fixed; z-index: 3; top: 8px; left: 8px; padding: 12px; background: var(--surface); transform: translateY(-150%); }
 .skip:focus { transform: none; }
 .nav-shell { background: var(--paper); border-bottom: 1px solid var(--line); }
 .nav, .nav-links { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-.nav { min-height: 68px; }
+.nav { min-height: 64px; }
 .brand { font-weight: 600; }
 .nav-links a, .text-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: .875rem; }
 .nav-links a:hover, .text-link:hover, .footer a:hover { text-decoration: underline; text-underline-offset: 4px; }
@@ -52,7 +52,9 @@ p { color: var(--secondary); }
 .approach { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; margin-top: 32px; }
 .approach article { padding-top: 20px; border-top: 1px solid var(--line); }
 .approach h3 { margin-bottom: 12px; font-size: 1.65rem; }
-.about { display: grid; grid-template-columns: 1fr 1.3fr; gap: 48px; border-top: 1px solid var(--line); }
+.about { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); gap: 32px 48px; align-items: start; }
+.about h2 { grid-column: 1 / -1; }
+.about > div { max-width: 60ch; }
 .about p + p { margin-top: 16px; }
 .stack, .skill-pills { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-block: 20px 12px; font-size: .8125rem; color: var(--muted); }
 .stack span, .skill-pills span { border-bottom: 1px solid var(--line); padding-bottom: 4px; }
@@ -64,7 +66,7 @@ p { color: var(--secondary); }
 .footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; padding-block: 24px; color: var(--muted); font-size: .8125rem; }
 @media (max-width: 720px) {
   .wrap, .nav { width: calc(100% - 40px); }
-  .section { padding-block: 56px; }
+  .section { padding-block: 48px; }
   .about, .approach { grid-template-columns: 1fr; gap: 24px; }
 }
 @media (max-width: 520px) {
@@ -77,6 +79,6 @@ p { color: var(--secondary); }
   .section { padding-block: 24px; }
 }
 
-.about-portrait { margin-top: 24px; max-width: 280px; }
+.about-portrait { max-width: 300px; }
 .about-portrait img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 25%; border-radius: 8px; }
 .about-portrait figcaption { margin-top: 8px; color: var(--muted); font-size: .8125rem; }

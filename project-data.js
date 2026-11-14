@@ -146,7 +146,7 @@ window.portfolioProjects = [
     "role": "Product Marketing Associate",
     "period": "March–June 2025",
     "status": "Commercial marketing work",
-    "url": "#experience",
+    "url": "#job-pepsales",
     "challenge": "Campaigns needed a landing experience that made the product proposition and next action clearer. I worked across the destination page and acquisition journeys.",
     "contributions": [
       "Redesigned landing-page UX and copy, including structure and CTA hierarchy.",
@@ -159,7 +159,7 @@ window.portfolioProjects = [
         "Lead-capture conversion lift"
       ],
       [
-        "9→30%",
+        "9% → 30%",
         "Email open rate"
       ],
       [
@@ -179,7 +179,7 @@ window.portfolioProjects = [
     "role": "Associate Product Marketing Manager",
     "period": "August 2023–February 2025",
     "status": "Commercial marketing work",
-    "url": "#experience",
+    "url": "#job-kommunicate",
     "challenge": "Make an AI customer-support platform easier to understand, discover and sell. I connected product positioning with launches, campaign execution and sales conversations.",
     "contributions": [
       "Led two Product Hunt launches achieving #3 and #5 global rankings.",

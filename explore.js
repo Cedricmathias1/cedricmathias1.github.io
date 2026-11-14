@@ -152,15 +152,32 @@
     }
   });
   const selectCompany = initializeTabs(document.querySelector('.company-list'));
-  $('dialog-link').addEventListener('click', () => {
+  const roleLinks = Array.from(document.querySelectorAll('.work-card[data-category="growth"] .text-link'));
+  function selectCompanyFromLink(link) {
+    const tab = $(link.hash.slice(1).replace(/^job-/, 'tab-'));
+    if (tab) selectCompany(tab);
+  }
+  function selectCompanyFromHash() {
+    const link = roleLinks.find(link => link.hash === window.location.hash);
+    if (link) selectCompanyFromLink(link);
+  }
+  selectCompanyFromHash();
+  window.addEventListener('hashchange', selectCompanyFromHash);
+
+  $('dialog-link').addEventListener('click', event => {
     if (!activeProject || activeProject.category !== 'growth') return;
-    selectCompany($(`tab-${activeProject.id}`));
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const link = event.currentTarget;
+    selectCompanyFromLink(link);
     dialog.close();
     // Focus the destination after native modal focus restoration.
-    requestAnimationFrame(() => $(`job-${activeProject.id}`).focus({ preventScroll: true }));
+    requestAnimationFrame(() => $(link.hash.slice(1)).focus({ preventScroll: true }));
   });
-  document.querySelectorAll('.work-card[data-category="growth"] .text-link').forEach(link => {
-    link.addEventListener('click', () => selectCompany($(`tab-${link.closest('.work-card').dataset.project}`)));
+  roleLinks.forEach(link => {
+    link.addEventListener('click', event => {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      selectCompanyFromLink(link);
+    });
   });
   document.querySelector('.filter-row').hidden = false;
   document.documentElement.classList.add('enhanced');
