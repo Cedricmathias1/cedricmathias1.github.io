@@ -1,5 +1,6 @@
 .case-hero { padding-block: 64px 32px; }
-.case-hero h1 { max-width: 15ch; }
+.case-hero h1 { max-width: 17ch; text-wrap: pretty; }
+.case-intro .lede { max-width: 46ch; }
 .case-meta { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 20px; color: var(--muted); font-size: .8125rem; }
 .case-brief { max-width: 900px; margin-top: 24px; padding-block: 16px; border-block: 1px solid var(--line); }
 .case-brief dl, .callouts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
@@ -23,20 +24,20 @@
 .case-body li + li { margin-top: 12px; }
 .case-body strong { color: var(--ink); }
 .callouts { padding-block: 16px; margin-block: 16px; border-block: 1px solid var(--line); }
-.callouts strong { display: block; font: 400 2rem/1.2 var(--serif); font-variant-numeric: tabular-nums; }
+.callouts strong { display: block; font: 600 2rem/1.2 var(--sans); font-variant-numeric: tabular-nums; }
 .callouts span { font-size: .8125rem; }
 .decision-grid { display: grid; gap: 16px; margin: 20px 0 0; padding: 0; list-style: none; }
 .decision-grid > li { display: grid; margin: 0; border: 1px solid var(--line); border-radius: var(--panel-radius); background: var(--surface); }
 .decision-copy { align-self: center; padding: 24px; }
 .decision-copy h3 { font-size: 1.65rem; margin-bottom: 12px; }
-.decision-visual { padding: 16px; text-align: center; background: var(--board); border-radius: 0 0 11px 11px; }
+.decision-visual { padding: 16px; text-align: center; background: var(--board); border-radius: 0 0 calc(var(--panel-radius) - 1px) calc(var(--panel-radius) - 1px); }
 .decision-visual a { display: block; }
 .decision-visual img { margin-inline: auto; max-height: 328px; object-fit: contain; border-radius: 8px; }
 .decision-visual figcaption { margin-top: 8px; font-size: .8125rem; }
 .case-next { margin-block: 24px; }
 @media (min-width: 701px) {
   .decision-grid > li:has(.decision-visual) { grid-template-columns: minmax(0, 1fr) minmax(0, .9fr); }
-  .decision-visual { border-radius: 0 11px 11px 0; }
+  .decision-visual { border-radius: 0 calc(var(--panel-radius) - 1px) calc(var(--panel-radius) - 1px) 0; }
 }
 @media (max-width: 540px) {
   .case-hero { padding-top: 40px; }

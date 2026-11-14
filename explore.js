@@ -152,7 +152,7 @@
     }
   });
   const selectCompany = initializeTabs(document.querySelector('.company-list'));
-  const roleLinks = Array.from(document.querySelectorAll('.work-card[data-category="growth"] .text-link'));
+  const roleLinks = Array.from(document.querySelectorAll('a[href^="#job-"]:not(#dialog-link)'));
   function selectCompanyFromLink(link) {
     const tab = $(link.hash.slice(1).replace(/^job-/, 'tab-'));
     if (tab) selectCompany(tab);

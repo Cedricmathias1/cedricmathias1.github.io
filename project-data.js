@@ -144,7 +144,7 @@ window.portfolioProjects = [
     "title": "Improving lead capture for Pepsales AI",
     "summary": "Connecting landing-page UX, lifecycle email and campaigns to lead generation.",
     "role": "Product Marketing Associate",
-    "period": "March–June 2025",
+    "period": "February–August 2025",
     "status": "Commercial marketing work",
     "url": "#job-pepsales",
     "challenge": "Campaigns needed a landing experience that made the product proposition and next action clearer. I worked across the destination page and acquisition journeys.",
